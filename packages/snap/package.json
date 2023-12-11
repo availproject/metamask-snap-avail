@@ -27,6 +27,7 @@
     "postpublish": "rm -rf ipfs",
     "serve": "mm-snap serve",
     "test": "yarn run test:unit",
+    "manifest": "mm-snap manifest --fix",
     "test:unit": "mocha --colors"
   },
   "repository": {

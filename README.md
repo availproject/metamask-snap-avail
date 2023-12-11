@@ -25,12 +25,14 @@ Please make sure to be using yarn for everything.
 
 - `yarn install`
 - `cd packages/snap`
-- `rm -rf build && rm -rf dist && cd ../.. && yarn build:snap && cd packages/snap && mm-snap manifest --fix`
+- `rm -rf build && rm -rf dist && cd ../.. && yarn build:snap && cd packages/snap && yarn manifest`
 - `yarn start` <br/>
 
 In another terminal
 
-- `cd packages/example`
+- `cd packages/adapter`
+- `yarn build`
+- `cd ../example`
 - `yarn start`
 
 ## License
