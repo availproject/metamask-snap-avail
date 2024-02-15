@@ -152,12 +152,25 @@ export type Origin = string;
 export type HexHash = string;
 
 export interface Transaction {
-  hash: string;
-  block: string;
-  sender: string;
-  destination: string;
-  amount: string | number;
-  fee: string;
+  // hash: string;
+  // block: string;
+  // sender: string;
+  // destination: string;
+  // amount: string | number;
+  // fee: string;
+  txnHash: string; // in hex
+  txnType: ExplorerTransactionType | string;
+  chainId: string; // in hex
+  senderAddress: string; // in hex
+  contractAddress: string; // in hex
+  contractFuncName: string;
+  contractCallData: RawCalldata;
+  status?: TransactionStatus | string;
+  executionStatus?: TransactionStatus | string;
+  finalityStatus?: TransactionStatus | string;
+  failureReason: string;
+  eventIds: string[];
+  timestamp: number;
 }
 
 export interface SignerPayloadJSON {

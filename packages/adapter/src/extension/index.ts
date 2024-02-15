@@ -10,7 +10,7 @@ interface Web3Window extends InjectedWindow {
 }
 
 const config: SnapConfig = {
-  networkName: 'westend'
+  networkName: 'avail'
 };
 
 function transformAccounts(accounts: string[]): InjectedAccount[] {

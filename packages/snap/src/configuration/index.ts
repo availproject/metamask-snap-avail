@@ -5,7 +5,6 @@ import { availConfiguration, defaultConfiguration } from './predefined';
 export function getDefaultConfiguration(networkName: string): SnapConfig {
   switch (networkName) {
     case 'avail':
-      console.log('avail configuration selected');
       return availConfiguration;
     default:
       return defaultConfiguration;

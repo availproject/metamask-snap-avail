@@ -21,7 +21,6 @@ async function initApi(rpcUrl: string): Promise<ApiPromise> {
       rpc,
       signedExtensions
     }
-    console.log("provider", provider)
     api = await ApiPromise.create(opt)
     console.info('Api is ready', api);
     return api

@@ -24,7 +24,7 @@ export async function enablePolkadotSnap(
     throw new Error("Current Metamask version doesn't support snaps");
   }
   if (!config.networkName) {
-    config.networkName = 'westend';
+    config.networkName = 'avail';
   }
 
   const isInstalled = await isPolkadotSnapInstalled(snapId);

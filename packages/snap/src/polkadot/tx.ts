@@ -17,7 +17,8 @@ export async function updateTxInState(transaction: Transaction): Promise<void> {
   const state = await getMetamaskState();
   const transactionsArray = state.transactions as unknown as Transaction[];
 
-  const index = transactionsArray.findIndex((tx) => tx.hash === transaction.hash);
+  // const index = transactionsArray.findIndex((tx) => tx.hash === transaction.hash);
+  const index = 0;
 
   if (index >= 0) {
     state.transactions[index] = JSON.stringify(transaction);

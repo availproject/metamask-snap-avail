@@ -12,7 +12,6 @@ import { getKeyringFromSeed } from 'avail-js-sdk';
 export async function getKeyPair(): Promise<KeyringPair> {
   try {
     const config = await getConfiguration();
-    console.log('Network', getCoinTypeByNetwork(config.networkName));
 
     const bip44Node = (await snap.request({
       method: 'snap_getBip44Entropy',
@@ -22,7 +21,6 @@ export async function getKeyPair(): Promise<KeyringPair> {
     })) as JsonBIP44CoinTypeNode;
     // generate keys
     const seed = bip44Node.privateKey;
-    console.log('SEED', seed);
     const keyring = getKeyringFromSeed(seed);
     return keyring;
     // return keyring.addFromSeed(stringToU8a(seed));
@@ -33,7 +31,6 @@ export async function getKeyPair(): Promise<KeyringPair> {
 }
 
 const getCoinTypeByNetwork = (network: SnapNetworks): number => {
-  console.log('Network at coin TYPE', network);
 
   switch (network) {
     case 'avail':
