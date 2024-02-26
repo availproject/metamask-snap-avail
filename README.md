@@ -4,7 +4,7 @@
 ![](https://img.shields.io/github/issues-raw/chainsafe/metamask-snap-polkadot)
 ![](https://img.shields.io/github/license/chainsafe/metamask-snap-polkadot)
 
-This project uses the [MetaMask Snaps](https://metamask.io/snaps/) framework to extend MetaMask
+This project uses the [MetaMask Snaps](<a href='https://metamask.io/snaps' target='_blank'></a>) framework to extend MetaMask
 capabilities to include support for Avail.
 [Substrate](https://docs.substrate.io/)- and FRAME-based blockchains in the
 [Polkadot](https://www.polkadot.network/) ecosystem.
