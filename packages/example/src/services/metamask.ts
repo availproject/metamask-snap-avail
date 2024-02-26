@@ -179,7 +179,7 @@ export const useAvailSnap = () => {
       dispatch(
         setErc20TokenBalanceSelected({
           amount: metamaskState.polkadotSnap.balance,
-          symbol: 'AVL',
+          symbol: 'AVAIL',
           decimals: 18
         } as Erc20TokenBalance)
       );

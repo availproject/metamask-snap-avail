@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const AssetQuantityView = ({
-  currency = 'AVL',
+  currency = 'AVAIL',
   currencyValue,
   centered,
   size = 'normal'

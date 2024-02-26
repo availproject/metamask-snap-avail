@@ -130,7 +130,7 @@ export const HeaderView = ({ address }: Props) => {
         <AssetQuantity
           currencyValue={getHumanReadableAmount(wallet.tokenBalance)}
           // currencyValue={balance}
-          currency="AVL"
+          currency="AVAIL"
           size="big"
           centered
         />

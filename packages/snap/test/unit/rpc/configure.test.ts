@@ -43,9 +43,9 @@ describe('Test rpc handler function: configure', function () {
     walletStub.request.returns(EmptyMetamaskState());
     // tested method
     const customConfiguration = availConfiguration;
-    customConfiguration.unit.symbol = 'AVL';
+    customConfiguration.unit.symbol = 'AVAIL';
     const result = await configure('avail', {
-      unit: { symbol: 'AVL' }
+      unit: { symbol: 'AVAIL' }
     } as SnapConfig);
     // assertions
     expect(result).to.be.deep.eq(customConfiguration);

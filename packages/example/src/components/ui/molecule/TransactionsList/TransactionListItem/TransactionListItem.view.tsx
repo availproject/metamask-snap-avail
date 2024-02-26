@@ -23,7 +23,7 @@ interface Props {
 
 export const TransactionListItemView = ({ transaction }: Props) => {
   const wallet = useAppSelector((state) => state.wallet);
-  const [currencySymbol, setCurrencySymbol] = useState('AVL');
+  const [currencySymbol, setCurrencySymbol] = useState('AVAIL');
   const [txnValue, setTxnValue] = useState('0');
   const [txnUsdValue, setTxnUsdValue] = useState('0.00');
 
