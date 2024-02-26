@@ -44,7 +44,6 @@ export const getHumanReadableAmount = (asset: Erc20TokenBalance) => {
   //   ? assetAmount
   //   : ethers.utils.formatUnits(asset.amount, asset.decimals);
   if (asset.amount > 0) {
-    console.log(asset.amount);
     const amountStr = ethers.utils.formatUnits(asset.amount, asset.decimals);
     const indexDecimal = amountStr.indexOf('.');
     const integerPart = amountStr.substring(0, indexDecimal);
@@ -57,7 +56,6 @@ export const getHumanReadableAmount = (asset: Erc20TokenBalance) => {
     if (firstNonZeroIndex === -1) {
       return integerPart;
     }
-    console.log('aaaaaaaa');
 
     return amountStr.substring(0, indexDecimal + firstNonZeroIndex + 3);
   } else {
