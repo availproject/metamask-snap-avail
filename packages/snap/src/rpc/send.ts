@@ -1,5 +1,5 @@
-import type { Transaction, TxPayload } from '@avail/metamask-polkadot-types';
-import { saveTxToState } from '../polkadot/tx';
+import type { Transaction, TxPayload } from '@availproject/metamask-avail-types';
+import { saveTxToState } from '../avail/tx';
 import { getAddress } from './getAddress';
 import { ApiPromise } from 'avail-js-sdk';
 import { ISubmittableResult } from '@polkadot/types/types/extrinsic';

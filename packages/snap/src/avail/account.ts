@@ -1,7 +1,7 @@
 // import { Keyring } from '@polkadot/keyring';
 import { stringToU8a } from '@polkadot/util';
 import type { JsonBIP44CoinTypeNode } from '@metamask/key-tree';
-import type { SnapNetworks } from '@avail/metamask-polkadot-types';
+import type { SnapNetworks } from '@availproject/metamask-avail-types';
 import { getConfiguration } from '../configuration';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { getKeyringFromSeed } from 'avail-js-sdk';
@@ -34,8 +34,6 @@ const getCoinTypeByNetwork = (network: SnapNetworks): number => {
 
   switch (network) {
     case 'avail':
-      return 354;
-    case 'polkadot':
       return 354;
     default:
       return 354;

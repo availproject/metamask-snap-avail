@@ -1,7 +1,7 @@
-import type { SnapConfig } from '@avail/metamask-polkadot-types';
+import type { SnapConfig } from '@availproject/metamask-avail-types';
 
-declare module '@avail/metamask-polkadot-adapter' {
-  export function injectMetamaskPolkadotSnapProvider(
+declare module '@availproject/metamask-avail-adapter' {
+  export function injectMetamaskAvailSnapProvider(
     network: 'avail',
     config?: SnapConfig,
     pluginOrigin?: string
@@ -51,4 +51,4 @@ export enum TransactionStatus { // for retrieving txn from Avail feeder gateway
   REJECTED = 'REJECTED'
 }
 
-export type { Transaction } from '@avail/metamask-polkadot-types';
+export type { Transaction } from '@availproject/metamask-avail-types';

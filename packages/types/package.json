@@ -1,8 +1,8 @@
 {
-  "name": "@avail/metamask-polkadot-types",
+  "name": "@availproject/metamask-avail-types",
   "version": "0.6.0",
   "types": "./index.d.ts",
-  "author": "ChainSafe <info@chainsafe.io>",
+  "author": "availproject",
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public"

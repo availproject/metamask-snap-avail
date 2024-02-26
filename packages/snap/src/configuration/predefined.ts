@@ -1,4 +1,4 @@
-import type { SnapConfig } from '@avail/metamask-polkadot-types';
+import type { SnapConfig } from '@availproject/metamask-avail-types';
 
 export const availConfiguration: SnapConfig = {
   addressPrefix: 42,

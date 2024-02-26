@@ -1,4 +1,4 @@
-import type { SnapConfig } from '@avail/metamask-polkadot-types';
+import type { SnapConfig } from '@availproject/metamask-avail-types';
 import { getMetamaskState } from '../rpc/getMetamaskState';
 import { availConfiguration, defaultConfiguration } from './predefined';
 

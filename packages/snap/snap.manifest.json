@@ -1,18 +1,18 @@
 {
   "version": "0.7.7",
-  "description": "The Polkadot snap.",
-  "proposedName": "Polkadot Wallet",
+  "description": "The Avail snap",
+  "proposedName": "Avail Wallet",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chainsafe/metamask-snap-polkadot.git"
+    "url": "git+https://github.com/availproject/metamask-snap-avail.git"
   },
   "source": {
-    "shasum": "TZaHjc3Z22rbKbiysFVbGCjraRfUnPweqfZ4E3fU9jA=",
+    "shasum": "tUc8K0a3tnOeRkSO1W5U3r+Sm4fSmJ7abdwZ8GyHHfA=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
         "iconPath": "images/logo.svg",
-        "packageName": "@chainsafe/polkadot-snap",
+        "packageName": "@availproject/avail-snap",
         "registry": "https://registry.npmjs.org/"
       }
     }

@@ -1,10 +1,10 @@
 import { web3EnablePromise } from '@polkadot/extension-dapp';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { Network, Erc20TokenBalance, Account } from '@types';
-import type { InjectedMetamaskExtension } from '@avail/metamask-polkadot-adapter/src/types';
+import type { InjectedMetamaskExtension } from '@availproject/metamask-avail-adapter/build/types';
 import type { InjectedExtension } from '@polkadot/extension-inject/types';
-import { enablePolkadotSnap } from '@avail/metamask-polkadot-adapter';
-import type { MetamaskPolkadotSnap } from '@avail/metamask-polkadot-adapter/build/snap';
+import { enableAvailSnap } from '@availproject/metamask-avail-adapter';
+import type { MetamaskAvailSnap } from '@availproject/metamask-avail-adapter/build/snap';
 import Toastr from 'toastr2';
 import { setData } from 'slices/metamaskSlice';
 import { setInfoModalVisible } from 'slices/modalSlice';
@@ -17,7 +17,7 @@ import {
 } from 'slices/walletSlice';
 import { disableLoading, enableLoadingWithMessage } from 'slices/UISlice';
 import { setNetworks, setActiveNetwork } from 'slices/networkSlice';
-import type { SnapNetworks } from '@avail/metamask-polkadot-types';
+import type { SnapNetworks } from '@availproject/metamask-avail-types';
 
 export function hasMetaMask(): boolean {
   if (!window.ethereum) {
@@ -28,17 +28,17 @@ export function hasMetaMask(): boolean {
 
 export const defaultSnapId = 'local:http://localhost:8081';
 
-export async function installPolkadotSnap(): Promise<boolean> {
+export async function installAvailSnap(): Promise<boolean> {
   const snapId = process.env.REACT_APP_SNAP_ID ? process.env.REACT_APP_SNAP_ID : defaultSnapId;
   try {
-    await enablePolkadotSnap({ networkName: 'avail' }, snapId);
+    await enableAvailSnap({ networkName: 'avail' }, snapId);
     return true;
   } catch (err) {
     return false;
   }
 }
 
-export async function isPolkadotSnapInstalled(): Promise<boolean> {
+export async function isAvailSnapInstalled(): Promise<boolean> {
   return !!(await getInjectedMetamaskExtension());
 }
 
@@ -50,24 +50,24 @@ export async function getInjectedMetamaskExtension(): Promise<InjectedMetamaskEx
 function getMetamaskExtension(
   extensions: InjectedExtension[]
 ): InjectedMetamaskExtension | undefined {
-  return extensions.find((item) => item.name === 'metamask-polkadot-snap') as unknown as
+  return extensions.find((item) => item.name === 'metamask-avail-snap') as unknown as
     | InjectedMetamaskExtension
     | undefined;
 }
 
 export interface SnapInitializationResponse {
   isSnapInstalled: boolean;
-  snap?: MetamaskPolkadotSnap;
+  snap?: MetamaskAvailSnap;
 }
 
-export async function initiatePolkadotSnap(
+export async function initiateAvailSnap(
   network: SnapNetworks
 ): Promise<SnapInitializationResponse> {
   const snapId = process.env.REACT_APP_SNAP_ID ? process.env.REACT_APP_SNAP_ID : defaultSnapId;
 
   try {
-    const metamaskPolkadotSnap = await enablePolkadotSnap({ networkName: network }, snapId);
-    return { isSnapInstalled: true, snap: metamaskPolkadotSnap };
+    const metamaskAvailSnap = await enableAvailSnap({ networkName: network }, snapId);
+    return { isSnapInstalled: true, snap: metamaskAvailSnap };
   } catch (e) {
     return { isSnapInstalled: false };
   }
@@ -123,8 +123,8 @@ export const useAvailSnap = () => {
 
   const switchNetwork = async (network: number, chainId: string) => {
     dispatch(enableLoadingWithMessage('Switching Network...'));
-    if (metamaskState.hasMetaMask && metamaskState.polkadotSnap.isInstalled) {
-      await metamaskState?.polkadotSnap?.api?.setConfiguration({
+    if (metamaskState.hasMetaMask && metamaskState.availSnap.isInstalled) {
+      await metamaskState?.availSnap?.api?.setConfiguration({
         networkName: networkState.items[network].name
       });
       dispatch(disableLoading());
@@ -151,22 +151,22 @@ export const useAvailSnap = () => {
       dispatch(
         setData({
           isInstalled: true,
-          snap: metamaskState.polkadotSnap.snap,
-          address: await metamaskState.polkadotSnap.snap?.getMetamaskSnapApi().getAddress(),
-          publicKey: await metamaskState.polkadotSnap.snap?.getMetamaskSnapApi().getPublicKey(),
-          balance: await metamaskState.polkadotSnap.snap?.getMetamaskSnapApi().getBalance(),
-          latestBlock: await metamaskState.polkadotSnap.snap?.getMetamaskSnapApi().getLatestBlock(),
-          transactions: await metamaskState.polkadotSnap.snap
+          snap: metamaskState.availSnap.snap,
+          address: await metamaskState.availSnap.snap?.getMetamaskSnapApi().getAddress(),
+          publicKey: await metamaskState.availSnap.snap?.getMetamaskSnapApi().getPublicKey(),
+          balance: await metamaskState.availSnap.snap?.getMetamaskSnapApi().getBalance(),
+          latestBlock: await metamaskState.availSnap.snap?.getMetamaskSnapApi().getLatestBlock(),
+          transactions: await metamaskState.availSnap.snap
             ?.getMetamaskSnapApi()
             .getAllTransactions(),
-          api: metamaskState.polkadotSnap.snap?.getMetamaskSnapApi()
+          api: metamaskState.availSnap.snap?.getMetamaskSnapApi()
         })
       );
     }
     const acc = [
       {
-        address: metamaskState.polkadotSnap.address,
-        publicKey: metamaskState.polkadotSnap.publicKey
+        address: metamaskState.availSnap.address,
+        publicKey: metamaskState.availSnap.publicKey
       }
     ] as Account[];
 
@@ -174,11 +174,11 @@ export const useAvailSnap = () => {
       dispatch(setNetworks(networks));
     }
     dispatch(setAccounts(acc));
-    dispatch(setTransactions(metamaskState.polkadotSnap.transactions));
+    dispatch(setTransactions(metamaskState.availSnap.transactions));
     if (acc.length > 0) {
       dispatch(
         setErc20TokenBalanceSelected({
-          amount: metamaskState.polkadotSnap.balance,
+          amount: metamaskState.availSnap.balance,
           symbol: 'AVAIL',
           decimals: 18
         } as Erc20TokenBalance)
@@ -196,7 +196,7 @@ export const useAvailSnap = () => {
     if (nets.length === 0) {
       return;
     }
-    const installResult = await initiatePolkadotSnap(nets[0].name);
+    const installResult = await initiateAvailSnap(nets[0].name);
     if (!installResult.isSnapInstalled) {
       dispatch(
         setData({
@@ -239,7 +239,7 @@ export const useAvailSnap = () => {
 
   const checkConnection = async () => {
     dispatch(enableLoadingWithMessage('Connecting...'));
-    const isInstalled = await isPolkadotSnapInstalled();
+    const isInstalled = await isAvailSnapInstalled();
     if (isInstalled) {
       dispatch(setWalletConnection(true));
     } else {
@@ -249,8 +249,8 @@ export const useAvailSnap = () => {
   };
 
   const getPrivateKeyFromAddress = async () => {
-    if (!metamaskState.polkadotSnap.snap) return;
-    const api = metamaskState.polkadotSnap.snap.getMetamaskSnapApi();
+    if (!metamaskState.availSnap.snap) return;
+    const api = metamaskState.availSnap.snap.getMetamaskSnapApi();
     const privateKey = await api.exportSeed();
     alert(privateKey);
   };

@@ -8,7 +8,7 @@ import { getBalance } from './rpc/substrate/getBalance';
 import { getAddress } from './rpc/getAddress';
 import { getTransactions } from './rpc/substrate/getTransactions';
 import { getBlock } from './rpc/substrate/getBlock';
-import { getApi, resetApi } from './polkadot/api';
+import { getApi, resetApi } from './avail/api';
 import { configure } from './rpc/configure';
 import { signPayloadJSON, signPayloadRaw } from './rpc/substrate/sign';
 import { generateTransactionPayload } from './rpc/generateTransactionPayload';

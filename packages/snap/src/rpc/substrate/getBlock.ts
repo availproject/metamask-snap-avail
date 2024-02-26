@@ -1,6 +1,6 @@
-import { BlockId, BlockInfo } from '@avail/metamask-polkadot-types';
+import { BlockId, BlockInfo } from '@availproject/metamask-avail-types';
 // import type { ApiPromise } from '@polkadot/api';
-// import type { BlockId, BlockInfo } from "@avail/metamask-polkadot-types";
+// import type { BlockId, BlockInfo } from "@availproject/metamask-avail-types";
 import type { BlockHash } from '@polkadot/types/interfaces';
 import { ApiPromise } from 'avail-js-sdk';
 
