@@ -21,17 +21,18 @@ export async function send(
       .transfer(destination, String(amount))
       .paymentInfo(sender);
 
-  const txHash = await api.rpc.author.submitExtrinsic(extrinsic);
-  // const tx = {
-  //   amount: amount,
-  //   block: txHash.toHex(),
-  //   destination: destination,
-  //   fee: String(paymentInfo.partialFee.toJSON()),
-  //   hash: extrinsic.hash.toHex(),
-  //   sender: sender
-  // } as Transaction;
+    const txHash = await api.rpc.author.submitExtrinsic(extrinsic);
 
-  const tx = {} as Transaction;
+    const tx = {
+      amount: amount,
+      block: txHash.toHex(),
+      destination: destination,
+      fee: String(paymentInfo.partialFee.toJSON()),
+      hash: extrinsic.hash.toHex(),
+      sender: sender
+    } as Transaction;
+
+    // const tx = {} as Transaction;
 
     await saveTxToState(tx);
     return tx;

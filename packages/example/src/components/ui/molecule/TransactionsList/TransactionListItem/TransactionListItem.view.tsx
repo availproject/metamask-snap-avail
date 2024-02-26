@@ -13,18 +13,9 @@ import {
   LeftIcon,
   Middle,
   Right,
-  Status,
   Wrapper
 } from './TransactionListItem.style';
-import {
-  getIcon,
-  getTxnDate,
-  getTxnFailureReason,
-  getTxnName,
-  getTxnStatus,
-  getTxnToFromLabel,
-  getTxnValues
-} from './types';
+import { getIcon, getTxnToFromLabel, getTxnValues } from './types';
 
 interface Props {
   transaction: Transaction;
@@ -32,52 +23,35 @@ interface Props {
 
 export const TransactionListItemView = ({ transaction }: Props) => {
   const wallet = useAppSelector((state) => state.wallet);
-  const [currencySymbol, setCurrencySymbol] = useState('N/A');
+  const [currencySymbol, setCurrencySymbol] = useState('AVL');
   const [txnValue, setTxnValue] = useState('0');
   const [txnUsdValue, setTxnUsdValue] = useState('0.00');
 
   useEffect(() => {
     const fetchData = async () => {
-      // const foundToken = wallet.erc20TokenBalances.find((token: any) =>
-      //   ethers.BigNumber.from(token.address).eq(ethers.BigNumber.from(transaction.contractAddress))
-      // );
-      // if (foundToken) {
-      //   const txnValues = getTxnValues(transaction, foundToken.decimals, foundToken.usdPrice);
-      //   setTxnValue(getHumanReadableAmount(txnValues.txnValue));
-      //   setTxnUsdValue(txnValues.txnUsdValue);
-      //   setCurrencySymbol(foundToken.symbol);
-      // }
+      const txnValues = getTxnValues(transaction);
+      setTxnUsdValue(txnValues.txnUsdValue);
+      setTxnValue(txnValues.txnValue);
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const txnName = getTxnName(transaction);
-  const txnDate = getTxnDate(transaction);
-  const txnStatus = getTxnStatus(transaction);
   const txnToFromLabel = getTxnToFromLabel(transaction);
-  const txnFailureReason = getTxnFailureReason(transaction);
   return (
-    <Wrapper onClick={() => openExplorerTab(transaction.txnHash, 'tx', transaction.chainId)}>
+    <Wrapper onClick={() => openExplorerTab(transaction.hash, 'extrinsic')}>
       <Left>
         <LeftIcon>
-          <IconStyled transactionname={txnName} icon={getIcon(txnName)} />
+          <IconStyled transactionname={'Send'} icon={getIcon('Send')} />
         </LeftIcon>
         <Column>
-          <Label>{txnName}</Label>
-          <Description>
-            {txnDate}
-            <Status status={transaction.executionStatus}>
-              {' '}
-              . {txnStatus}
-              {txnFailureReason}
-            </Status>
-          </Description>
+          <Label>{'Send'}</Label>
+          {/* <Description>{transaction.fee}</Description> */}
         </Column>
       </Left>
       <Middle>{txnToFromLabel} </Middle>
       <Right>
-        {txnName === 'Send' && <AssetQuantity currency={currencySymbol} currencyValue={txnValue} />}
+        <AssetQuantity currency={currencySymbol} currencyValue={txnValue} />
       </Right>
     </Wrapper>
   );

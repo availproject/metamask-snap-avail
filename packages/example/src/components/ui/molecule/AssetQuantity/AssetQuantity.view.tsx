@@ -19,7 +19,6 @@ export const AssetQuantityView = ({
         {currencyValue}&nbsp;
         {currency}
       </Currency>
-      {/* {USDValue && <Dollars size={size}>{USDValue} USD</Dollars>} */}
     </Wrapper>
   );
 };

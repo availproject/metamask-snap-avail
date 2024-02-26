@@ -43,7 +43,7 @@ export const TransactionsListView = ({ transactions }: Props) => {
     <Wrapper<FC<IListProps<Transaction>>>
       data={transactions.length > 0 ? transactions : wallet.transactions}
       render={(transaction) => <TransactionListItem transaction={transaction} />}
-      keyExtractor={(transaction) => transaction.txnHash.toString()}
+      keyExtractor={(transaction) => transaction.hash.toString()}
     />
   );
 };

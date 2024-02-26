@@ -12,6 +12,7 @@ import {
   setForceReconnect,
   setWalletConnection,
   setAccounts,
+  setTransactions,
   setErc20TokenBalanceSelected
 } from 'slices/walletSlice';
 import { disableLoading, enableLoadingWithMessage } from 'slices/UISlice';
@@ -173,6 +174,7 @@ export const useAvailSnap = () => {
       dispatch(setNetworks(networks));
     }
     dispatch(setAccounts(acc));
+    dispatch(setTransactions(metamaskState.polkadotSnap.transactions));
     if (acc.length > 0) {
       dispatch(
         setErc20TokenBalanceSelected({
