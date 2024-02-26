@@ -4,23 +4,23 @@
 ![](https://img.shields.io/github/issues-raw/chainsafe/metamask-snap-polkadot)
 ![](https://img.shields.io/github/license/chainsafe/metamask-snap-polkadot)
 
-This project uses the [MetaMask Snaps](<a href='https://metamask.io/snaps' target='_blank'></a>) framework to extend MetaMask
+This project uses the <a href='https://metamask.io/snaps' target='_blank'>[MetaMask Snaps]</a> framework to extend MetaMask
 capabilities to include support for Avail.
-[Substrate](https://docs.substrate.io/)- and FRAME-based blockchains in the
-[Polkadot](https://www.polkadot.network/) ecosystem.
+<a href='https://docs.substrate.io/' target='_blank'>[Substrate]</a> - and FRAME-based blockchains in the
+<a href='https://www.polkadot.network/' target='_blank'>[Polkadot]</a> ecosystem.
 
 ## Documentation
 
 This snap is a built on top of polkadot snap by chainsafe, its architecture, integration steps and detailed API documentation for dApp
 developers is covered in the
-[project wiki](https://github.com/ChainSafe/metamask-snap-polkadot/wiki), which also includes a
+<a href='https://github.com/ChainSafe/metamask-snap-polkadot/wiki' target='_blank'>[project wiki]</a>, which also includes a
 usage guide for the example dApp
 
 ## Local Development
 
-Developers who wish to use the snap locally must use [MetaMask Flask](https://metamask.io/flask/);
+Developers who wish to use the snap locally must use <a href='https://metamask.io/flask/' target='_blank'>[MetaMask Flask]</a>;
 run the following commands from the project root to launch the
-[Polkadot Wallet Snap Example dApp](https://github.com/ChainSafe/metamask-snap-polkadot/tree/master/packages/example).
+<a href='https://github.com/ChainSafe/metamask-snap-polkadot/tree/master/packages/example' target='_blank'>[Polkadot Wallet Snap Example dApp]</a>.
 Please make sure to be using yarn for everything.
 
 - `yarn install`
@@ -35,7 +35,7 @@ In another terminal
 
 ## Avail Snap Design
 ![](./design.png)
-[FIGMA Designs](https://www.figma.com/file/03bs8ccbT7nR1a8KTGTZJ6/Metamask-Avail-Snap-team-library?type=design&node-id=0%3A1&mode=design&t=5gQcjL32P2mcXtuv-1)
+<a href='https://www.figma.com/file/03bs8ccbT7nR1a8KTGTZJ6/Metamask-Avail-Snap-team-library?type=design&node-id=0%3A1&mode=design&t=5gQcjL32P2mcXtuv-1' target='_blank'>[FIGMA Designs]</a>
 
 ## Contribution Guidelines
 
@@ -43,7 +43,7 @@ In another terminal
 
 Avail welcomes contributors from every background and skill level. Our mission is to build a community that's not only welcoming and friendly but also aligned with the best development practices. Interested in contributing to this project? Whether you've spotted an issue, have improvement ideas, or want to add new features, we'd love to have your input. Simply open a GitHub issue or submit a pull request to get started.
 
-1. Before asking any questions regarding how the project works, please read through all the documentation and install the project on your own local machine to try it and understand how it works. Please ask your questions in open channels (Github and [Telegram](https://t.me/avail_uncharted/5)).
+1. Before asking any questions regarding how the project works, please read through all the documentation and install the project on your own local machine to try it and understand how it works. Please ask your questions in open channels Github and <a href='https://t.me/avail_uncharted/5' target='_blank'>[Telegram]</a>.
 
 2. To work on an issue, first, get approval from a maintainer or team member. You can request to be assigned by commenting on the issue in GitHub. This respects the efforts of others who may already be working on the same issue. Unapproved PRs may be declined.
 
