@@ -1,15 +1,15 @@
 {
   "name": "root",
   "private": true,
-  "author": "ChainSafe <info@chainsafe.io>",
+  "author": "availproject",
   "license": "Apache-2.0",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "build:snap": "yarn workspace @chainsafe/polkadot-snap build",
-    "build:adapter": "yarn workspace @avail/metamask-polkadot-adapter build",
-    "start:snap": "yarn workspace @chainsafe/polkadot-snap serve",
+    "build:snap": "yarn workspace @availproject/avail-snap build",
+    "build:adapter": "yarn workspace @availproject/metamask-avail-adapter build",
+    "start:snap": "yarn workspace @availproject/avail-snap serve",
     "start:example": "yarn workspace example start",
     "predemo": "yarn run build:snap && yarn run build:adapter",
     "build": "yarn workspaces foreach -vpt run build",

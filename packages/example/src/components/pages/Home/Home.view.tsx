@@ -8,7 +8,6 @@ interface Props {
 }
 
 export const HomeView = ({ address }: Props) => {
-  const { transactions } = useAppSelector((state) => state.wallet);
   const loader = useAppSelector((state) => state.UI.loader);
   const wallet = useAppSelector((state) => state.wallet);
 
@@ -16,8 +15,8 @@ export const HomeView = ({ address }: Props) => {
     <Wrapper>
       <RightPart>
         {wallet.accounts.length > 0 && <Header address={address} />}
-        <TransactionsList transactions={[]} />
-        {Object.keys(transactions).length === 0 && !loader.isLoading && (
+        <TransactionsList transactions={wallet.transactions || []} />
+        {Object.keys(wallet.transactions).length === 0 && !loader.isLoading && (
           <NoTransactions> You have no transactions</NoTransactions>
         )}
       </RightPart>

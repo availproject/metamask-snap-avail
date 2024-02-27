@@ -1,19 +1,19 @@
 import '@polkadot/types-augment';
-import type { SnapConfig } from '@avail/metamask-polkadot-types';
-import { MetamaskPolkadotSnap } from './snap';
-import { hasMetaMask, isMetamaskSnapsSupported, isPolkadotSnapInstalled } from './utils';
+import type { SnapConfig } from '@availproject/metamask-avail-types';
+import { MetamaskAvailSnap } from './snap';
+import { hasMetaMask, isMetamaskSnapsSupported, isAvailSnapInstalled } from './utils';
 
-const defaultSnapOrigin = 'npm:@chainsafe/polkadot-snap';
+const defaultSnapOrigin = 'npm:@availproject/avail-snap';
 
 export type SnapInstallationParamNames = string;
 
 export * from './extension';
 
-export async function enablePolkadotSnap(
+export async function enableAvailSnap(
   config: SnapConfig = { networkName: 'avail' },
   snapOrigin?: string,
   snapInstallationParams: Record<SnapInstallationParamNames, unknown> = {}
-): Promise<MetamaskPolkadotSnap> {
+): Promise<MetamaskAvailSnap> {
   const snapId = snapOrigin ?? defaultSnapOrigin;
 
   // check all conditions
@@ -27,7 +27,7 @@ export async function enablePolkadotSnap(
     config.networkName = 'avail';
   }
 
-  const isInstalled = await isPolkadotSnapInstalled(snapId);
+  const isInstalled = await isAvailSnapInstalled(snapId);
   console.info('isInstalled', isInstalled);
 
   if (!isInstalled) {
@@ -41,7 +41,7 @@ export async function enablePolkadotSnap(
   }
 
   // create snap describer
-  const snap = new MetamaskPolkadotSnap(snapOrigin || defaultSnapOrigin, config);
+  const snap = new MetamaskAvailSnap(snapOrigin || defaultSnapOrigin, config);
   // set initial configuration
 
   try {

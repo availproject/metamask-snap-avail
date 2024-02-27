@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Network } from '@types';
-import type { MetamaskPolkadotSnap } from '@avail/metamask-polkadot-adapter/build/snap';
+import type { MetamaskAvailSnap } from '@availproject/metamask-avail-adapter/build/snap';
 import type {
   BlockInfo,
   SnapConfig,
@@ -8,14 +8,14 @@ import type {
   Transaction,
   TxPayload,
   SnapNetworks
-} from '@avail/metamask-polkadot-types';
-import type { MetamaskSnapApi } from '@avail/metamask-polkadot-adapter/src/types';
+} from '@availproject/metamask-avail-types';
+import type { MetamaskSnapApi } from '@availproject/metamask-avail-adapter/build/types';
 import { hasMetaMask } from '../services/metamask';
 
-interface IPolkadotSnap {
+interface IAvailSnap {
   isInstalled: boolean;
   message: string;
-  snap?: MetamaskPolkadotSnap;
+  snap?: MetamaskAvailSnap;
   balance: string;
   address: string;
   publicKey: string;
@@ -26,13 +26,13 @@ interface IPolkadotSnap {
 }
 
 export interface MetamaskState {
-  polkadotSnap: IPolkadotSnap;
+  availSnap: IAvailSnap;
   hasMetaMask: boolean;
 }
 
 const initialState: MetamaskState = {
   hasMetaMask: hasMetaMask(),
-  polkadotSnap: {
+  availSnap: {
     isInstalled: false,
     message: '',
     balance: '0',
@@ -53,7 +53,7 @@ export const metamaskSlice = createSlice({
   initialState,
   reducers: {
     setData: (state, action) => {
-      state.polkadotSnap = action.payload;
+      state.availSnap = action.payload;
     }
   }
 });

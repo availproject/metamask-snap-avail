@@ -65,8 +65,8 @@ export const HeaderView = ({ address }: Props) => {
     const chain = networks.items[networks.activeNetwork]?.chainId;
     if (chain && address) {
       const interval = setInterval(async () => {
-        if (metamaskState?.polkadotSnap?.api) {
-          const newBalance = await metamaskState?.polkadotSnap?.api?.getBalance();
+        if (metamaskState?.availSnap?.api) {
+          const newBalance = await metamaskState?.availSnap?.api?.getBalance();
           dispatch(
             setErc20TokenBalanceSelected({
               ...wallet.tokenBalance,
@@ -130,7 +130,7 @@ export const HeaderView = ({ address }: Props) => {
         <AssetQuantity
           currencyValue={getHumanReadableAmount(wallet.tokenBalance)}
           // currencyValue={balance}
-          currency="AVL"
+          currency="AVAIL"
           size="big"
           centered
         />

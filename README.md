@@ -1,8 +1,8 @@
 # Avail wallet snap.
 
-![](https://github.com/chainsafe/metamask-snap-polkadot/workflows/ci/badge.svg)
-![](https://img.shields.io/github/issues-raw/chainsafe/metamask-snap-polkadot)
-![](https://img.shields.io/github/license/chainsafe/metamask-snap-polkadot)
+![](https://github.com/availproject/metamask-snap-avail/workflows/ci/badge.svg)
+![](https://img.shields.io/github/issues-raw/availproject/metamask-snap-avail)
+![](https://img.shields.io/github/license/availproject/metamask-snap-avail)
 
 This project uses the [MetaMask Snaps](https://metamask.io/snaps/) framework to extend MetaMask
 capabilities to include support for Avail.
@@ -13,14 +13,14 @@ capabilities to include support for Avail.
 
 This snap is a built on top of polkadot snap by chainsafe, its architecture, integration steps and detailed API documentation for dApp
 developers is covered in the
-[project wiki](https://github.com/ChainSafe/metamask-snap-polkadot/wiki), which also includes a
+[project wiki](https://github.com/availproject/metamask-snap-avail/wiki), which also includes a
 usage guide for the example dApp
 
 ## Local Development
 
 Developers who wish to use the snap locally must use [MetaMask Flask](https://metamask.io/flask/);
 run the following commands from the project root to launch the
-[Polkadot Wallet Snap Example dApp](https://github.com/ChainSafe/metamask-snap-polkadot/tree/master/packages/example).
+[Avail Wallet Snap Example dApp](https://github.com/availproject/metamask-snap-avail/tree/master/packages/example).
 Please make sure to be using yarn for everything.
 
 - `yarn install`

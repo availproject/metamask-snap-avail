@@ -1,7 +1,7 @@
 {
-  "name": "@chainsafe/polkadot-snap",
+  "name": "@availproject/avail-snap",
   "version": "0.7.7",
-  "description": "MetaMask snap for interacting with Polkadot dApps",
+  "description": "MetaMask snap for interacting with Avail dApps",
   "main": "build/index.js",
   "scripts": {
     "lint": "yarn run lint:types && yarn run lint:style",
@@ -31,22 +31,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chainsafe/metamask-snap-polkadot.git"
+    "url": "git+https://github.com/availproject/metamask-snap-avail.git"
   },
   "keywords": [
-    "polkadot",
+    "avail",
     "metamask",
     "snap",
     "plugin",
     "dapp",
     "wallet"
   ],
-  "author": "ChainSafe <info@chainsafe.io>",
+  "author": "availproject",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/chainsafe/metamask-snap-polkadot/issues"
+    "url": "https://github.com/availproject/metamask-snap-avail/issues"
   },
-  "homepage": "https://github.com/chainsafe/metamask-snap-polkadot#readme",
+  "homepage": "https://github.com/availproject/metamask-snap-avail#readme",
   "web3Wallet": {
     "bundle": {
       "local": "dist/bundle.js",
@@ -61,7 +61,7 @@
     }
   },
   "devDependencies": {
-    "@avail/metamask-polkadot-types": "0.6.0",
+    "@availproject/metamask-avail-types": "0.6.0",
     "@metamask/snaps-cli": "^1.0.2",
     "@types/chai": "^4.2.10",
     "@types/mocha": "^10.0.1",

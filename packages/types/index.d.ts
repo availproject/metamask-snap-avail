@@ -1,4 +1,4 @@
-import { SignerPayloadRaw } from '@polkadot/types/types';
+import { SignerPayloadRaw } from '@Avail/types/types';
 
 export interface GetPublicKeyRequest {
   method: 'getPublicKey';
@@ -34,8 +34,8 @@ export interface ConfigureSnapRequest {
   };
 }
 
-export interface AddPolkadotAssetRequest {
-  method: 'addPolkadotAsset';
+export interface AddAvailAssetRequest {
+  method: 'addAvailAsset';
 }
 
 export interface GetChainHeadRequest {
@@ -72,7 +72,7 @@ export interface SendUnitRequest {
   };
 }
 
-export type MetamaskPolkadotRpcRequest =
+export type MetamaskAvailRpcRequest =
   | GetPublicKeyRequest
   | GetAddressRequest
   | ExportSeedRequest
@@ -80,14 +80,14 @@ export type MetamaskPolkadotRpcRequest =
   | GetBlockRequest
   | GetBalanceRequest
   | ConfigureSnapRequest
-  | AddPolkadotAssetRequest
+  | AddAvailAssetRequest
   | GetChainHeadRequest
   | SignPayloadJSONRequest
   | SignPayloadRawRequest
   | SendUnitRequest
   | GenerateTransactionPayload;
 
-type Method = MetamaskPolkadotRpcRequest['method'];
+type Method = MetamaskAvailRpcRequest['method'];
 
 export interface WalletEnableRequest {
   method: 'wallet_enable';
@@ -100,7 +100,7 @@ export interface GetPluginsRequest {
 
 export interface SnapRpcMethodRequest {
   method: string;
-  params: [MetamaskPolkadotRpcRequest];
+  params: [MetamaskAvailRpcRequest];
 }
 
 export type MetamaskRpcRequest = WalletEnableRequest | GetPluginsRequest | SnapRpcMethodRequest;
@@ -124,7 +124,7 @@ export interface UnitConfiguration {
   customViewUrl?: string;
 }
 
-export type SnapNetworks = 'polkadot' | 'kusama' | 'westend' | 'avail';
+export type SnapNetworks = 'avail' | 'goldberg';
 
 export interface SnapConfig {
   networkName: SnapNetworks;
@@ -133,12 +133,12 @@ export interface SnapConfig {
   unit?: UnitConfiguration;
 }
 
-// Polkadot types
+// Avail types
 
 export type Callback<T> = (arg: T) => void;
 
-export type PolkadotEventArgument = Balance;
-export type PolkadotEventCallback = Callback<PolkadotEventArgument>;
+export type AvailEventArgument = Balance;
+export type AvailEventCallback = Callback<AvailEventArgument>;
 
 export type TxEventArgument = TxStatus;
 export type TxEventCallback = Callback<TxEventArgument>;
@@ -152,25 +152,12 @@ export type Origin = string;
 export type HexHash = string;
 
 export interface Transaction {
-  // hash: string;
-  // block: string;
-  // sender: string;
-  // destination: string;
-  // amount: string | number;
-  // fee: string;
-  txnHash: string; // in hex
-  txnType: ExplorerTransactionType | string;
-  chainId: string; // in hex
-  senderAddress: string; // in hex
-  contractAddress: string; // in hex
-  contractFuncName: string;
-  contractCallData: RawCalldata;
-  status?: TransactionStatus | string;
-  executionStatus?: TransactionStatus | string;
-  finalityStatus?: TransactionStatus | string;
-  failureReason: string;
-  eventIds: string[];
-  timestamp: number;
+  hash: string;
+  block: string;
+  sender: string;
+  destination: string;
+  amount: string | number;
+  fee: string;
 }
 
 export interface SignerPayloadJSON {

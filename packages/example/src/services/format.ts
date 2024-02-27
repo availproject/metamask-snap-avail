@@ -5,7 +5,7 @@ export function shortAddress(address: string): string {
 export function getCurrency(network: string): string {
   switch (network) {
     case 'avail':
-      return 'avl';
+      return 'avail';
   }
   return '';
 }

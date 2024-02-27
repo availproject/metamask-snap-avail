@@ -32,7 +32,8 @@ export const Currency = styled.span<ISize>`
       : props.theme.typography.h1.lineHeight};
   font-weight: ${(props) => props.theme.typography.h1.fontWeight};
   font-family: ${(props) => props.theme.typography.h1.fontFamily};
-  color: ${(props) => props.theme.palette.grey.white};
+  color: ${(props) =>
+    props.size === 'normal' ? props.theme.palette.grey.black : props.theme.palette.grey.white};
 `;
 
 export const Dollars = styled.span<ISize>`

@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@avail/metamask-polkadot-adapter": "0.5.1",
-    "@avail/metamask-polkadot-types": "0.6.0",
+    "@availproject/metamask-avail-adapter": "0.5.1",
+    "@availproject/metamask-avail-types": "0.6.0",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",

@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const AssetQuantityView = ({
-  currency = 'AVL',
+  currency = 'AVAIL',
   currencyValue,
   centered,
   size = 'normal'
@@ -19,7 +19,6 @@ export const AssetQuantityView = ({
         {currencyValue}&nbsp;
         {currency}
       </Currency>
-      {/* {USDValue && <Dollars size={size}>{USDValue} USD</Dollars>} */}
     </Wrapper>
   );
 };
