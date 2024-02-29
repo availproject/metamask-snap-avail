@@ -1,4 +1,4 @@
-import type { SnapConfig } from '@avail/metamask-polkadot-types';
+import type { SnapConfig } from '@availproject/metamask-avail-types';
 import {
   exportSeed,
   generateTransactionPayload,
@@ -14,7 +14,7 @@ import {
 } from './methods';
 import type { MetamaskSnapApi } from './types';
 
-export class MetamaskPolkadotSnap {
+export class MetamaskAvailSnap {
   protected readonly config: SnapConfig;
   //url to package.json
   protected readonly pluginOrigin: string;

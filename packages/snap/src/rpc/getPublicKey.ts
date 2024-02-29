@@ -1,5 +1,5 @@
 import { u8aToHex } from '@polkadot/util';
-import { getKeyPair } from '../polkadot/account';
+import { getKeyPair } from '../avail/account';
 
 export async function getPublicKey(): Promise<string> {
   const keyPair = await getKeyPair();

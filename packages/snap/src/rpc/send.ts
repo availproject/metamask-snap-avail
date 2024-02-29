@@ -1,5 +1,5 @@
-import type { Transaction, TxPayload } from '@avail/metamask-polkadot-types';
-import { saveTxToState } from '../polkadot/tx';
+import type { Transaction, TxPayload } from '@availproject/metamask-avail-types';
+import { saveTxToState } from '../avail/tx';
 import { getAddress } from './getAddress';
 import { ApiPromise } from 'avail-js-sdk';
 import { ISubmittableResult } from '@polkadot/types/types/extrinsic';
@@ -22,6 +22,7 @@ export async function send(
       .paymentInfo(sender);
 
     const txHash = await api.rpc.author.submitExtrinsic(extrinsic);
+
     const tx = {
       amount: amount,
       block: txHash.toHex(),
@@ -30,6 +31,8 @@ export async function send(
       hash: extrinsic.hash.toHex(),
       sender: sender
     } as Transaction;
+
+    // const tx = {} as Transaction;
 
     await saveTxToState(tx);
     return tx;

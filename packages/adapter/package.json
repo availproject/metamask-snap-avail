@@ -1,14 +1,14 @@
 {
-  "name": "@avail/metamask-polkadot-adapter",
+  "name": "@availproject/metamask-avail-adapter",
   "version": "0.5.1",
   "main": "./build/index.js",
   "module": "./build/index.js",
   "types": "./build/index.d.ts",
-  "author": "ChainSafe <info@chainsafe.io>",
+  "author": "availproject",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/chainsafe/metamask-snap-polkadot/tree/master/packages/adapter",
+  "homepage": "https://github.com/availproject/metamask-snap-avail/tree/master/packages/adapter",
   "keywords": [
-    "polkadot",
+    "avail",
     "metamask",
     "snap",
     "substrate"

@@ -1,13 +1,10 @@
 {
   "ts-node": {
-    "files": true,
+    "files": true
   },
   "compilerOptions": {
     "module": "commonjs",
-    "lib": [
-      "DOM",
-      "ES2015"
-    ],
+    "lib": ["DOM", "ES2015"],
     "esModuleInterop": true,
     "noImplicitAny": true,
     "strictFunctionTypes": true,
@@ -22,20 +19,12 @@
     "baseUrl": ".",
     "strictNullChecks": false,
     "paths": {
-      "*": [
-        "../../node_modules"
-      ]
+      "*": ["../../node_modules"]
     },
     "outDir": "./build",
-    "typeRoots": [
-      "../../node_modules/@types",
-      "../types"
-    ]
+    "typeRoots": ["../../node_modules/@types", "../types"]
   },
-  "include": [
-    "src/**/*",
-    "test/**/*"
-  ],
+  "include": ["src/**/*", "test/**/*"],
 
   "files": ["../../node_modules/@metamask/snaps-types/dist/global.d.ts"]
 }

@@ -1,8 +1,8 @@
 import type { Injected, InjectedAccount, InjectedWindow } from '@polkadot/extension-inject/types';
-import type { SnapConfig } from '@avail/metamask-polkadot-types';
+import type { SnapConfig } from '@availproject/metamask-avail-types';
 import type { SignerPayloadJSON, SignerPayloadRaw, SignerResult } from '@polkadot/types/types';
 import type { HexString } from '@polkadot/util/types';
-import { enablePolkadotSnap } from '../index';
+import { enableAvailSnap } from '../index';
 import { hasMetaMask, isMetamaskSnapsSupported } from '../utils';
 
 interface Web3Window extends InjectedWindow {
@@ -10,20 +10,20 @@ interface Web3Window extends InjectedWindow {
 }
 
 const config: SnapConfig = {
-  networkName: 'westend'
+  networkName: 'avail'
 };
 
 function transformAccounts(accounts: string[]): InjectedAccount[] {
   return accounts.map((address, i) => ({
     address,
-    name: `Polkadot Snap #${i}`,
+    name: `Avail Snap #${i}`,
     type: 'ethereum'
   }));
 }
 
-async function injectPolkadotSnap(win: Web3Window): Promise<void> {
+async function injectAvailSnap(win: Web3Window): Promise<void> {
   try {
-    const snap = (await enablePolkadotSnap(config)).getMetamaskSnapApi();
+    const snap = (await enableAvailSnap(config)).getMetamaskSnapApi();
 
     win.injectedWeb3.Snap = {
       enable: async (): Promise<Injected> => {
@@ -69,12 +69,12 @@ async function injectPolkadotSnap(win: Web3Window): Promise<void> {
       version: '0'
     };
   } catch (error) {
-    console.error('Error injecting Polkadot Snap:', error);
+    console.error('Error injecting Avail Snap:', error);
     throw error;
   }
 }
 
-export async function initPolkadotSnap(): Promise<boolean> {
+export async function initAvailSnap(): Promise<boolean> {
   try {
     const win = window as Window & Web3Window;
     win.injectedWeb3 = win.injectedWeb3 || {};
@@ -82,13 +82,13 @@ export async function initPolkadotSnap(): Promise<boolean> {
     if (hasMetaMask()) {
       const result = await isMetamaskSnapsSupported();
       if (result) {
-        await injectPolkadotSnap(win);
+        await injectAvailSnap(win);
         return true;
       }
     }
     return false;
   } catch (error) {
-    console.error('Error initializing Polkadot Snap:', error);
+    console.error('Error initializing Avail Snap:', error);
     return false;
   }
 }

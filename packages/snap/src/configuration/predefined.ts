@@ -1,4 +1,4 @@
-import type { SnapConfig } from '@avail/metamask-polkadot-types';
+import type { SnapConfig } from '@availproject/metamask-avail-types';
 
 export const availConfiguration: SnapConfig = {
   addressPrefix: 42,
@@ -6,9 +6,9 @@ export const availConfiguration: SnapConfig = {
   unit: {
     decimals: 18,
     image: 'https://svgshare.com/i/L2d.svg',
-    symbol: 'AVL'
+    symbol: 'AVAIL'
   },
-  wsRpcUrl: 'https://goldberg.avail.tools/api'
+  wsRpcUrl: 'https://rpc-testnet.avail.tools/api'
 };
 
 export const defaultConfiguration: SnapConfig = availConfiguration;

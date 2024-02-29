@@ -5,7 +5,7 @@ import type {
   Transaction,
   TxPayload,
   SignerPayloadJSON
-} from '@avail/metamask-polkadot-types';
+} from '@availproject/metamask-avail-types';
 import type { InjectedExtension } from '@polkadot/extension-inject/types';
 import type { SignerPayloadRaw } from '@polkadot/types/types/extrinsic';
 
