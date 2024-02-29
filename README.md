@@ -14,13 +14,13 @@ capabilities to include support for Avail.
 This snap is a built on top of polkadot snap by chainsafe, its architecture, integration steps and detailed API documentation for dApp
 developers is covered in the
 [project wiki](https://github.com/availproject/metamask-snap-avail/wiki), which also includes a
-usage guide for the example dApp
+usage guide for the avail-wallet dApp
 
 ## Local Development
 
 Developers who wish to use the snap locally must use [MetaMask Flask](https://metamask.io/flask/);
 run the following commands from the project root to launch the
-[Avail Wallet Snap Example dApp](https://github.com/availproject/metamask-snap-avail/tree/master/packages/example).
+[Avail Wallet Snap dApp](https://github.com/availproject/metamask-snap-avail/tree/master/packages/avail-wallet).
 Please make sure to be using yarn for everything.
 
 - `yarn install`
@@ -30,7 +30,7 @@ Please make sure to be using yarn for everything.
 
 In another terminal
 
-- `cd packages/example`
+- `cd packages/avail-wallet`
 - `yarn start`
 
 ## Avail Snap Design [FIGMA](https://www.figma.com/file/R10LzyyjKxiCgm4nMIu9bw/Avail-Designs?type=design&node-id=399-339&mode=design&t=VXeFmfwcQfdUWYcz-0)

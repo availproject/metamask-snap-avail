@@ -1,4 +1,4 @@
-### Metamask avail snap example 
+### Metamask avail snap wallet 
 
 - `yarn install`
 - serve snap

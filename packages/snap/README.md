@@ -11,8 +11,7 @@ capabilities to include support for avail
 
 Avail Wallet snap architecture, integration steps and detailed API documentation for dApp
 developers is covered in the
-[project wiki](https://github.com/availproject/metamask-snap-avail/wiki), which also includes a
-usage guide for the [example dApp](https://polkadot.snap.chainsafe.io/). Additional
+[project wiki](https://github.com/availproject/metamask-snap-avail/wiki). Additional
 documentation is available on the
 [homepage](https://github.com/availproject/metamask-snap-avail#avail-wallet-snap-for-metamask)
 for the project's GitHub repository.
@@ -21,7 +20,7 @@ for the project's GitHub repository.
 
 Developers who wish to use the snap locally must use [MetaMask Flask](https://metamask.io/flask/);
 run the following commands from the project root to launch the
-[Avail Wallet Snap Example dApp](https://github.com/availproject/metamask-snap-avail/tree/master/packages/example).
+[Avail Wallet Snap](https://github.com/availproject/metamask-snap-avail/tree/master/packages/avail-wallet).
 
 - `yarn install`
 - `yarn run demo`
