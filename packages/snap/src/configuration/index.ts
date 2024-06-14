@@ -4,7 +4,7 @@ import { availConfiguration, defaultConfiguration } from './predefined';
 
 export function getDefaultConfiguration(networkName: string): SnapConfig {
   switch (networkName) {
-    case 'avail':
+    case 'turing':
       return availConfiguration;
     default:
       return defaultConfiguration;

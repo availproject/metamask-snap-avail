@@ -124,7 +124,7 @@ export interface UnitConfiguration {
   customViewUrl?: string;
 }
 
-export type SnapNetworks = 'avail' | 'goldberg';
+export type SnapNetworks = 'turing' | 'goldberg';
 
 export interface SnapConfig {
   networkName: SnapNetworks;

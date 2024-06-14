@@ -43,7 +43,7 @@ const initialState: MetamaskState = {
       number: ''
     },
     transactions: [],
-    network: 'avail',
+    network: 'turing',
     api: null
   }
 };

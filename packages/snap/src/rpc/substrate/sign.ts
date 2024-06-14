@@ -1,11 +1,11 @@
 // import type { ApiPromise } from '@polkadot/api/';
 import type { SignerPayloadRaw } from '@polkadot/types/types';
 import { hexToU8a, u8aToHex } from '@polkadot/util';
+import type { ApiPromise } from 'avail-js-sdk';
+import type { SignerPayloadJSON } from '@availproject/metamask-avail-types';
 import { getKeyPair } from '../../avail/account';
 import { showConfirmationDialog } from '../../util/confirmation';
 import { messageCreator } from '../../util/messageCreator';
-import { ApiPromise } from 'avail-js-sdk';
-import { SignerPayloadJSON } from '@availproject/metamask-avail-types';
 
 export async function signPayloadJSON(
   api: ApiPromise,

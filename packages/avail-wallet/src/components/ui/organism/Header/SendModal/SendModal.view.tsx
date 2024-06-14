@@ -99,6 +99,7 @@ export const SendModalView = ({ closeModal }: Props) => {
         toastr.error('Please fill recipient and amount fields.');
       }
     } catch (e) {
+      console.log(e, 'kjghaf');
       toastr.error('Error while sending the transaction');
     } finally {
       closeModal?.();

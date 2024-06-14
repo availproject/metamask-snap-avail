@@ -1,21 +1,19 @@
+/* eslint-disable no-useless-catch */
 // import type { ApiPromise } from '@polkadot/api/';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { TxPayload } from '@availproject/metamask-avail-types';
+import type { ApiPromise } from 'avail-js-sdk';
 import { getAddress } from './getAddress';
-import { ApiPromise, formatNumberToBalance } from 'avail-js-sdk';
-import { BN } from 'bn.js';
 
 export async function generateTransactionPayload(
   api: ApiPromise,
   to: string,
   amount: string | number
 ): Promise<TxPayload> {
+  console.log('generateTransactionPayload', to, amount);
   try {
     // fetch last signed block and account address
-    const [signedBlock, address] = await Promise.all([
-      api.rpc.chain.getBlock(),
-      getAddress()
-    ]);
+    const [signedBlock, address] = await Promise.all([api.rpc.chain.getBlock(), getAddress()]);
 
     // create signer options
     const nonce = (await api.derive.balances.account(address)).accountNonce;
@@ -29,8 +27,13 @@ export async function generateTransactionPayload(
     };
 
     // define transaction method
-    // const _amount = formatNumberToBalance(parseFloat(amount.toString()));
-    const data: SubmittableExtrinsic<'promise'> = api.tx.balances.transfer(to, new BN(amount));
+    // const _amount = formatNumberToBalance(parseFloat(amount.toString()));// eslint-disable-next-line prettier/prettier
+
+    const data: SubmittableExtrinsic<'promise'> = api.tx.balances.transferKeepAlive(
+      to,
+      String(amount)
+    );
+    console.log('data', data);
     const signerPayload = api.createType('SignerPayload', {
       genesisHash: api.genesisHash,
       runtimeVersion: api.runtimeVersion,
@@ -48,7 +51,6 @@ export async function generateTransactionPayload(
       tx: data.toHex()
     };
   } catch (error) {
-    // Handle the error appropriately
     throw error;
   }
 }

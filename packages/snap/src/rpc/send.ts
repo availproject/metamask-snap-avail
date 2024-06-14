@@ -1,8 +1,7 @@
 import type { Transaction, TxPayload } from '@availproject/metamask-avail-types';
+import type { ApiPromise } from 'avail-js-sdk';
 import { saveTxToState } from '../avail/tx';
 import { getAddress } from './getAddress';
-import { ApiPromise } from 'avail-js-sdk';
-import { ISubmittableResult } from '@polkadot/types/types/extrinsic';
 
 export async function send(
   api: ApiPromise,
@@ -18,7 +17,7 @@ export async function send(
 
     const amount = extrinsic.args[1].toJSON();
     const paymentInfo = await api.tx.balances
-      .transfer(destination, String(amount))
+      .transferKeepAlive(destination, String(amount))
       .paymentInfo(sender);
 
     const txHash = await api.rpc.author.submitExtrinsic(extrinsic);

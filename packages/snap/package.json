@@ -80,6 +80,7 @@
     "typescript": "4.7.3"
   },
   "dependencies": {
+    "bignumber.js": "^9.0.0",
     "@metamask/key-tree": "^9.0.0",
     "@metamask/snaps-types": "^1.0.2",
     "@metamask/snaps-ui": "^1.0.2",

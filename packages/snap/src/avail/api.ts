@@ -1,11 +1,13 @@
 import { ApiPromise, signedExtensions, types, rpc } from 'avail-js-sdk';
-import { getConfiguration } from '../configuration';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { HttpProvider } from '@polkadot/rpc-provider/http';
+import { getConfiguration } from '../configuration';
 
 let api: ApiPromise;
 let provider: HttpProvider;
 let isConnecting: boolean;
+
+/**Commented this code in favour of using avail js initialize, rather than this */
 
 /**
  * Initialize substrate api and awaits for it to be ready
@@ -13,17 +15,17 @@ let isConnecting: boolean;
 async function initApi(rpcUrl: string): Promise<ApiPromise> {
   try {
     await cryptoWaitReady();
-    provider = new HttpProvider(rpcUrl)
+    provider = new HttpProvider(rpcUrl);
     const opt = {
       provider: provider,
       noInitWarn: true,
       types,
       rpc,
       signedExtensions
-    }
-    api = await ApiPromise.create(opt)
+    };
+    api = await ApiPromise.create(opt);
     console.info('Api is ready', api);
-    return api
+    return api;
   } catch (error) {
     console.error('Error on provider creation', error);
     throw error;

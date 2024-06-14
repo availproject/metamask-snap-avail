@@ -2,7 +2,7 @@ import type { SnapConfig } from '@availproject/metamask-avail-types';
 
 declare module '@availproject/metamask-avail-adapter' {
   export function injectMetamaskAvailSnapProvider(
-    network: 'avail',
+    network: 'turing',
     config?: SnapConfig,
     pluginOrigin?: string
   ): void;

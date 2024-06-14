@@ -24,7 +24,7 @@ export class MetamaskAvailSnap {
   public constructor(pluginOrigin: string, config: SnapConfig) {
     this.pluginOrigin = pluginOrigin;
     this.snapId = `${this.pluginOrigin}`;
-    this.config = config || { networkName: 'avail' };
+    this.config = config || { networkName: 'turing' };
   }
 
   public getMetamaskSnapApi = (): MetamaskSnapApi => {
