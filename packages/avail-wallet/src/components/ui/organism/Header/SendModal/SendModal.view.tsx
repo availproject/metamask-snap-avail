@@ -5,6 +5,7 @@ import { ethers } from 'ethers';
 import Toastr from 'toastr2';
 import { AddressInput } from 'components/ui/molecule/AddressInput';
 import { isValidAddress } from 'utils/utils';
+import BigNumber from 'bignumber.js';
 import { SendSummaryModal } from '../SendSummaryModal';
 import { Bold, Normal } from '../../ConnectInfoModal/ConnectInfoModal.style';
 import {
@@ -89,7 +90,7 @@ export const SendModalView = ({ closeModal }: Props) => {
       if (fields.address && fields.amount && metamask.availSnap.api) {
         const amountBN = ethers.utils.parseUnits(fields.amount, wallet.tokenBalance.decimals);
         const txPayload = await metamask.availSnap.api.generateTransactionPayload(
-          amountBN.toNumber(),
+          new BigNumber(amountBN.toString()).toString(),
           fields.address
         );
         const signedTx = await metamask.availSnap.api.signPayloadJSON(txPayload.payload);
@@ -99,7 +100,6 @@ export const SendModalView = ({ closeModal }: Props) => {
         toastr.error('Please fill recipient and amount fields.');
       }
     } catch (e) {
-      console.log(e, 'kjghaf');
       toastr.error('Error while sending the transaction');
     } finally {
       closeModal?.();
