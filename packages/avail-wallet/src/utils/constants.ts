@@ -1,7 +1,7 @@
 export const DECIMALS_DISPLAYED_MAX_LENGTH = 11;
 
 export const GOLDBERG_TESTNET_EXPLORER = 'https://goldberg.avail.tools/';
-
+export const TURING_TESTNET_EXPLORER = 'https://avail-turing.subscan.io/';
 export const SNAPS_DOC_URL = 'https://docs.metamask.io/guide/snaps.html';
 
 export const INPUT_MAX_LENGTH = 100;

@@ -7,7 +7,7 @@
     "url": "git+https://github.com/availproject/metamask-snap-avail.git"
   },
   "source": {
-    "shasum": "KYcE+2L+SROrnRlI7X9Q0Z9l9xuR0eOQtQYYq4SIVf4=",
+    "shasum": "0Pxxcyrm1U8MepJ0acq82ogkUqHQuSrnT5JMJSFB6AI=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",

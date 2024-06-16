@@ -3,6 +3,8 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import metamaskSlice from 'slices/metamaskSlice';
+import { Transaction } from '@types';
+import { create } from 'zustand';
 import walletReducer from '../slices/walletSlice';
 import networkReducer from '../slices/networkSlice';
 import modalSlice from '../slices/modalSlice';
@@ -43,3 +45,14 @@ export const store = configureStore({
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
+
+interface TransactionStore {
+  transactions: Transaction[];
+  setTransactions: (transactions: Transaction[]) => void;
+  loading?: boolean;
+}
+
+export const useTransactionStore = create<TransactionStore>((set) => ({
+  transactions: [],
+  setTransactions: (transactions) => set({ transactions })
+}));

@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import { Erc20Token, Erc20TokenBalance } from '@types';
 import {
   DECIMALS_DISPLAYED_MAX_LENGTH,
-  GOLDBERG_TESTNET_EXPLORER,
+  TURING_TESTNET_EXPLORER,
   TIMEOUT_DURATION
 } from './constants';
 
@@ -15,10 +15,10 @@ export const shortenAddress = (address: string, num = 3) => {
 };
 
 export const openExplorerTab = (address: string, type = 'contract', chainId = '1' as string) => {
-  let explorerUrl = GOLDBERG_TESTNET_EXPLORER;
+  let explorerUrl = TURING_TESTNET_EXPLORER;
   switch (chainId) {
     case '1':
-      explorerUrl = GOLDBERG_TESTNET_EXPLORER;
+      explorerUrl = TURING_TESTNET_EXPLORER;
       break;
   }
   window.open(explorerUrl + type + '/' + address, '_blank')?.focus();

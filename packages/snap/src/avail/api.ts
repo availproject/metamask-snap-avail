@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { ApiPromise, signedExtensions, types, rpc } from 'avail-js-sdk';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { HttpProvider } from '@polkadot/rpc-provider/http';

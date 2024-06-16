@@ -6,6 +6,8 @@ import Toastr from 'toastr2';
 import { AddressInput } from 'components/ui/molecule/AddressInput';
 import { isValidAddress } from 'utils/utils';
 import BigNumber from 'bignumber.js';
+import { useAvailSnap } from 'services/metamask';
+import { useTransactionStore } from 'store/store';
 import { SendSummaryModal } from '../SendSummaryModal';
 import { Bold, Normal } from '../../ConnectInfoModal/ConnectInfoModal.style';
 import {
@@ -27,6 +29,7 @@ interface Props {
 export const SendModalView = ({ closeModal }: Props) => {
   const networks = useAppSelector((state) => state.networks);
   const wallet = useAppSelector((state) => state.wallet);
+  const { setTransactions } = useTransactionStore();
   const metamask = useAppSelector((state) => state.metamask);
   const [summaryModalOpen, setSummaryModalOpen] = useState(false);
   const [fields, setFields] = useState({
@@ -95,7 +98,8 @@ export const SendModalView = ({ closeModal }: Props) => {
         );
         const signedTx = await metamask.availSnap.api.signPayloadJSON(txPayload.payload);
         const tx = await metamask.availSnap.api.send(signedTx, txPayload);
-        toastr.success(JSON.stringify(tx.hash, null, 2));
+        toastr.success('Transaction sent successfully');
+        setTransactions(await metamask.availSnap.api.getAllTransactions());
       } else {
         toastr.error('Please fill recipient and amount fields.');
       }
