@@ -14,7 +14,9 @@ export async function send(
 
     const extrinsic = api.createType('Extrinsic', txPayload.tx);
     extrinsic.addSignature(sender, signature, txPayload.payload);
+    console.log('extrinsic', extrinsic.toJSON());
 
+    //gas estimations
     const amount = extrinsic.args[1].toJSON();
     const paymentInfo = await api.tx.balances
       .transferKeepAlive(destination, String(amount))

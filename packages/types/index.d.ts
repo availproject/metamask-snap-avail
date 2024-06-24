@@ -59,8 +59,9 @@ export interface SignPayloadRawRequest {
 export interface GenerateTransactionPayload {
   method: 'generateTransactionPayload';
   params: {
-    amount: string | number;
-    to: string;
+    module: string;
+    method: string;
+    args: unknown[];
   };
 }
 
@@ -109,6 +110,7 @@ export type BlockId = number | string | 'latest';
 
 export interface TxPayload {
   tx: string;
+  txRaw: any;
   payload: SignerPayloadJSON;
 }
 

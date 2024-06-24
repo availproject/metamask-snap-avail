@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // import type { ApiPromise } from '@polkadot/api/';
 import type { SignerPayloadRaw } from '@polkadot/types/types';
 import { hexToU8a, u8aToHex } from '@polkadot/util';
-import type { ApiPromise } from 'avail-js-sdk';
+import { signedExtensions, type ApiPromise } from 'avail-js-sdk';
 import type { SignerPayloadJSON } from '@availproject/metamask-avail-types';
 import { getKeyPair } from '../../avail/account';
 import { showConfirmationDialog } from '../../util/confirmation';
@@ -24,12 +25,16 @@ export async function signPayloadJSON(
       { message: 'era', value: payload.era },
       { message: 'nonce', value: payload.nonce },
       { message: 'spec version', value: payload.specVersion },
-      { message: 'transaction version', value: payload.transactionVersion }
+      { message: 'transaction version', value: payload.transactionVersion },
+      //@ts-ignore
+      { message: 'appId', value: payload.appId }
     ])
   });
   if (confirmation) {
     const extrinsic = api.registry.createType('ExtrinsicPayload', payload, {
-      version: payload.version
+      version: payload.version,
+      //try without it first
+      signedExtensions: signedExtensions
     });
     return extrinsic.sign(keyPair);
   }

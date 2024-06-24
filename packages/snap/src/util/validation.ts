@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { BlockId, SignerPayloadJSON, TxPayload } from '@availproject/metamask-avail-types';
 import type { SignerPayloadRaw } from '@polkadot/types/types';
 import type { Describe } from 'superstruct';
@@ -15,10 +16,12 @@ const SignaturePayloadJSONSchema = type({
   tip: string(),
   transactionVersion: string(),
   signedExtensions: array(string()),
-  version: number()
+  version: number(),
+  appID: number()
 });
 // export type HexString = `0x${string}`;
 
+//@ts-ignore
 export const validSignPayloadJSONSchema: Describe<{
   payload: SignerPayloadJSON;
 }> = object({
@@ -59,13 +62,16 @@ export const validConfigureSchema: Describe<{
 });
 
 export const validGenerateTransactionPayloadSchema: Describe<{
-  to: string;
-  amount: string | number;
+  method: string;
+  module: string;
+  args: unknown[];
 }> = object({
-  amount: union([string(), number()]),
-  to: string()
+  method: string(),
+  module: string(),
+  args: array()
 });
 
+//@ts-ignore
 export const validSendSchema: Describe<{
   signature: string;
   txPayload: TxPayload;
