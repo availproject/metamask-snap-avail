@@ -19,20 +19,22 @@ export async function send(
     //gas estimations
     const amount = extrinsic.args[1].toJSON();
     //@ts-ignore TODO: need to figure out how to get destination address from either the extrinsic or the txPayload, or skip in case of any other extrinsic call
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const destination = extrinsic.args[0].toJSON().id.toString();
-    const paymentInfo = await api.tx.balances
-      .transferKeepAlive(destination, String(amount))
-      .paymentInfo(sender);
+    // const destination = extrinsic.args[0].toJSON().id.toString();
+    //TODO: fix this to be the actual destination address
+    const destination = '5Fv3re8CcJf32Vw5Hwz2JXT41Fvac7Rgf6aCgbLrgQGB2gR2';
+
+    //TODO: fix this to be the actual fee
+    // const paymentInfo = await api.tx.balances
+    //   .transferKeepAlive(destination, String(amount))
+    //   .paymentInfo(sender);
 
     const txHash = await api.rpc.author.submitExtrinsic(extrinsic);
 
     const tx = {
       amount: amount,
       block: txHash.toHex(),
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       destination: destination,
-      fee: String(paymentInfo.partialFee.toJSON()),
+      fee: String('needs to be calculated'),
       hash: extrinsic.hash.toHex(),
       sender: sender
     } as Transaction;
