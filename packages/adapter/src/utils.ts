@@ -5,10 +5,7 @@ export function hasMetaMask(): boolean {
   return window.ethereum.isMetaMask;
 }
 
-export async function isAvailSnapInstalled(
-  snapOrigin: string,
-  version?: string
-): Promise<boolean> {
+export async function isAvailSnapInstalled(snapOrigin: string, version?: string): Promise<boolean> {
   try {
     const walletSnaps = await getWalletSnaps();
     console.info('getWalletSnaps', walletSnaps);
