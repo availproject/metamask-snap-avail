@@ -110,7 +110,6 @@ export type BlockId = number | string | 'latest';
 
 export interface TxPayload {
   tx: string;
-  txRaw: any;
   payload: SignerPayloadJSON;
 }
 

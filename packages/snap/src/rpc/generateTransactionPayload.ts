@@ -43,8 +43,7 @@ export async function generateTransactionPayload(
 
     return {
       payload: signerPayload.toPayload(),
-      tx: data.toHex(),
-      txRaw: data
+      tx: data.toHex()
     };
   } catch (error) {
     throw error;

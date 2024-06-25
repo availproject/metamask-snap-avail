@@ -101,6 +101,7 @@ export const SendModalView = ({ closeModal }: Props) => {
         console.log(txPayload, 'txPayload');
         const signedTx = await metamask.availSnap.api.signPayloadJSON(txPayload.payload);
         const tx = await metamask.availSnap.api.send(signedTx, txPayload);
+        console.log(tx, 'tx');
         toastr.success('Transaction sent successfully');
         setTransactions(await metamask.availSnap.api.getAllTransactions());
       } else {

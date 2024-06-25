@@ -16,8 +16,7 @@ const SignaturePayloadJSONSchema = type({
   tip: string(),
   transactionVersion: string(),
   signedExtensions: array(string()),
-  version: number(),
-  appID: number()
+  version: number()
 });
 // export type HexString = `0x${string}`;
 

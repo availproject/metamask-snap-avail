@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 // import type { ApiPromise } from '@polkadot/api/';
 import type { SignerPayloadRaw } from '@polkadot/types/types';
 import { hexToU8a, u8aToHex } from '@polkadot/util';
@@ -25,9 +24,7 @@ export async function signPayloadJSON(
       { message: 'era', value: payload.era },
       { message: 'nonce', value: payload.nonce },
       { message: 'spec version', value: payload.specVersion },
-      { message: 'transaction version', value: payload.transactionVersion },
-      //@ts-ignore
-      { message: 'appId', value: payload.appId }
+      { message: 'transaction version', value: payload.transactionVersion }
     ])
   });
   if (confirmation) {
