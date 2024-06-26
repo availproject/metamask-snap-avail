@@ -92,18 +92,59 @@ export const SendModalView = ({ closeModal }: Props) => {
     try {
       if (fields.address && fields.amount && metamask.availSnap.api) {
         const amountBN = ethers.utils.parseUnits(fields.amount, wallet.tokenBalance.decimals);
+        console.log(fields.address, new BigNumber(amountBN.toString()).toString());
         const txPayload = await metamask.availSnap.api.generateTransactionPayload(
-          new BigNumber(amountBN.toString()).toString(),
-          fields.address
+          'balances',
+          'transferKeepAlive',
+          [fields.address, new BigNumber(amountBN.toString()).toString()]
         );
+        console.log(txPayload, 'txPayload');
         const signedTx = await metamask.availSnap.api.signPayloadJSON(txPayload.payload);
         const tx = await metamask.availSnap.api.send(signedTx, txPayload);
+        console.log(tx, 'tx');
         toastr.success('Transaction sent successfully');
         setTransactions(await metamask.availSnap.api.getAllTransactions());
       } else {
         toastr.error('Please fill recipient and amount fields.');
       }
     } catch (e) {
+      console.log(e, 'Error while sending the transaction');
+      toastr.error('Error while sending the transaction');
+    } finally {
+      closeModal?.();
+    }
+  };
+
+  const sendMessage = async () => {
+    try {
+      if (fields.address && fields.amount && metamask.availSnap.api) {
+        const amountBN = ethers.utils.parseUnits(fields.amount, wallet.tokenBalance.decimals);
+        console.log(fields.address.padEnd(66, '0'), new BigNumber(amountBN.toString()).toString());
+        const txPayload = await metamask.availSnap.api.generateTransactionPayload(
+          'vector',
+          'sendMessage',
+          [
+            {
+              FungibleToken: {
+                assetId: '0x0000000000000000000000000000000000000000000000000000000000000000',
+                amount: new BigNumber(amountBN.toString()).toString()
+              }
+            },
+            '0x3CBe81d1C181fBaf07fe9E443cbC33A9004ef516000000000000000000000000',
+            2
+          ]
+        );
+        console.log(txPayload, 'txPayload');
+        const signedTx = await metamask.availSnap.api.signPayloadJSON(txPayload.payload);
+        const tx = await metamask.availSnap.api.send(signedTx, txPayload);
+        console.log(tx, 'tx');
+        toastr.success('Transaction sent successfully');
+        setTransactions(await metamask.availSnap.api.getAllTransactions());
+      } else {
+        toastr.error('Please fill recipient and amount fields.');
+      }
+    } catch (e) {
+      console.log(e, 'Error while sending the transaction');
       toastr.error('Error while sending the transaction');
     } finally {
       closeModal?.();

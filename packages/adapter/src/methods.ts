@@ -114,11 +114,12 @@ export async function sendSignedData(
 
 export async function generateTransactionPayload(
   this: MetamaskAvailSnap,
-  amount: string | number,
-  to: string
+  module: string,
+  method: string,
+  args: unknown[]
 ): Promise<TxPayload> {
   return (await sendSnapMethod(
-    { method: 'generateTransactionPayload', params: { amount, to } },
+    { method: 'generateTransactionPayload', params: { module, method, args } },
     this.snapId
   )) as TxPayload;
 }

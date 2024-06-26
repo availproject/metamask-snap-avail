@@ -1,7 +1,7 @@
 // import type { ApiPromise } from '@polkadot/api/';
 import type { SignerPayloadRaw } from '@polkadot/types/types';
 import { hexToU8a, u8aToHex } from '@polkadot/util';
-import type { ApiPromise } from 'avail-js-sdk';
+import { signedExtensions, type ApiPromise } from 'avail-js-sdk';
 import type { SignerPayloadJSON } from '@availproject/metamask-avail-types';
 import { getKeyPair } from '../../avail/account';
 import { showConfirmationDialog } from '../../util/confirmation';
@@ -29,7 +29,9 @@ export async function signPayloadJSON(
   });
   if (confirmation) {
     const extrinsic = api.registry.createType('ExtrinsicPayload', payload, {
-      version: payload.version
+      version: payload.version,
+      //try without it first
+      signedExtensions: signedExtensions
     });
     return extrinsic.sign(keyPair);
   }

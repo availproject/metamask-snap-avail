@@ -7,10 +7,10 @@ import { getAddress } from './getAddress';
 
 export async function generateTransactionPayload(
   api: ApiPromise,
-  to: string,
-  amount: string | number
+  module: string,
+  method: string,
+  args: unknown[]
 ): Promise<TxPayload> {
-  console.log('generateTransactionPayload', to, amount);
   try {
     // fetch last signed block and account address
     const [signedBlock, address] = await Promise.all([api.rpc.chain.getBlock(), getAddress()]);
@@ -19,6 +19,7 @@ export async function generateTransactionPayload(
     const nonce = (await api.derive.balances.account(address)).accountNonce;
     const signerOptions = {
       blockHash: signedBlock.block.header.hash,
+      appId: 0,
       era: api.createType('ExtrinsicEra', {
         current: signedBlock.block.header.number,
         period: 50
@@ -27,19 +28,13 @@ export async function generateTransactionPayload(
     };
 
     // define transaction method
-    // const _amount = formatNumberToBalance(parseFloat(amount.toString()));// eslint-disable-next-line prettier/prettier
-
-    const data: SubmittableExtrinsic<'promise'> = api.tx.balances.transferKeepAlive(
-      to,
-      String(amount)
-    );
+    const data: SubmittableExtrinsic<'promise'> = api.tx[module][method](...args);
     console.log('data', data);
     const signerPayload = api.createType('SignerPayload', {
       genesisHash: api.genesisHash,
       runtimeVersion: api.runtimeVersion,
       version: api.extrinsicVersion,
       ...signerOptions,
-      address: to,
       blockNumber: signedBlock.block.header.number,
       method: data.method,
       signedExtensions: [],

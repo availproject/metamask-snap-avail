@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
   BlockInfo,
   SnapConfig,
@@ -30,7 +31,7 @@ export interface MetamaskSnapApi {
 
   send(signature: string, txPayload: TxPayload): Promise<Transaction>;
 
-  generateTransactionPayload(amount: string | number, to: string): Promise<TxPayload>;
+  generateTransactionPayload(module: string, method: string, args: unknown[]): Promise<TxPayload>;
 }
 
 export interface InjectedMetamaskExtension extends InjectedExtension {
@@ -46,7 +47,6 @@ declare global {
         request: SnapRpcMethodRequest | { method: string; params?: never[] }
       ) => Promise<unknown>;
       on: (eventName: unknown, callback: unknown) => unknown;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       request: <T>(request: SnapRpcMethodRequest | { method: string; params?: any }) => Promise<T>;
     };
   }

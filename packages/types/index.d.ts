@@ -59,8 +59,9 @@ export interface SignPayloadRawRequest {
 export interface GenerateTransactionPayload {
   method: 'generateTransactionPayload';
   params: {
-    amount: string | number;
-    to: string;
+    module: string;
+    method: string;
+    args: unknown[];
   };
 }
 

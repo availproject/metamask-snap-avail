@@ -98,7 +98,12 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
     }
     case 'generateTransactionPayload':
       assert(request.params, validGenerateTransactionPayloadSchema);
-      return await generateTransactionPayload(api, request.params.to, request.params.amount);
+      return await generateTransactionPayload(
+        api,
+        request.params.module,
+        request.params.method,
+        request.params.args
+      );
 
     case 'send':
       assert(request.params, validSendSchema);
