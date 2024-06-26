@@ -1,6 +1,7 @@
 export const DECIMALS_DISPLAYED_MAX_LENGTH = 11;
 
-export const GOLDBERG_TESTNET_EXPLORER = 'https://goldberg.avail.tools/';
+export const GOLDBERG_TESTNET_EXPLORER =
+  'https://goldberg.avail.tools/?rpc=wss%3A%2F%2Fgoldberg-rpc.slowops.xyz%2Fws#/explorer';
 export const TURING_TESTNET_EXPLORER = 'https://avail-turing.subscan.io/';
 export const SNAPS_DOC_URL = 'https://docs.metamask.io/guide/snaps.html';
 

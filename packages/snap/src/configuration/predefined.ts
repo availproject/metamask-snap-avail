@@ -1,6 +1,6 @@
 import type { SnapConfig } from '@availproject/metamask-avail-types';
 
-export const availConfiguration: SnapConfig = {
+export const turingConfiguration: SnapConfig = {
   addressPrefix: 42,
   networkName: 'turing',
   unit: {
@@ -11,4 +11,15 @@ export const availConfiguration: SnapConfig = {
   wsRpcUrl: 'https://turing-rpc.avail.so/ws'
 };
 
-export const defaultConfiguration: SnapConfig = availConfiguration;
+export const goldbergConfiguration: SnapConfig = {
+  addressPrefix: 43,
+  networkName: 'goldberg',
+  unit: {
+    decimals: 18,
+    image: 'https://svgshare.com/i/L2d.svg',
+    symbol: 'AVAIL'
+  },
+  wsRpcUrl: 'https://goldberg-rpc.slowops.xyz/ws'
+};
+
+export const defaultConfiguration: SnapConfig = turingConfiguration;
