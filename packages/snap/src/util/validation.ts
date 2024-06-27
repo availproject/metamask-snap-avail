@@ -70,16 +70,17 @@ export const validGenerateTransactionPayloadSchema: Describe<{
   args: array()
 });
 
-//@ts-ignore
 export const validSendSchema: Describe<{
   signature: string;
   txPayload: TxPayload;
+  network: number;
 }> = object({
   signature: string(),
   txPayload: object({
     payload: SignaturePayloadJSONSchema,
     tx: string()
-  })
+  }),
+  network: number()
 });
 
 // export interface SignerPayloadJSON {

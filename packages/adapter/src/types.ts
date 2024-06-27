@@ -29,7 +29,7 @@ export interface MetamaskSnapApi {
 
   signPayloadRaw(payload: SignerPayloadRaw): Promise<string>;
 
-  send(signature: string, txPayload: TxPayload): Promise<Transaction>;
+  send(signature: string, txPayload: TxPayload, network: number): Promise<Transaction>;
 
   generateTransactionPayload(module: string, method: string, args: unknown[]): Promise<TxPayload>;
 }

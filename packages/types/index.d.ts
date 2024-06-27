@@ -70,6 +70,7 @@ export interface SendUnitRequest {
   params: {
     signature: string;
     txPayload: TxPayload;
+    network: number;
   };
 }
 
@@ -156,10 +157,21 @@ export interface Transaction {
   hash: string;
   block: string;
   sender: string;
-  destination: string;
-  amount: string | number;
+  extrinsicdata: Extrinsic
+  destination?: string;
+  amount?: string | number;
   fee: string;
+  network: number
 }
+
+export type Extrinsic = {
+  method: {
+    method: string;
+    section: string;
+    args: unknown[];
+  };
+  isSigned: boolean;
+};
 
 export interface SignerPayloadJSON {
   /**

@@ -1,6 +1,6 @@
 import { KeyboardEvent } from 'react';
 import { ethers } from 'ethers';
-import { Erc20Token, Erc20TokenBalance } from '@types';
+import { Erc20Token, Erc20TokenBalance, Network } from '@types';
 import {
   DECIMALS_DISPLAYED_MAX_LENGTH,
   TURING_TESTNET_EXPLORER,
@@ -16,13 +16,13 @@ export const shortenAddress = (address: string, num = 3) => {
 };
 
 //TODO: the explorer url should switch based on the chainId, here it's hardcoded, need to fix.
-export const openExplorerTab = (address: string, type = 'contract', chainId = '1' as string) => {
+export const openExplorerTab = (address: string, type = 'contract', chainId: number) => {
   let explorerUrl = TURING_TESTNET_EXPLORER;
   switch (chainId) {
-    case '1':
+    case 0:
       explorerUrl = TURING_TESTNET_EXPLORER;
       break;
-    case '2':
+    case 1:
       explorerUrl = GOLDBERG_TESTNET_EXPLORER;
       break;
   }

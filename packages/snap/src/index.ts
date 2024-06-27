@@ -110,7 +110,8 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       return await send(
         api,
         request.params.signature as Uint8Array | `0x${string}`,
-        request.params.txPayload
+        request.params.txPayload,
+        request.params.network
       );
     case 'getChainHead':
       return api && (await api.rpc.chain.getFinalizedHead()).hash;

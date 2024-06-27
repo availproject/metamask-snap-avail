@@ -22,7 +22,7 @@ interface Props {
 }
 
 export const TransactionListItemView = ({ transaction }: Props) => {
-  const wallet = useAppSelector((state) => state.wallet);
+  const networks = useAppSelector((state) => state.networks);
   const [currencySymbol, setCurrencySymbol] = useState('AVAIL');
   const [txnValue, setTxnValue] = useState('0');
   const [txnUsdValue, setTxnUsdValue] = useState('0.00');
@@ -36,10 +36,9 @@ export const TransactionListItemView = ({ transaction }: Props) => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const txnToFromLabel = getTxnToFromLabel(transaction);
   return (
-    <Wrapper onClick={() => openExplorerTab(transaction.hash, 'extrinsic')}>
+    <Wrapper onClick={() => openExplorerTab(transaction.hash, 'extrinsic', networks.activeNetwork)}>
       <Left>
         <LeftIcon>
           <IconStyled transactionname={'Send'} icon={getIcon('Send')} />

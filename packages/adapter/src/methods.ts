@@ -97,14 +97,16 @@ export async function getAllTransactions(this: MetamaskAvailSnap): Promise<Trans
 export async function sendSignedData(
   this: MetamaskAvailSnap,
   signature: string,
-  txPayload: TxPayload
+  txPayload: TxPayload,
+  network: number
 ): Promise<Transaction> {
   const response = await sendSnapMethod(
     {
       method: 'send',
       params: {
         signature,
-        txPayload
+        txPayload,
+        network
       }
     },
     this.snapId

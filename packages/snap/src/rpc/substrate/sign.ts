@@ -42,7 +42,7 @@ export async function signPayloadRaw(
   payload: SignerPayloadRaw
 ): Promise<{ signature: string } | void> {
   const keyPair = await getKeyPair();
-  // ask for confirmation
+  // ask for confirmation and TODO: beautify the message
   const confirmation = await showConfirmationDialog({
     description: `It will be signed with address: ${keyPair.address}`,
     prompt: `Do you want to sign this message?`,

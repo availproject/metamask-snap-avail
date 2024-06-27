@@ -21,9 +21,13 @@ export const TransactionsListView = () => {
   useEffect(() => {
     (async () => {
       if (wallet.transactions.length > 0 && metamaskState.availSnap.snap?.getMetamaskSnapApi()) {
-        setTransactions(
-          await metamaskState.availSnap.snap?.getMetamaskSnapApi().getAllTransactions()
+        const allTransactions = await metamaskState.availSnap.snap
+          ?.getMetamaskSnapApi()
+          .getAllTransactions();
+        const filteredTransactions = allTransactions.filter(
+          (transaction) => transaction.network === networks.activeNetwork
         );
+        setTransactions(filteredTransactions);
       }
     })();
   }, [wallet.transactions]);

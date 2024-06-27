@@ -18,6 +18,7 @@ import {
   clearAccounts
 } from 'slices/walletSlice';
 import { resetNetwork, setActiveNetwork } from 'slices/networkSlice';
+import { Erc20TokenBalance } from '@types';
 import { ConnectInfoModal } from '../ConnectInfoModal';
 import { AccountDetailsModal } from '../AccountDetailsModal';
 import {
@@ -52,6 +53,7 @@ interface Props {
 export const HeaderView = ({ address }: Props) => {
   const [receiveOpen, setReceiveOpen] = useState(false);
   const [sendOpen, setSendOpen] = useState(false);
+  const [balance, setBalance] = useState<Erc20TokenBalance>();
   const networks = useAppSelector((state) => state.networks);
   const chainId = networks?.items[networks.activeNetwork]?.chainId;
   const wallet = useAppSelector((state) => state.wallet);
@@ -79,6 +81,10 @@ export const HeaderView = ({ address }: Props) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [networks.activeNetwork, wallet.tokenBalance, setErc20TokenBalanceSelected]);
+
+  // useEffect(() => {
+  //   setBalance(wallet.tokenBalance);
+  // }, [wallet.connected, networks.activeNetwork, wallet.tokenBalance]);
 
   const handleSendClick = () => {
     setSendOpen(true);
@@ -129,6 +135,7 @@ export const HeaderView = ({ address }: Props) => {
         </Left>
         <AssetQuantity
           currencyValue={getHumanReadableAmount(wallet.tokenBalance)}
+          //currencyValue={balance ? getHumanReadableAmount(balance) : '0'}
           // currencyValue={balance}
           currency="AVAIL"
           size="big"
