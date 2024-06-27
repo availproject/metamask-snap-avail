@@ -55,16 +55,13 @@ export const getTxnValues = (
     transaction.extrinsicdata.method.method === 'transferKeepAlive' &&
     transaction.extrinsicdata.method.section === 'balances'
   ) {
-    let txnValue = '0';
-    let txnUsdValue = '0';
-
-    txnValue =
+   const txnValue =
       (
         //@ts-ignore
       Number(transaction.extrinsicdata.method.args.value.replace(/,/g, '')) /
       (10 ** decimals)
     ).toString();
-    txnUsdValue = '87';
+   const txnUsdValue = 'not calculated yet';
     return { txnValue, txnUsdValue };
   } else {
     const txnValue = 'extrinsic call';
