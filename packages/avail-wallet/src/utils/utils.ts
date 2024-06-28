@@ -15,8 +15,7 @@ export const shortenAddress = (address: string, num = 3) => {
   );
 };
 
-//TODO: the explorer url should switch based on the chainId, here it's hardcoded, need to fix.
-export const openExplorerTab = (address: string, type = 'contract', chainId: number) => {
+export const openExplorerTab = (address: string, type: string, chainId: number) => {
   let explorerUrl = TURING_TESTNET_EXPLORER;
   switch (chainId) {
     case 0:

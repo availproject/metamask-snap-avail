@@ -127,7 +127,7 @@ export const HeaderView = ({ address }: Props) => {
                 <AccountDetailButton
                   backgroundTransparent
                   iconLeft="external-link"
-                  onClick={() => openExplorerTab(address, 'contract', chainId)}
+                  onClick={() => openExplorerTab(address, 'account', networks.activeNetwork)}
                 >
                   View on explorer
                 </AccountDetailButton>

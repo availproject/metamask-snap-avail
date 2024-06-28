@@ -14,6 +14,7 @@ interface Props {
 export const TransactionsListView = () => {
   const networks = useAppSelector((state) => state.networks);
   const wallet = useAppSelector((state) => state.wallet);
+  const { loader } = useAppSelector((state: any) => state.UI);
   const metamaskState = useAppSelector((state) => state.metamask);
   const timeoutHandle = useRef(setTimeout(() => {}));
   const { transactions, setTransactions } = useTransactionStore();
@@ -31,8 +32,10 @@ export const TransactionsListView = () => {
       }
     })();
   }, [wallet.transactions]);
-
-  return (
+  console.log('loader', loader);
+  return loader.isLoading ? (
+    <></>
+  ) : (
     <Wrapper<FC<IListProps<Transaction>>>
       data={transactions.length > 0 ? transactions : transactions}
       render={(transaction) => <TransactionListItem transaction={transaction} />}
