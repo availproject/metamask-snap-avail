@@ -19,6 +19,7 @@ import {
 } from 'slices/walletSlice';
 import { resetNetwork, setActiveNetwork } from 'slices/networkSlice';
 import { Erc20TokenBalance } from '@types';
+import { KeyboardArrowRightSharp } from '@material-ui/icons';
 import { ConnectInfoModal } from '../ConnectInfoModal';
 import { AccountDetailsModal } from '../AccountDetailsModal';
 import {
@@ -201,6 +202,20 @@ export const HeaderView = ({ address }: Props) => {
       <Buttons>
         <HeaderButton onClick={() => setReceiveOpen(true)}>Receive</HeaderButton>
         <SendButton onClick={() => handleSendClick()}>Send</SendButton>
+        <a href={`https://bridge-ui-xi.vercel.app/`} style={{ textDecoration: 'none' }}>
+          <SendButton
+            style={{
+              marginLeft: '20px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <span style={{ display: 'flex', alignItems: 'center' }}>
+              BRIDGE <KeyboardArrowRightSharp />
+            </span>
+          </SendButton>
+        </a>
       </Buttons>
       <PopIn isOpen={receiveOpen} setIsOpen={setReceiveOpen}>
         <ReceiveModal address={address} />
