@@ -10,7 +10,7 @@ export type SnapInstallationParamNames = string;
 export * from './extension';
 
 export async function enableAvailSnap(
-  config: SnapConfig = { networkName: 'avail' },
+  config: SnapConfig = { networkName: 'turing' },
   snapOrigin?: string,
   snapInstallationParams: Record<SnapInstallationParamNames, unknown> = {}
 ): Promise<MetamaskAvailSnap> {
@@ -24,7 +24,7 @@ export async function enableAvailSnap(
     throw new Error("Current Metamask version doesn't support snaps");
   }
   if (!config.networkName) {
-    config.networkName = 'avail';
+    config.networkName = 'turing';
   }
 
   const isInstalled = await isAvailSnapInstalled(snapId);

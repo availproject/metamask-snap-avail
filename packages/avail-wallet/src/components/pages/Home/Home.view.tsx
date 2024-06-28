@@ -11,11 +11,12 @@ export const HomeView = ({ address }: Props) => {
   const loader = useAppSelector((state) => state.UI.loader);
   const wallet = useAppSelector((state) => state.wallet);
 
+  console.log(wallet.transactions, 'this should print on change ');
   return (
     <Wrapper>
       <RightPart>
         {wallet.accounts.length > 0 && <Header address={address} />}
-        <TransactionsList transactions={wallet.transactions || []} />
+        <TransactionsList />
         {Object.keys(wallet.transactions).length === 0 && !loader.isLoading && (
           <NoTransactions> You have no transactions</NoTransactions>
         )}

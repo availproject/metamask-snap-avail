@@ -1,7 +1,7 @@
 // import type { ApiPromise } from '@polkadot/api';
-import { ApiPromise } from 'avail-js-sdk';
+import type { ApiPromise } from 'avail-js-sdk';
+import type { AccountData } from '@polkadot/types/interfaces';
 import { getKeyPair } from '../../avail/account';
-import { AccountData } from '@polkadot/types/interfaces';
 
 /**
  * Returns balance as BN

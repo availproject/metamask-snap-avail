@@ -4,8 +4,8 @@ export function shortAddress(address: string): string {
 
 export function getCurrency(network: string): string {
   switch (network) {
-    case 'avail':
-      return 'avail';
+    case 'turing':
+      return 'turing';
   }
   return '';
 }

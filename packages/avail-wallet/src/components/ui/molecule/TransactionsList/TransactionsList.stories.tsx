@@ -9,12 +9,12 @@ export default {
 
 const transactions: Transaction[] = [];
 
-export const FullWidth = () => <TransactionsListView transactions={transactions} />;
+export const FullWidth = () => <TransactionsListView />;
 
 export const HalfWidth = () => {
   return (
     <div style={{ width: '50%' }}>
-      <TransactionsListView transactions={transactions} />
+      <TransactionsListView />
     </div>
   );
 };

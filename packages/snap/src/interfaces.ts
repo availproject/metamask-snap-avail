@@ -11,6 +11,6 @@ export const EmptyMetamaskState: () => MetamaskState = () => ({
 });
 
 export interface Wallet {
-  send(options: { method: string; params: unknown[] }): unknown;
+  send(options: { method: string; params: [] }): unknown;
   request(options: { method: string; params?: unknown }): unknown;
 }

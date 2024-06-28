@@ -1,5 +1,5 @@
 // import type { Transaction } from "@availproject/metamask-avail-types";
-import { Transaction } from '@availproject/metamask-avail-types';
+import type { Transaction } from '@availproject/metamask-avail-types';
 import { getMetamaskState } from '../rpc/getMetamaskState';
 
 export async function saveTxToState(tx: Transaction): Promise<void> {
@@ -15,7 +15,6 @@ export async function saveTxToState(tx: Transaction): Promise<void> {
 
 export async function updateTxInState(transaction: Transaction): Promise<void> {
   const state = await getMetamaskState();
-  const transactionsArray = state.transactions as unknown as Transaction[];
 
   // const index = transactionsArray.findIndex((tx) => tx.hash === transaction.hash);
   const index = 0;

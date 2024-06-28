@@ -5,6 +5,9 @@ import { ethers } from 'ethers';
 import Toastr from 'toastr2';
 import { AddressInput } from 'components/ui/molecule/AddressInput';
 import { isValidAddress } from 'utils/utils';
+import BigNumber from 'bignumber.js';
+import { useAvailSnap } from 'services/metamask';
+import { useTransactionStore } from 'store/store';
 import { SendSummaryModal } from '../SendSummaryModal';
 import { Bold, Normal } from '../../ConnectInfoModal/ConnectInfoModal.style';
 import {
@@ -26,6 +29,7 @@ interface Props {
 export const SendModalView = ({ closeModal }: Props) => {
   const networks = useAppSelector((state) => state.networks);
   const wallet = useAppSelector((state) => state.wallet);
+  const { setTransactions } = useTransactionStore();
   const metamask = useAppSelector((state) => state.metamask);
   const [summaryModalOpen, setSummaryModalOpen] = useState(false);
   const [fields, setFields] = useState({
@@ -89,16 +93,57 @@ export const SendModalView = ({ closeModal }: Props) => {
       if (fields.address && fields.amount && metamask.availSnap.api) {
         const amountBN = ethers.utils.parseUnits(fields.amount, wallet.tokenBalance.decimals);
         const txPayload = await metamask.availSnap.api.generateTransactionPayload(
-          amountBN.toNumber(),
-          fields.address
+          'balances',
+          'transferKeepAlive',
+          [fields.address, new BigNumber(amountBN.toString()).toString()]
         );
         const signedTx = await metamask.availSnap.api.signPayloadJSON(txPayload.payload);
-        const tx = await metamask.availSnap.api.send(signedTx, txPayload);
-        toastr.success(JSON.stringify(tx.hash, null, 2));
+        const tx = await metamask.availSnap.api.send(signedTx, txPayload, networks.activeNetwork);
+        toastr.success('Transaction sent successfully');
+
+        setTransactions(
+          (await metamask.availSnap.api.getAllTransactions()).filter(
+            (tx) => tx.network === networks.activeNetwork
+          )
+        );
       } else {
         toastr.error('Please fill recipient and amount fields.');
       }
     } catch (e) {
+      console.log(e, 'Error while sending the transaction');
+      toastr.error('Error while sending the transaction');
+    } finally {
+      closeModal?.();
+    }
+  };
+
+  const sendMessage = async () => {
+    try {
+      if (fields.address && fields.amount && metamask.availSnap.api) {
+        const amountBN = ethers.utils.parseUnits(fields.amount, wallet.tokenBalance.decimals);
+        const txPayload = await metamask.availSnap.api.generateTransactionPayload(
+          'vector',
+          'sendMessage',
+          [
+            {
+              FungibleToken: {
+                assetId: '0x0000000000000000000000000000000000000000000000000000000000000000',
+                amount: new BigNumber(amountBN.toString()).toString()
+              }
+            },
+            '0x3CBe81d1C181fBaf07fe9E443cbC33A9004ef516000000000000000000000000',
+            2
+          ]
+        );
+        const signedTx = await metamask.availSnap.api.signPayloadJSON(txPayload.payload);
+        const tx = await metamask.availSnap.api.send(signedTx, txPayload, networks.activeNetwork);
+        toastr.success('Transaction sent successfully');
+        setTransactions(await metamask.availSnap.api.getAllTransactions());
+      } else {
+        toastr.error('Please fill recipient and amount fields.');
+      }
+    } catch (e) {
+      console.log(e, 'Error while sending the transaction');
       toastr.error('Error while sending the transaction');
     } finally {
       closeModal?.();
