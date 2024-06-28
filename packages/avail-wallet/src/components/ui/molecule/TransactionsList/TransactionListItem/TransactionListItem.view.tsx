@@ -45,7 +45,9 @@ export const TransactionListItemView = ({ transaction }: Props) => {
         </LeftIcon>
         <Column>
           <Label>{'Send'}</Label>
-          {/* <Description>{transaction.fee}</Description> */}
+          <Description>
+            fee: {(Number(transaction.fee) / 10 ** 18).toString().slice(0, 5)}
+          </Description>
         </Column>
       </Left>
       <Middle>{txnToFromLabel} </Middle>
