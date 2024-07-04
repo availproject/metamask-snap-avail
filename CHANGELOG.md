@@ -11,8 +11,8 @@ This snap is the package that any dapp would use to integrate avail-snap as a we
 
 ### Added
 
-- The snap was previously hardcoded to just handle balances.transfer extrinsic calls, now it takes the extrinsic calls as a params, so we could use the snap package for our bridge and staking ui.
-- Added few calculations for extrinsic calls.   
+- The snap was previously hardcoded to just handle balances.transfer extrinsic calls, now it takes the extrinsic call data as a param, so we could use the snap package for our bridge and staking ui.
+- Added fee calculations for extrinsic calls.   
 
 ### Changed
 
@@ -22,7 +22,7 @@ This snap is the package that any dapp would use to integrate avail-snap as a we
 
 
 ### ADAPTER
-The adapter injects the snap as a web3provider, basically triggers the metamask popups
+The adapter injects the snap as a web3provider, basically triggers the metamask popups.
   
 ### Changed
 
@@ -31,18 +31,20 @@ The adapter injects the snap as a web3provider, basically triggers the metamask 
 
 
 ### AVAIL WALLET UI
-This is a that dapp that uses the snap to do extrinsic calls, such as balance transfers, and shows transactions.
+This is a that dapp that uses the snap to do extrinsic calls, such as balance transfers, and shows transactions on the UI.
 
 
 ### Added
 
 - Transaction refetching logic whenever a new transaction is initaited.
 - Transaction segregation based on the network switches.
+- UI changes.
 
 
 ### Changed
 
 - Fixed balance refetching slow on network change.
-- Fixed hooks 
+- Fixed hooks.
+
 
 
