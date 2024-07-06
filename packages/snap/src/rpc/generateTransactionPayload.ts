@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-catch */
-// import type { ApiPromise } from '@polkadot/api/';
+
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { TxPayload } from '@availproject/metamask-avail-types';
 import type { ApiPromise } from 'avail-js-sdk';
