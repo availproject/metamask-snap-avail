@@ -33,8 +33,8 @@ export async function getKeyPair(): Promise<KeyringPair> {
 const getCoinTypeByNetwork = (network: SnapNetworks): number => {
   switch (network) {
     case 'turing':
-      return 354;
+      return 709;
     default:
-      return 354;
+      return 709;
   }
 };

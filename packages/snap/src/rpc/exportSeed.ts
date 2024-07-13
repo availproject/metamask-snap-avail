@@ -1,7 +1,7 @@
 import type { JsonBIP44CoinTypeNode } from '@metamask/key-tree';
 import { showConfirmationDialog } from '../util/confirmation';
 
-const kusamaCoinType: number = 354;
+const kusamaCoinType: number = 709;
 
 export async function exportSeed(): Promise<string | null> {
   try {
