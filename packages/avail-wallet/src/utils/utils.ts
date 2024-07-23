@@ -5,7 +5,8 @@ import {
   DECIMALS_DISPLAYED_MAX_LENGTH,
   TURING_TESTNET_EXPLORER,
   TIMEOUT_DURATION,
-  GOLDBERG_TESTNET_EXPLORER
+  GOLDBERG_TESTNET_EXPLORER,
+  MAINNET_EXPLORER
 } from './constants';
 
 export const shortenAddress = (address: string, num = 3) => {
@@ -23,6 +24,9 @@ export const openExplorerTab = (address: string, type: string, chainId: number) 
       break;
     case 1:
       explorerUrl = GOLDBERG_TESTNET_EXPLORER;
+      break;
+    case 2:
+      explorerUrl = MAINNET_EXPLORER;
       break;
   }
   window.open(explorerUrl + type + '/' + address, '_blank')?.focus();

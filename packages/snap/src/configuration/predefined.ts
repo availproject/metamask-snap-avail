@@ -22,4 +22,15 @@ export const goldbergConfiguration: SnapConfig = {
   wsRpcUrl: 'https://goldberg-rpc.slowops.xyz/ws'
 };
 
+export const mainnetConfiguration: SnapConfig = {
+  addressPrefix: 43,
+  networkName: 'mainnet',
+  unit: {
+    decimals: 18,
+    image: 'https://svgshare.com/i/L2d.svg',
+    symbol: 'AVAIL'
+  },
+  wsRpcUrl: 'https://mainnet-rpc.avail.so/ws'
+};
+
 export const defaultConfiguration: SnapConfig = turingConfiguration;

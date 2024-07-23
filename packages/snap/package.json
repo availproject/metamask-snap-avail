@@ -1,6 +1,6 @@
 {
   "name": "@availproject/avail-snap",
-  "version": "0.7.7",
+  "version": "1.0.0",
   "description": "MetaMask snap for interacting with Avail dApps",
   "main": "build/index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "watch": "concurrently  --raw --kill-others \"yarn run watch:tsc\" \"yarn run watch:snap\" \"yarn run serve\"",
     "watch:tsc": "yarn run build:tsc --watch",
     "watch:snap": "mm-snap watch --debug",
-    "prepublish": "yarn run build && mkdir ipfs && cp package.json ipfs/package.json",
+    "prepublish": "yarn run build",
     "publish": "export BUNDLE_URL=`ipd --no-clipboard -O -p infura dist/bundle.js` && sed -i 's/http:\\/\\/localhost:8081\\/dist\\/bundle.js/https:\\/\\/ipfs.infura.io\\/ipfs\\/'\"$BUNDLE_URL\"'/g' ipfs/package.json && ipd --no-clipboard -O -p infura ipfs/package.json",
     "postpublish": "rm -rf ipfs",
     "serve": "mm-snap serve",
@@ -80,7 +80,6 @@
     "typescript": "4.7.3"
   },
   "dependencies": {
-    "bignumber.js": "^9.0.0",
     "@metamask/key-tree": "^9.0.0",
     "@metamask/snaps-types": "^1.0.2",
     "@metamask/snaps-ui": "^1.0.2",
@@ -89,6 +88,7 @@
     "@polkadot/types": "^10.9.1",
     "@polkadot/util": "^12.3.2",
     "avail-js-sdk": "^0.1.15",
+    "bignumber.js": "^9.0.0",
     "deepmerge": "^4.3.1",
     "superstruct": "^1.0.3"
   }

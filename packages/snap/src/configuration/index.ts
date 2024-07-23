@@ -1,6 +1,11 @@
 import type { SnapConfig } from '@availproject/metamask-avail-types';
 import { getMetamaskState } from '../rpc/getMetamaskState';
-import { turingConfiguration, defaultConfiguration, goldbergConfiguration } from './predefined';
+import {
+  turingConfiguration,
+  defaultConfiguration,
+  goldbergConfiguration,
+  mainnetConfiguration
+} from './predefined';
 
 export function getDefaultConfiguration(networkName: string): SnapConfig {
   switch (networkName) {
@@ -8,6 +13,8 @@ export function getDefaultConfiguration(networkName: string): SnapConfig {
       return turingConfiguration;
     case 'goldberg':
       return goldbergConfiguration;
+    case 'mainnet':
+      return mainnetConfiguration;
     default:
       return defaultConfiguration;
   }

@@ -34,6 +34,33 @@
     jsonpointer "^5.0.0"
     leven "^3.1.0"
 
+"@avail-project/avail-snap@^0.7.7":
+  version "0.7.7"
+  resolved "https://registry.yarnpkg.com/@avail-project/avail-snap/-/avail-snap-0.7.7.tgz#b17dcae750edfd2c543c746849003f5507616a66"
+  integrity sha512-KOqQ33rGuLo8ZrTGpFV0vgcNquP1QuGzHkYTsb+Vi+41m6r2Wn/FZGld6/2qE2gWb4pq1hPSmO7f9ljmW4eF7Q==
+  dependencies:
+    "@metamask/key-tree" "^9.0.0"
+    "@metamask/snaps-types" "^1.0.2"
+    "@metamask/snaps-ui" "^1.0.2"
+    "@polkadot/api" "10.10.1"
+    "@polkadot/keyring" "^12.3.2"
+    "@polkadot/types" "^10.9.1"
+    "@polkadot/util" "^12.3.2"
+    avail-js-sdk "^0.1.15"
+    bignumber.js "^9.0.0"
+    deepmerge "^4.3.1"
+    superstruct "^1.0.3"
+
+"@avail-project/metamask-avail-adapter@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@avail-project/metamask-avail-adapter/-/metamask-avail-adapter-0.5.1.tgz#6be971364e40c115a2a6d75a3b422867eb947b4f"
+  integrity sha512-8oW2MMG9ws7WS/cfdCJxmqOoruR4zi8rItzZFHOFR/t1nZ87qDpFQMrWbTKBUTjJ5ngklJvgqKFTah5ngTQLOA==
+  dependencies:
+    "@polkadot/api" "^10.9.1"
+    "@polkadot/extension-inject" "^0.46.5"
+    "@polkadot/types-augment" "^10.9.1"
+    avail-js "^0.1.0"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.16.0", "@babel/code-frame@^7.22.13", "@babel/code-frame@^7.8.3":
   version "7.22.13"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.22.13.tgz"

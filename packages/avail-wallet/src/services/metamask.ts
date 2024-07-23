@@ -122,6 +122,11 @@ export const useAvailSnap = () => {
         name: 'goldberg',
         displayName: 'Goldberg Testnet',
         chainId: '2'
+      },
+      {
+        name: 'mainnet',
+        displayName: 'Mainnet',
+        chainId: '3'
       }
     ] as Network[];
   };
