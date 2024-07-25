@@ -1,6 +1,6 @@
 {
-  "name": "@availproject/metamask-avail-adapter",
-  "version": "0.5.1",
+  "name": "@avail-project/metamask-avail-adapter",
+  "version": "1.0.7",
   "main": "./build/index.js",
   "module": "./build/index.js",
   "types": "./build/index.d.ts",

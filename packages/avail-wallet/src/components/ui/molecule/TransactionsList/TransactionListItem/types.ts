@@ -3,7 +3,7 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { shortenAddress } from 'utils/utils';
 import { ethers } from 'ethers';
-import { Extrinsic } from '@availproject/metamask-avail-types';
+import { Extrinsic } from '@avail-project/metamask-avail-types';
 import BigNumber from 'bignumber.js';
 
 export interface Transaction {

@@ -1,15 +1,15 @@
 {
-  "name": "devops-avail",
-  "private": false,
+  "name": "@avail-project/avail-snap",
+  "private": true,
   "author": "availproject",
   "license": "Apache-2.0",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "build:snap": "yarn workspace @availproject/avail-snap build",
-    "build:adapter": "yarn workspace @availproject/metamask-avail-adapter build",
-    "start:snap": "yarn workspace @availproject/avail-snap serve",
+    "build:snap": "yarn workspace @avail-project/avail-snap build",
+    "build:adapter": "yarn workspace @avail-project/metamask-avail-adapter build",
+    "start:snap": "yarn workspace @avail-project/avail-snap serve",
     "start:avail-wallet": "yarn workspace avail-wallet start",
     "predemo": "yarn run build:snap && yarn run build:adapter",
     "build": "yarn workspaces foreach -vpt run build",
@@ -31,5 +31,5 @@
   "dependencies": {
     "@rushstack/eslint-patch": "^1.3.3"
   },
-  "version": "1.0.2"
+  "version": "1.0.6"
 }

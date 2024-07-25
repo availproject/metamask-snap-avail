@@ -1,4 +1,4 @@
-import type { SnapConfig } from '@availproject/metamask-avail-types';
+import type { SnapConfig } from '@avail-project/metamask-avail-types';
 import { getMetamaskState } from '../rpc/getMetamaskState';
 import {
   turingConfiguration,

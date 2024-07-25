@@ -1,6 +1,6 @@
-import type { SnapConfig } from '@availproject/metamask-avail-types';
+import type { SnapConfig } from '@avail-project/metamask-avail-types';
 
-declare module '@availproject/metamask-avail-adapter' {
+declare module '@avail-project/metamask-avail-adapter' {
   export function injectMetamaskAvailSnapProvider(
     network: 'turing',
     config?: SnapConfig,
@@ -51,4 +51,4 @@ export enum TransactionStatus { // for retrieving txn from Avail feeder gateway
   REJECTED = 'REJECTED'
 }
 
-export type { Transaction } from '@availproject/metamask-avail-types';
+export type { Transaction } from '@avail-project/metamask-avail-types';

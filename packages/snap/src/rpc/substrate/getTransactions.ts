@@ -1,4 +1,4 @@
-import type { Transaction } from '@availproject/metamask-avail-types';
+import type { Transaction } from '@avail-project/metamask-avail-types';
 import type { MetamaskState } from '../../interfaces';
 
 export async function getTransactions(): Promise<Transaction[]> {

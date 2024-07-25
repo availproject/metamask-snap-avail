@@ -1,7 +1,7 @@
 /* eslint-disable import/order */
 // import { Keyring } from '@polkadot/keyring';
 import type { JsonBIP44CoinTypeNode } from '@metamask/key-tree';
-import type { SnapNetworks } from '@availproject/metamask-avail-types';
+import type { SnapNetworks } from '@avail-project/metamask-avail-types';
 import { getConfiguration } from '../configuration';
 import type { KeyringPair } from '@polkadot/keyring/types';
 import { getKeyringFromSeed } from 'avail-js-sdk';

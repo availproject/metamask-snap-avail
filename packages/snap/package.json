@@ -1,6 +1,6 @@
 {
-  "name": "@availproject/avail-snap",
-  "version": "1.0.0",
+  "name": "@avail-project/avail-snap",
+  "version": "1.0.7",
   "description": "MetaMask snap for interacting with Avail dApps",
   "main": "build/index.js",
   "scripts": {
@@ -61,7 +61,7 @@
     }
   },
   "devDependencies": {
-    "@availproject/metamask-avail-types": "0.6.0",
+    "@avail-project/metamask-avail-types": "0.6.0",
     "@metamask/snaps-cli": "^1.0.2",
     "@types/chai": "^4.2.10",
     "@types/mocha": "^10.0.1",
