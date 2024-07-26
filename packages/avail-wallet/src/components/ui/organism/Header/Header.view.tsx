@@ -202,7 +202,7 @@ export const HeaderView = ({ address }: Props) => {
       <Buttons>
         <HeaderButton onClick={() => setReceiveOpen(true)}>Receive</HeaderButton>
         <SendButton onClick={() => handleSendClick()}>Send</SendButton>
-        <a href={`https://bridge-ui-xi.vercel.app/`} style={{ textDecoration: 'none' }}>
+        <a href={`https://bridge.avail.so/`} style={{ textDecoration: 'none' }}>
           <SendButton
             style={{
               marginLeft: '20px',
