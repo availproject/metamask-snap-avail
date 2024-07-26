@@ -18,6 +18,8 @@ import {
   clearAccounts
 } from 'slices/walletSlice';
 import { resetNetwork, setActiveNetwork } from 'slices/networkSlice';
+import { Erc20TokenBalance } from '@types';
+import { KeyboardArrowRightSharp } from '@material-ui/icons';
 import { ConnectInfoModal } from '../ConnectInfoModal';
 import { AccountDetailsModal } from '../AccountDetailsModal';
 import {
@@ -52,6 +54,7 @@ interface Props {
 export const HeaderView = ({ address }: Props) => {
   const [receiveOpen, setReceiveOpen] = useState(false);
   const [sendOpen, setSendOpen] = useState(false);
+  const [balance, setBalance] = useState<string>();
   const networks = useAppSelector((state) => state.networks);
   const chainId = networks?.items[networks.activeNetwork]?.chainId;
   const wallet = useAppSelector((state) => state.wallet);
@@ -62,8 +65,7 @@ export const HeaderView = ({ address }: Props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const chain = networks.items[networks.activeNetwork]?.chainId;
-    if (chain && address) {
+    if (address) {
       const interval = setInterval(async () => {
         if (metamaskState?.availSnap?.api) {
           const newBalance = await metamaskState?.availSnap?.api?.getBalance();
@@ -73,12 +75,21 @@ export const HeaderView = ({ address }: Props) => {
               amount: newBalance
             })
           );
+          setBalance(newBalance);
         }
       }, TOKEN_BALANCE_REFRESH_FREQUENCY); // every 60 seconds
       return () => clearInterval(interval);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [networks.activeNetwork, wallet.tokenBalance, setErc20TokenBalanceSelected]);
+
+  useEffect(() => {
+    (async () => {
+      if (metamaskState?.availSnap?.api) {
+        setBalance(await metamaskState?.availSnap?.api?.getBalance());
+      }
+    })();
+  }, [wallet.connected, networks.activeNetwork, wallet.tokenBalance]);
 
   const handleSendClick = () => {
     setSendOpen(true);
@@ -117,7 +128,7 @@ export const HeaderView = ({ address }: Props) => {
                 <AccountDetailButton
                   backgroundTransparent
                   iconLeft="external-link"
-                  onClick={() => openExplorerTab(address, 'contract', chainId)}
+                  onClick={() => openExplorerTab(address, 'account', networks.activeNetwork)}
                 >
                   View on explorer
                 </AccountDetailButton>
@@ -128,8 +139,7 @@ export const HeaderView = ({ address }: Props) => {
           </AccountDetails>
         </Left>
         <AssetQuantity
-          currencyValue={getHumanReadableAmount(wallet.tokenBalance)}
-          // currencyValue={balance}
+          currencyValue={balance ? (Number(balance) / 10 ** 18).toString().slice(0, 5) : '....'}
           currency="AVAIL"
           size="big"
           centered
@@ -192,6 +202,20 @@ export const HeaderView = ({ address }: Props) => {
       <Buttons>
         <HeaderButton onClick={() => setReceiveOpen(true)}>Receive</HeaderButton>
         <SendButton onClick={() => handleSendClick()}>Send</SendButton>
+        <a href={`https://bridge.avail.so/`} style={{ textDecoration: 'none' }}>
+          <SendButton
+            style={{
+              marginLeft: '20px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <span style={{ display: 'flex', alignItems: 'center' }}>
+              BRIDGE <KeyboardArrowRightSharp />
+            </span>
+          </SendButton>
+        </a>
       </Buttons>
       <PopIn isOpen={receiveOpen} setIsOpen={setReceiveOpen}>
         <ReceiveModal address={address} />

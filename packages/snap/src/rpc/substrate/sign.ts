@@ -1,35 +1,30 @@
 // import type { ApiPromise } from '@polkadot/api/';
 import type { SignerPayloadRaw } from '@polkadot/types/types';
 import { hexToU8a, u8aToHex } from '@polkadot/util';
+import { signedExtensions, type ApiPromise } from 'avail-js-sdk';
+import type { SignerPayloadJSON } from '@avail-project/metamask-avail-types';
 import { getKeyPair } from '../../avail/account';
 import { showConfirmationDialog } from '../../util/confirmation';
-import { messageCreator } from '../../util/messageCreator';
-import { ApiPromise } from 'avail-js-sdk';
-import { SignerPayloadJSON } from '@availproject/metamask-avail-types';
 
 export async function signPayloadJSON(
   api: ApiPromise,
   payload: SignerPayloadJSON
 ): Promise<{ signature: string } | void> {
   const keyPair = await getKeyPair();
+  const decodedMethod = api.registry.createType('Call', payload.method).toHuman();
+  console.log(decodedMethod);
   const confirmation = await showConfirmationDialog({
-    description: `It will be signed with address: ${keyPair.address}`,
-    prompt: `Do you want to sign this message?`,
-    textAreaContent: messageCreator([
-      { message: 'address', value: payload.address },
-      { message: 'tip', value: payload.tip },
-      { message: 'block number', value: payload.blockNumber },
-      { message: 'block hash', value: payload.blockHash },
-      { message: 'genesis hash', value: payload.genesisHash },
-      { message: 'era', value: payload.era },
-      { message: 'nonce', value: payload.nonce },
-      { message: 'spec version', value: payload.specVersion },
-      { message: 'transaction version', value: payload.transactionVersion }
-    ])
+    description: `You are signing a transaction which may transfer funds from your account. Please verify the details below.`,
+    prompt: `Sign this transaction?`,
+    sender: keyPair.address,
+    fee: payload.tip.toString(),
+    method: decodedMethod
   });
   if (confirmation) {
     const extrinsic = api.registry.createType('ExtrinsicPayload', payload, {
-      version: payload.version
+      version: payload.version,
+      //try without it first
+      signedExtensions: signedExtensions
     });
     return extrinsic.sign(keyPair);
   }
@@ -40,11 +35,10 @@ export async function signPayloadRaw(
   payload: SignerPayloadRaw
 ): Promise<{ signature: string } | void> {
   const keyPair = await getKeyPair();
-  // ask for confirmation
+  // ask for confirmation and TODO: beautify the message
   const confirmation = await showConfirmationDialog({
     description: `It will be signed with address: ${keyPair.address}`,
-    prompt: `Do you want to sign this message?`,
-    textAreaContent: payload.data
+    prompt: `Do you want to sign this message?`
   });
 
   // return seed if user confirmed action

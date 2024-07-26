@@ -10,10 +10,7 @@ import type {
 import type { SignerPayloadJSON, SignerPayloadRaw } from '@polkadot/types/types';
 import type { MetamaskAvailSnap } from './snap';
 
-async function sendSnapMethod(
-  request: MetamaskAvailRpcRequest,
-  snapId: string
-): Promise<unknown> {
+async function sendSnapMethod(request: MetamaskAvailRpcRequest, snapId: string): Promise<unknown> {
   try {
     console.info('sendSnapMethod', request, snapId);
     const result = await window.ethereum.request({
@@ -77,10 +74,7 @@ export async function exportSeed(this: MetamaskAvailSnap): Promise<string> {
   return (await sendSnapMethod({ method: 'exportSeed' }, this.snapId)) as string;
 }
 
-export async function setConfiguration(
-  this: MetamaskAvailSnap,
-  config: SnapConfig
-): Promise<void> {
+export async function setConfiguration(this: MetamaskAvailSnap, config: SnapConfig): Promise<void> {
   await sendSnapMethod({ method: 'configure', params: { configuration: config } }, this.snapId);
 }
 
@@ -103,14 +97,16 @@ export async function getAllTransactions(this: MetamaskAvailSnap): Promise<Trans
 export async function sendSignedData(
   this: MetamaskAvailSnap,
   signature: string,
-  txPayload: TxPayload
+  txPayload: TxPayload,
+  network: number
 ): Promise<Transaction> {
   const response = await sendSnapMethod(
     {
       method: 'send',
       params: {
         signature,
-        txPayload
+        txPayload,
+        network
       }
     },
     this.snapId
@@ -120,11 +116,12 @@ export async function sendSignedData(
 
 export async function generateTransactionPayload(
   this: MetamaskAvailSnap,
-  amount: string | number,
-  to: string
+  module: string,
+  method: string,
+  args: unknown[]
 ): Promise<TxPayload> {
   return (await sendSnapMethod(
-    { method: 'generateTransactionPayload', params: { amount, to } },
+    { method: 'generateTransactionPayload', params: { module, method, args } },
     this.snapId
   )) as TxPayload;
 }

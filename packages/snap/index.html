@@ -145,8 +145,8 @@
     const configureButton = document.querySelector('button.configure');
     configureButton.addEventListener('click', loadConfiguration);
     // create asset
-    const createAssetButton = document.querySelector('button.create-asset');
-    createAssetButton.addEventListener('click', createAsset);
+    const sendTransferButton = document.querySelector('button.create-asset');
+    sendTransferButton.addEventListener('click', sendTransfer);
     const removeAssetButton = document.querySelector('button.remove-asset');
     removeAssetButton.addEventListener('click', removeAsset);
     // export seed
@@ -183,8 +183,8 @@
           method: 'configure',
           params: {
             configuration: {
-              networkName: 'avail',
-              wsRpcUrl: 'https://goldberg.avail.tools/api',
+              networkName: 'turing',
+              wsRpcUrl: 'https://turing-rpc.avail.so/ws',
               unit: {
                 image: '',
                 symbol: 'AVAIL'
@@ -202,22 +202,28 @@
     async function removeAsset() {
       try {
         await invokeSnap({
-          method: 'removeKusamaAsset'
+          method: 'transfer'
         });
       } catch (e) {
         console.log('Keys not generated', e);
       }
     }
 
-    async function createAsset() {
+    async function sendTransfer() {
       try {
+        console.log("clicked")
         await invokeSnap({
-          method: 'addKusamaAsset'
+          method: 'generateTransactionPayload',
+          params: {
+            amount: '10',
+            to: '5D7GadfhbbkSqCugapLwP1nj6xkTZTEG1UbG11ndzCwEPBJh'
+          }
         });
       } catch (e) {
-        console.log('Keys not generated', e);
+        console.log('problem creating transfer', e);
       }
     }
+
 
     async function findBlock() {
       let block = null;

@@ -1,8 +1,8 @@
-import { BlockId, BlockInfo } from '@availproject/metamask-avail-types';
+import type { BlockId, BlockInfo } from '@avail-project/metamask-avail-types';
 // import type { ApiPromise } from '@polkadot/api';
-// import type { BlockId, BlockInfo } from "@availproject/metamask-avail-types";
+// import type { BlockId, BlockInfo } from "@avail-project/metamask-avail-types";
 import type { BlockHash } from '@polkadot/types/interfaces';
-import { ApiPromise } from 'avail-js-sdk';
+import type { ApiPromise } from 'avail-js-sdk';
 
 async function _getBlock(blockHash: BlockHash | string, api: ApiPromise): Promise<BlockInfo> {
   const signedBlock = await api.rpc.chain.getBlock(blockHash.toString());

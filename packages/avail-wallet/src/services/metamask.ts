@@ -1,10 +1,7 @@
 import { web3EnablePromise } from '@polkadot/extension-dapp';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { Network, Erc20TokenBalance, Account } from '@types';
-import type { InjectedMetamaskExtension } from '@availproject/metamask-avail-adapter/build/types';
 import type { InjectedExtension } from '@polkadot/extension-inject/types';
-import { enableAvailSnap } from '@availproject/metamask-avail-adapter';
-import type { MetamaskAvailSnap } from '@availproject/metamask-avail-adapter/build/snap';
 import Toastr from 'toastr2';
 import { setData } from 'slices/metamaskSlice';
 import { setInfoModalVisible } from 'slices/modalSlice';
@@ -17,7 +14,10 @@ import {
 } from 'slices/walletSlice';
 import { disableLoading, enableLoadingWithMessage } from 'slices/UISlice';
 import { setNetworks, setActiveNetwork } from 'slices/networkSlice';
-import type { SnapNetworks } from '@availproject/metamask-avail-types';
+import type { SnapNetworks } from '@avail-project/metamask-avail-types';
+import { enableAvailSnap } from '@avail-project/metamask-avail-adapter';
+import { InjectedMetamaskExtension } from '@avail-project/metamask-avail-adapter/build/types';
+import { MetamaskAvailSnap } from '@avail-project/metamask-avail-adapter/build/snap';
 
 export function hasMetaMask(): boolean {
   if (!window.ethereum) {
@@ -26,12 +26,12 @@ export function hasMetaMask(): boolean {
   return window.ethereum.isMetaMask;
 }
 
-export const defaultSnapId = 'local:http://localhost:8081';
+export const defaultSnapId = 'npm:@avail-project/avail-snap';
 
 export async function installAvailSnap(): Promise<boolean> {
   const snapId = process.env.REACT_APP_SNAP_ID ? process.env.REACT_APP_SNAP_ID : defaultSnapId;
   try {
-    await enableAvailSnap({ networkName: 'avail' }, snapId);
+    await enableAvailSnap({ networkName: 'turing' }, snapId);
     return true;
   } catch (err) {
     return false;
@@ -81,7 +81,7 @@ export const useAvailSnap = () => {
   const networkState = useAppSelector((state) => state.networks);
   const snapId = process.env.REACT_APP_SNAP_ID
     ? process.env.REACT_APP_SNAP_ID
-    : 'local:http://localhost:8081/';
+    : 'npm:@avail-project/avail-snap';
   const snapVersion = process.env.REACT_APP_SNAP_VERSION ? process.env.REACT_APP_SNAP_VERSION : '*';
   const debugLevel =
     process.env.REACT_APP_DEBUG_LEVEL !== undefined ? process.env.REACT_APP_DEBUG_LEVEL : 'all';
@@ -114,9 +114,19 @@ export const useAvailSnap = () => {
   const getNetworks = async () => {
     return [
       {
-        name: 'avail',
-        displayName: 'Goldberg Testnet',
+        name: 'turing',
+        displayName: 'Turing Testnet',
         chainId: '1'
+      },
+      {
+        name: 'goldberg',
+        displayName: 'Goldberg Testnet',
+        chainId: '2'
+      },
+      {
+        name: 'mainnet',
+        displayName: 'Mainnet',
+        chainId: '3'
       }
     ] as Network[];
   };

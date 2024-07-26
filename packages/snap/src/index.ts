@@ -1,5 +1,6 @@
 import type { OnRpcRequestHandler } from '@metamask/snaps-types';
 import { assert } from 'superstruct';
+import type { ApiPromise } from 'avail-js-sdk';
 import type { MetamaskState } from './interfaces';
 import { EmptyMetamaskState } from './interfaces';
 import { getPublicKey } from './rpc/getPublicKey';
@@ -21,7 +22,6 @@ import {
   validSignPayloadJSONSchema,
   validSignPayloadRawSchema
 } from './util/validation';
-import { ApiPromise } from 'avail-js-sdk';
 
 const apiDependentMethods = [
   'getBlock',
@@ -98,14 +98,20 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
     }
     case 'generateTransactionPayload':
       assert(request.params, validGenerateTransactionPayloadSchema);
-      return await generateTransactionPayload(api, request.params.to, request.params.amount);
+      return await generateTransactionPayload(
+        api,
+        request.params.module,
+        request.params.method,
+        request.params.args
+      );
 
     case 'send':
       assert(request.params, validSendSchema);
       return await send(
         api,
         request.params.signature as Uint8Array | `0x${string}`,
-        request.params.txPayload
+        request.params.txPayload,
+        request.params.network
       );
     case 'getChainHead':
       return api && (await api.rpc.chain.getFinalizedHead()).hash;

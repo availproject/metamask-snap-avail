@@ -1,26 +1,25 @@
-// import type { ApiPromise } from '@polkadot/api/';
+/* eslint-disable no-useless-catch */
+
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
-import type { TxPayload } from '@availproject/metamask-avail-types';
+import type { TxPayload } from '@avail-project/metamask-avail-types';
+import type { ApiPromise } from 'avail-js-sdk';
 import { getAddress } from './getAddress';
-import { ApiPromise, formatNumberToBalance } from 'avail-js-sdk';
-import { BN } from 'bn.js';
 
 export async function generateTransactionPayload(
   api: ApiPromise,
-  to: string,
-  amount: string | number
+  module: string,
+  method: string,
+  args: unknown[]
 ): Promise<TxPayload> {
   try {
     // fetch last signed block and account address
-    const [signedBlock, address] = await Promise.all([
-      api.rpc.chain.getBlock(),
-      getAddress()
-    ]);
+    const [signedBlock, address] = await Promise.all([api.rpc.chain.getBlock(), getAddress()]);
 
     // create signer options
     const nonce = (await api.derive.balances.account(address)).accountNonce;
     const signerOptions = {
       blockHash: signedBlock.block.header.hash,
+      appId: 0,
       era: api.createType('ExtrinsicEra', {
         current: signedBlock.block.header.number,
         period: 50
@@ -29,14 +28,13 @@ export async function generateTransactionPayload(
     };
 
     // define transaction method
-    // const _amount = formatNumberToBalance(parseFloat(amount.toString()));
-    const data: SubmittableExtrinsic<'promise'> = api.tx.balances.transfer(to, new BN(amount));
+    const data: SubmittableExtrinsic<'promise'> = api.tx[module][method](...args);
+    console.log('data', data);
     const signerPayload = api.createType('SignerPayload', {
       genesisHash: api.genesisHash,
       runtimeVersion: api.runtimeVersion,
       version: api.extrinsicVersion,
       ...signerOptions,
-      address: to,
       blockNumber: signedBlock.block.header.number,
       method: data.method,
       signedExtensions: [],
@@ -48,7 +46,6 @@ export async function generateTransactionPayload(
       tx: data.toHex()
     };
   } catch (error) {
-    // Handle the error appropriately
     throw error;
   }
 }

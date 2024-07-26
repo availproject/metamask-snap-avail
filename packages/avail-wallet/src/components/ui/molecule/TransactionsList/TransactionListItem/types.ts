@@ -1,13 +1,19 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { shortenAddress } from 'utils/utils';
-import { BigNumber, ethers } from 'ethers';
+import { ethers } from 'ethers';
+import { Extrinsic } from '@avail-project/metamask-avail-types';
+import BigNumber from 'bignumber.js';
 
-interface Transaction {
+export interface Transaction {
   hash: string;
   block: string;
   sender: string;
-  destination: string;
-  amount: string | number;
+  extrinsicdata: Extrinsic;
+  destination?: string;
+  amount?: string | number;
+  network: number;
   fee: string;
 }
 
@@ -30,7 +36,14 @@ export const getTxnFee = (transaction: Transaction): string => {
 };
 
 export const getTxnToFromLabel = (transaction: Transaction): string => {
-  return 'To ' + shortenAddress(transaction.destination.toString());
+  if (
+    transaction.extrinsicdata.method.method === 'transferKeepAlive' &&
+    transaction.extrinsicdata.method.section === 'balances'
+  ) {
+    //@ts-ignore
+    return 'To ' + shortenAddress(transaction.extrinsicdata.method.args.dest.Id);
+  }
+  return 'extrinsic call';
 };
 
 export const getTxnValues = (
@@ -38,11 +51,21 @@ export const getTxnValues = (
   decimals: number = 18,
   toUsdRate: number = 0
 ) => {
-  let txnValue = '0';
-  let txnUsdValue = '0';
-
-  txnValue = ethers.utils.formatUnits(transaction.amount, decimals);
-  txnUsdValue = (parseFloat(txnValue) * toUsdRate).toFixed(2);
-
-  return { txnValue, txnUsdValue };
+  if (
+    transaction.extrinsicdata.method.method === 'transferKeepAlive' &&
+    transaction.extrinsicdata.method.section === 'balances'
+  ) {
+   const txnValue =
+      (
+        //@ts-ignore
+      Number(transaction.extrinsicdata.method.args.value.replace(/,/g, '')) /
+      (10 ** decimals)
+    ).toString();
+   const txnUsdValue = 'not calculated yet';
+    return { txnValue, txnUsdValue };
+  } else {
+    const txnValue = 'extrinsic call';
+    const txnUsdValue = 'extrinsic call';
+    return { txnValue, txnUsdValue };
+  }
 };

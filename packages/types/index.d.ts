@@ -59,8 +59,9 @@ export interface SignPayloadRawRequest {
 export interface GenerateTransactionPayload {
   method: 'generateTransactionPayload';
   params: {
-    amount: string | number;
-    to: string;
+    module: string;
+    method: string;
+    args: unknown[];
   };
 }
 
@@ -69,6 +70,7 @@ export interface SendUnitRequest {
   params: {
     signature: string;
     txPayload: TxPayload;
+    network: number;
   };
 }
 
@@ -124,7 +126,7 @@ export interface UnitConfiguration {
   customViewUrl?: string;
 }
 
-export type SnapNetworks = 'avail' | 'goldberg';
+export type SnapNetworks = 'turing' | 'goldberg' | 'mainnet';
 
 export interface SnapConfig {
   networkName: SnapNetworks;
@@ -155,10 +157,21 @@ export interface Transaction {
   hash: string;
   block: string;
   sender: string;
-  destination: string;
-  amount: string | number;
+  extrinsicdata: Extrinsic
+  destination?: string;
+  amount?: string | number;
   fee: string;
+  network: number
 }
+
+export type Extrinsic = {
+  method: {
+    method: string;
+    section: string;
+    args: unknown[];
+  };
+  isSigned: boolean;
+};
 
 export interface SignerPayloadJSON {
   /**

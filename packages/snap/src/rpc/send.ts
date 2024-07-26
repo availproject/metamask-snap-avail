@@ -1,35 +1,48 @@
-import type { Transaction, TxPayload } from '@availproject/metamask-avail-types';
+import type { Extrinsic, Transaction, TxPayload } from '@avail-project/metamask-avail-types';
+import type { ApiPromise } from 'avail-js-sdk';
+import type { AnyJson } from '@polkadot/types/types';
 import { saveTxToState } from '../avail/tx';
 import { getAddress } from './getAddress';
-import { ApiPromise } from 'avail-js-sdk';
-import { ISubmittableResult } from '@polkadot/types/types/extrinsic';
 
 export async function send(
   api: ApiPromise,
   signature: Uint8Array | `0x${string}`,
-  txPayload: TxPayload
+  txPayload: TxPayload,
+  network: number
 ): Promise<Transaction> {
   try {
     const sender = await getAddress();
-    const destination = txPayload.payload.address;
 
     const extrinsic = api.createType('Extrinsic', txPayload.tx);
     extrinsic.addSignature(sender, signature, txPayload.payload);
+    console.log('extrinsic', extrinsic.toHuman());
 
-    const amount = extrinsic.args[1].toJSON();
-    const paymentInfo = await api.tx.balances
-      .transfer(destination, String(amount))
-      .paymentInfo(sender);
+    const extrinsicData: AnyJson = api.tx(txPayload.tx).toHuman();
+    const typedExtrinsic = extrinsicData as Extrinsic;
+
+    const paymentInfo = await api.tx(txPayload.tx).paymentInfo(sender);
 
     const txHash = await api.rpc.author.submitExtrinsic(extrinsic);
 
+    // await api.rpc.chain.subscribeFinalizedHeads(async (lastHeader) => {
+    //   const blockHash = lastHeader.hash.toHex();
+    //   const block = await api.rpc.chain.getBlock(blockHash);
+    //   const extrinsics = block.block.extrinsics;
+    //   for (let index = 0; index < extrinsics.length; index++) {
+    //     const ext = extrinsics[index];
+    //     if (ext.hash.toHex() === txHash.toHex()) {
+    //       const blockhash = txHash.toHex();
+    //     }
+    //   }
+    // });
+
     const tx = {
-      amount: amount,
-      block: txHash.toHex(),
-      destination: destination,
+      block: 'not defined yet',
+      extrinsicdata: typedExtrinsic,
       fee: String(paymentInfo.partialFee.toJSON()),
-      hash: extrinsic.hash.toHex(),
-      sender: sender
+      hash: txHash.toHex(),
+      sender: sender,
+      network: network
     } as Transaction;
 
     // const tx = {} as Transaction;

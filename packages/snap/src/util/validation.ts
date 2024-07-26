@@ -1,4 +1,5 @@
-import type { BlockId, SignerPayloadJSON, TxPayload } from '@availproject/metamask-avail-types';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import type { BlockId, SignerPayloadJSON, TxPayload } from '@avail-project/metamask-avail-types';
 import type { SignerPayloadRaw } from '@polkadot/types/types';
 import type { Describe } from 'superstruct';
 import { array, enums, number, object, optional, string, type, union } from 'superstruct';
@@ -19,6 +20,7 @@ const SignaturePayloadJSONSchema = type({
 });
 // export type HexString = `0x${string}`;
 
+//@ts-ignore
 export const validSignPayloadJSONSchema: Describe<{
   payload: SignerPayloadJSON;
 }> = object({
@@ -59,22 +61,26 @@ export const validConfigureSchema: Describe<{
 });
 
 export const validGenerateTransactionPayloadSchema: Describe<{
-  to: string;
-  amount: string | number;
+  method: string;
+  module: string;
+  args: unknown[];
 }> = object({
-  amount: union([string(), number()]),
-  to: string()
+  method: string(),
+  module: string(),
+  args: array()
 });
 
 export const validSendSchema: Describe<{
   signature: string;
   txPayload: TxPayload;
+  network: number;
 }> = object({
   signature: string(),
   txPayload: object({
     payload: SignaturePayloadJSONSchema,
     tx: string()
-  })
+  }),
+  network: number()
 });
 
 // export interface SignerPayloadJSON {

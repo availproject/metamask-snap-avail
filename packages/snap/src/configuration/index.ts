@@ -1,11 +1,20 @@
-import type { SnapConfig } from '@availproject/metamask-avail-types';
+import type { SnapConfig } from '@avail-project/metamask-avail-types';
 import { getMetamaskState } from '../rpc/getMetamaskState';
-import { availConfiguration, defaultConfiguration } from './predefined';
+import {
+  turingConfiguration,
+  defaultConfiguration,
+  goldbergConfiguration,
+  mainnetConfiguration
+} from './predefined';
 
 export function getDefaultConfiguration(networkName: string): SnapConfig {
   switch (networkName) {
-    case 'avail':
-      return availConfiguration;
+    case 'turing':
+      return turingConfiguration;
+    case 'goldberg':
+      return goldbergConfiguration;
+    case 'mainnet':
+      return mainnetConfiguration;
     default:
       return defaultConfiguration;
   }
