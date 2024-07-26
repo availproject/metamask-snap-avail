@@ -1,10 +1,7 @@
 import { web3EnablePromise } from '@polkadot/extension-dapp';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { Network, Erc20TokenBalance, Account } from '@types';
-import type { InjectedMetamaskExtension } from '@avail-project/metamask-avail-adapter/build/types';
 import type { InjectedExtension } from '@polkadot/extension-inject/types';
-import { enableAvailSnap } from '@avail-project/metamask-avail-adapter';
-import type { MetamaskAvailSnap } from '@avail-project/metamask-avail-adapter/build/snap';
 import Toastr from 'toastr2';
 import { setData } from 'slices/metamaskSlice';
 import { setInfoModalVisible } from 'slices/modalSlice';
@@ -18,6 +15,9 @@ import {
 import { disableLoading, enableLoadingWithMessage } from 'slices/UISlice';
 import { setNetworks, setActiveNetwork } from 'slices/networkSlice';
 import type { SnapNetworks } from '@avail-project/metamask-avail-types';
+import { enableAvailSnap } from '@avail-project/metamask-avail-adapter';
+import { InjectedMetamaskExtension } from '@avail-project/metamask-avail-adapter/build/types';
+import { MetamaskAvailSnap } from '@avail-project/metamask-avail-adapter/build/snap';
 
 export function hasMetaMask(): boolean {
   if (!window.ethereum) {
