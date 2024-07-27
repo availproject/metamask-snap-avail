@@ -93,22 +93,22 @@ export const useAvailSnap = () => {
   const connectToSnap = () => {
     dispatch(setWalletConnection(true));
     dispatch(setForceReconnect(false));
-    // dispatch(enableLoadingWithMessage('Connecting...'));
-    // provider
-    //   .request({
-    //     method: 'wallet_requestSnaps',
-    //     params: {
-    //       [snapId]: { version: snapVersion }
-    //     }
-    //   })
-    //   .then(() => {
-    //     dispatch(setWalletConnection(true));
-    //     dispatch(setForceReconnect(false));
-    //   })
-    //   .catch(() => {
-    //     dispatch(setWalletConnection(false));
-    //     dispatch(disableLoading());
-    //   });
+    dispatch(enableLoadingWithMessage('Connecting...'));
+    provider
+      .request({
+        method: 'wallet_requestSnaps',
+        params: {
+          [snapId]: { version: snapVersion }
+        }
+      })
+      .then(() => {
+        dispatch(setWalletConnection(true));
+        dispatch(setForceReconnect(false));
+      })
+      .catch(() => {
+        dispatch(setWalletConnection(false));
+        dispatch(disableLoading());
+      });
   };
 
   const getNetworks = async () => {

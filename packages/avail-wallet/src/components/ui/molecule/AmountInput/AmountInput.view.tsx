@@ -88,7 +88,7 @@ export const AmountInputView = ({
   const handleMaxClick = () => {
     if (inputRef.current) {
       const amountStr = ethers.utils.formatUnits(asset.amount, asset.decimals).toString();
-      inputRef.current.value = amountStr;
+      inputRef.current.value = (Number(amountStr) - 1).toString();
       resizeInput();
       triggerOnChange();
     }

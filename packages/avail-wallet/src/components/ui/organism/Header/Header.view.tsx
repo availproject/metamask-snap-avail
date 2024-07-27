@@ -19,7 +19,7 @@ import {
 } from 'slices/walletSlice';
 import { resetNetwork, setActiveNetwork } from 'slices/networkSlice';
 import { Erc20TokenBalance } from '@types';
-import { KeyboardArrowRightSharp } from '@material-ui/icons';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { ConnectInfoModal } from '../ConnectInfoModal';
 import { AccountDetailsModal } from '../AccountDetailsModal';
 import {
@@ -202,7 +202,7 @@ export const HeaderView = ({ address }: Props) => {
       <Buttons>
         <HeaderButton onClick={() => setReceiveOpen(true)}>Receive</HeaderButton>
         <SendButton onClick={() => handleSendClick()}>Send</SendButton>
-        <a href={`https://bridge.avail.so/`} style={{ textDecoration: 'none' }}>
+        <a href={`https://bridge.avail.so/`} style={{ textDecoration: 'none' }} target="_blank">
           <SendButton
             style={{
               marginLeft: '20px',
@@ -211,8 +211,8 @@ export const HeaderView = ({ address }: Props) => {
               justifyContent: 'center'
             }}
           >
-            <span style={{ display: 'flex', alignItems: 'center' }}>
-              BRIDGE <KeyboardArrowRightSharp />
+            <span style={{ display: 'flex', alignItems: 'center', marginLeft: '2px' }}>
+              BRIDGE <ArrowOutwardIcon />
             </span>
           </SendButton>
         </a>
