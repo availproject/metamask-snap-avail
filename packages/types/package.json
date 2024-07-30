@@ -1,6 +1,6 @@
 {
-  "name": "@availproject/metamask-avail-types",
-  "version": "0.6.0",
+  "name": "@avail-project/metamask-avail-types",
+  "version": "0.6.1",
   "types": "./index.d.ts",
   "author": "availproject",
   "license": "Apache-2.0",

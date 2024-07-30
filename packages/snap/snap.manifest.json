@@ -1,5 +1,5 @@
 {
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "The Avail snap",
   "proposedName": "Avail Wallet",
   "repository": {
@@ -7,7 +7,7 @@
     "url": "git+https://github.com/availproject/metamask-snap-avail.git"
   },
   "source": {
-    "shasum": "hdZDufS7D45fhDvpomlsglv9Btk57EW7hYyLdI9ACD8=",
+    "shasum": "KZV4C5Gao8Ij61Thb/Q2zp34iPvugBNoYK7US5oLju8=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",

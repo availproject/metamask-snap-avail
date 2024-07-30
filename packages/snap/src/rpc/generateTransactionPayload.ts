@@ -21,7 +21,7 @@ export async function generateTransactionPayload(
       blockHash: signedBlock.block.header.hash,
       appId: 0,
       era: api.createType('ExtrinsicEra', {
-        current: signedBlock.block.header.number,
+      current: signedBlock.block.header.number,
         period: 50
       }),
       nonce
@@ -29,7 +29,7 @@ export async function generateTransactionPayload(
 
     // define transaction method
     const data: SubmittableExtrinsic<'promise'> = api.tx[module][method](...args);
-    console.log('data', data);
+
     const signerPayload = api.createType('SignerPayload', {
       genesisHash: api.genesisHash,
       runtimeVersion: api.runtimeVersion,

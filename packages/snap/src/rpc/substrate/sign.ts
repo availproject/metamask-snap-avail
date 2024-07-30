@@ -12,7 +12,7 @@ export async function signPayloadJSON(
 ): Promise<{ signature: string } | void> {
   const keyPair = await getKeyPair();
   const decodedMethod = api.registry.createType('Call', payload.method).toHuman();
-  console.log(decodedMethod);
+
   const confirmation = await showConfirmationDialog({
     description: `You are signing a transaction which may transfer funds from your account. Please verify the details below.`,
     prompt: `Sign this transaction?`,
@@ -23,7 +23,6 @@ export async function signPayloadJSON(
   if (confirmation) {
     const extrinsic = api.registry.createType('ExtrinsicPayload', payload, {
       version: payload.version,
-      //try without it first
       signedExtensions: signedExtensions
     });
     return extrinsic.sign(keyPair);
@@ -35,7 +34,7 @@ export async function signPayloadRaw(
   payload: SignerPayloadRaw
 ): Promise<{ signature: string } | void> {
   const keyPair = await getKeyPair();
-  // ask for confirmation and TODO: beautify the message
+
   const confirmation = await showConfirmationDialog({
     description: `It will be signed with address: ${keyPair.address}`,
     prompt: `Do you want to sign this message?`

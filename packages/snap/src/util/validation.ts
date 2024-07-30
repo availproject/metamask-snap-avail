@@ -1,8 +1,24 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import type { BlockId, SignerPayloadJSON, TxPayload } from '@avail-project/metamask-avail-types';
+import type {
+  BlockId,
+  SignerPayloadJSON,
+  Transaction,
+  TxPayload
+} from '@avail-project/metamask-avail-types';
 import type { SignerPayloadRaw } from '@polkadot/types/types';
 import type { Describe } from 'superstruct';
-import { array, enums, number, object, optional, string, type, union } from 'superstruct';
+import {
+  array,
+  boolean,
+  enums,
+  number,
+  object,
+  optional,
+  string,
+  type,
+  union,
+  unknown
+} from 'superstruct';
 
 const SignaturePayloadJSONSchema = type({
   address: string(),
@@ -17,6 +33,24 @@ const SignaturePayloadJSONSchema = type({
   transactionVersion: string(),
   signedExtensions: array(string()),
   version: number()
+});
+
+const ExtrinsicSchema = object({
+  method: object({
+    method: string(),
+    section: string(),
+    args: unknown() as Describe<unknown[]>
+  }),
+  isSigned: boolean()
+});
+
+const TransactionSchema = type({
+  hash: string(),
+  block: string(),
+  sender: string(),
+  extrinsicdata: ExtrinsicSchema,
+  fee: string(),
+  network: number()
 });
 // export type HexString = `0x${string}`;
 
@@ -38,6 +72,11 @@ export const validSignPayloadRawSchema: Describe<{
     data: string(),
     type: SignPayloadRawTypesSchema
   })
+});
+export const validTransactionSchema: Describe<{
+  transaction: Transaction;
+}> = object({
+  transaction: TransactionSchema
 });
 
 export const validGetBlockSchema: Describe<{ blockTag: BlockId }> = object({

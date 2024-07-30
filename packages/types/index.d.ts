@@ -1,5 +1,4 @@
 import { SignerPayloadRaw } from '@Avail/types/types';
-import { updateTransaction } from '../adapter/src/methods';
 
 export interface GetPublicKeyRequest {
   method: 'getPublicKey';
@@ -175,8 +174,6 @@ export interface Transaction {
   block: string;
   sender: string;
   extrinsicdata: Extrinsic
-  destination?: string;
-  amount?: string | number;
   fee: string;
   network: number
 }

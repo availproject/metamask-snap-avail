@@ -26,7 +26,7 @@ export function hasMetaMask(): boolean {
   return window.ethereum.isMetaMask;
 }
 
-export const defaultSnapId = 'local:http://localhost:8081';
+export const defaultSnapId = 'npm:@avail-project/avail-snap';
 
 export async function installAvailSnap(): Promise<boolean> {
   const snapId = process.env.REACT_APP_SNAP_ID ? process.env.REACT_APP_SNAP_ID : defaultSnapId;
@@ -81,7 +81,7 @@ export const useAvailSnap = () => {
   const networkState = useAppSelector((state) => state.networks);
   const snapId = process.env.REACT_APP_SNAP_ID
     ? process.env.REACT_APP_SNAP_ID
-    : 'local:http://localhost:8081';
+    : 'npm:@avail-project/avail-snap';
   const snapVersion = process.env.REACT_APP_SNAP_VERSION ? process.env.REACT_APP_SNAP_VERSION : '*';
   const debugLevel =
     process.env.REACT_APP_DEBUG_LEVEL !== undefined ? process.env.REACT_APP_DEBUG_LEVEL : 'all';
@@ -93,22 +93,22 @@ export const useAvailSnap = () => {
   const connectToSnap = () => {
     dispatch(setWalletConnection(true));
     dispatch(setForceReconnect(false));
-    // dispatch(enableLoadingWithMessage('Connecting...'));
-    // provider
-    //   .request({
-    //     method: 'wallet_requestSnaps',
-    //     params: {
-    //       [snapId]: { version: snapVersion }
-    //     }
-    //   })
-    //   .then(() => {
-    //     dispatch(setWalletConnection(true));
-    //     dispatch(setForceReconnect(false));
-    //   })
-    //   .catch(() => {
-    //     dispatch(setWalletConnection(false));
-    //     dispatch(disableLoading());
-    //   });
+    dispatch(enableLoadingWithMessage('Connecting...'));
+    provider
+      .request({
+        method: 'wallet_requestSnaps',
+        params: {
+          [snapId]: { version: snapVersion }
+        }
+      })
+      .then(() => {
+        dispatch(setWalletConnection(true));
+        dispatch(setForceReconnect(false));
+      })
+      .catch(() => {
+        dispatch(setWalletConnection(false));
+        dispatch(disableLoading());
+      });
   };
 
   const getNetworks = async () => {

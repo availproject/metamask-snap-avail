@@ -8,7 +8,7 @@ export async function configure(networkName: string, overrides: unknown): Promis
   const configuration = deepmerge(defaultConfig, overrides) as SnapConfig;
 
   const state = await getMetamaskState();
-  console.info('Current state', state);
+
   await snap.request({
     method: 'snap_manageState',
     params: {
