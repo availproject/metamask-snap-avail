@@ -116,9 +116,9 @@ export const SendModalView = ({ closeModal }: Props) => {
       } else {
         toastr.error('Please fill recipient and amount fields.');
       }
-    } catch (e) {
+    } catch (e: any) {
       console.log(e, 'Error while sending the transaction');
-      toastr.error('Error while sending the transaction');
+      toastr.error(`Error while sending the transaction - Error(${e.message})`);
     } finally {
       closeModal?.();
     }

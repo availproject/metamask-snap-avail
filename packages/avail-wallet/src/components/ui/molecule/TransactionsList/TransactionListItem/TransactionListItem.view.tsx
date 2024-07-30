@@ -119,18 +119,16 @@ export const TransactionListItemView = ({ transaction, api }: Props) => {
           <IconStyled transactionname={'Send'} icon={transaction.block === 'finalised' ? getIcon('Send') : getIcon('Loading')} />
         </LeftIcon>
         <Column>
-          <Label>{'Send'}</Label>
+          <Label> {transaction.block === 'finalised' ? <>Sent</> : <div   style={{ display: 'flex', alignItems: 'center', marginTop: "-16px", marginBottom:"-12px"}}><p>Sending</p> <Chip
+          icon={ <LoadingSpinner icon="spinner" pulse />}
+          style={{ display: 'flex', alignItems: 'center', marginLeft: '20px' }}
+          label={`Status: ${transaction.block.toLocaleUpperCase()}`}
+          className=""
+        ></Chip></div>}</Label>
           <Description>
             fee: {(Number(transaction.fee) / 10 ** 18).toString().slice(0, 5)}
           </Description>
         </Column>
-        {/* {txnStatus === '' ? <></> :  <Chip
-          icon={icon()}
-          style={{ display: 'flex', alignItems: 'center', marginLeft: '20px' }}
-          label={txnStatus === '' ? '' : `Status: ${txnStatus}`}
-          className=""
-        ></Chip>} */}
-       {transaction.block}
       </Left>
       <Middle>{txnToFromLabel}</Middle>
       <Right>
