@@ -32,6 +32,10 @@ export interface MetamaskSnapApi {
   send(signature: string, txPayload: TxPayload, network: number): Promise<Transaction>;
 
   generateTransactionPayload(module: string, method: string, args: unknown[]): Promise<TxPayload>;
+
+  addTransaction(transaction: Transaction): Promise<void>;
+
+  updateTransaction(transaction: Transaction): Promise<void>;
 }
 
 export interface InjectedMetamaskExtension extends InjectedExtension {

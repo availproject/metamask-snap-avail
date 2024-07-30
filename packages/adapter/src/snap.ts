@@ -10,7 +10,9 @@ import {
   sendSignedData,
   setConfiguration,
   signPayloadJSON,
-  signPayloadRaw
+  signPayloadRaw,
+  addTransaction,
+  updateTransaction
 } from './methods';
 import type { MetamaskSnapApi } from './types';
 
@@ -39,7 +41,9 @@ export class MetamaskAvailSnap {
       send: sendSignedData.bind(this),
       setConfiguration: setConfiguration.bind(this),
       signPayloadJSON: signPayloadJSON.bind(this),
-      signPayloadRaw: signPayloadRaw.bind(this)
+      signPayloadRaw: signPayloadRaw.bind(this),
+      addTransaction: addTransaction.bind(this),
+      updateTransaction: updateTransaction.bind(this)
     };
   };
 }

@@ -4,6 +4,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { shortenAddress } from 'utils/utils';
 import { ethers } from 'ethers';
 import { Extrinsic } from '@avail-project/metamask-avail-types';
+import { LoadingSmall } from 'components/ui/atom/LoadingSmall';
 import BigNumber from 'bignumber.js';
 
 export interface Transaction {
@@ -25,7 +26,10 @@ export const getIcon = (transactionName: string): IconProp => {
       return ['fas', 'long-arrow-alt-down'];
     case 'Deploy':
     case 'Deploy Account':
+    
       return ['fas', 'long-arrow-alt-up'];
+      case 'Loading': // Adding a case for the loading state with rotation
+      return ['fas', 'spinner'];
     default:
       return ['fas', 'arrow-right-arrow-left'];
   }

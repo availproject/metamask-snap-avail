@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Injected, InjectedAccount, InjectedWindow } from '@polkadot/extension-inject/types';
 import type { SnapConfig } from '@availproject/metamask-avail-types';
 import type { SignerPayloadJSON, SignerPayloadRaw, SignerResult } from '@polkadot/types/types';
@@ -39,8 +41,7 @@ async function injectAvailSnap(win: Web3Window): Promise<void> {
               }
             },
             subscribe: (_cb: (accounts: InjectedAccount[]) => void): (() => void) => {
-              // Currently there is only available only one account, in that case this method will never return anything
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              // Currently there is only available only one account, in that case this method will never return anything'
               return (): void => {};
             }
           },

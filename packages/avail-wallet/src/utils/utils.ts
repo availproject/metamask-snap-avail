@@ -1,5 +1,6 @@
 import { KeyboardEvent } from 'react';
 import { ethers } from 'ethers';
+import { ApiPromise, initialize, isValidAddress as isValidAvailAddress } from 'avail-js-sdk';
 import { Erc20Token, Erc20TokenBalance, Network } from '@types';
 import {
   DECIMALS_DISPLAYED_MAX_LENGTH,
@@ -14,6 +15,30 @@ export const shortenAddress = (address: string, num = 3) => {
   return (
     !!address && `${address.substring(0, num + 2)}...${address.substring(address.length - num - 1)}`
   );
+};
+
+export async function initializeApi(endpoint: string) {
+  try {
+    const api = await initialize(endpoint);
+    console.log('Api connected successfully');
+    return api;
+  } catch (error) {
+    console.error('Error initializing Api :', error);
+    setTimeout(initializeApi, 5000);
+  }
+}
+
+export const getRpcEndpoint = (chainId: number) => {
+  switch (chainId) {
+    case 0: // turing
+      return 'wss://turing-rpc.avail.so/ws';
+    case 1: // goldberg
+      return 'wss://goldberg-rpc.slowops.xyz/ws';
+    case 2: // mainnet
+      return 'wss://mainnet-rpc.avail.so/ws';
+    default:
+      throw new Error('Unsupported chain ID');
+  }
 };
 
 export const openExplorerTab = (address: string, type: string, chainId: number) => {
@@ -33,7 +58,11 @@ export const openExplorerTab = (address: string, type: string, chainId: number) 
 };
 
 export const isValidAddress = (toCheck: string) => {
-  return /^[a-zA-Z0-9]{47,48}$/.test(toCheck);
+  if (isValidAvailAddress(toCheck)) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 export const addMissingPropertiesToToken = (

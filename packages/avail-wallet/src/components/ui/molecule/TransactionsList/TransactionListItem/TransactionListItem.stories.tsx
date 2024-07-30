@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react';
 import { Transaction } from '@types';
+import { ApiPromise } from 'avail-js-sdk';
 import { TransactionListItemView } from './TransactionListItem.view';
 
 export default {
@@ -8,13 +9,14 @@ export default {
 } as Meta;
 
 const transaction: Transaction = {} as Transaction;
+const api = {} as ApiPromise;
 
-export const FullWidth = () => <TransactionListItemView transaction={transaction} />;
+export const FullWidth = () => <TransactionListItemView transaction={transaction} api={api} />;
 
 export const HalfWidth = () => {
   return (
     <div style={{ width: '50%' }}>
-      <TransactionListItemView transaction={transaction} />
+      <TransactionListItemView transaction={transaction} api={api} />
     </div>
   );
 };

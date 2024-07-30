@@ -61,6 +61,10 @@ export const IconStyled = styled(FontAwesomeIcon)<IIconeStyled>`
   font-size: ${(props) => props.theme.typography.i2.fontSize};
   color: ${(props) => props.theme.palette.grey.grey1};
   transform: ${(props) => (props.transactionname === 'Send' ? 'rotate(45deg)' : 'initial')};
+  &.fa-spin {
+    animation: ${(props) =>
+      props.transactionname === 'Loading' ? 'fa-spin 2s infinite linear' : 'none'};
+  }
 `;
 
 export const Label = styled.span`

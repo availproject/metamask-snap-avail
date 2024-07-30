@@ -1,9 +1,18 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+/* eslint-disable no-unsafe-optional-chaining */
+/* eslint-disable prettier/prettier */
 import { Transaction } from '@types';
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from 'hooks/redux';
 import { AssetQuantity } from 'components/ui/molecule/AssetQuantity';
-import { getHumanReadableAmount, openExplorerTab } from 'utils/utils';
+import { getHumanReadableAmount, getRpcEndpoint, openExplorerTab } from 'utils/utils';
+import { ApiPromise, initialize } from 'avail-js-sdk';
+import { Chip } from '@mui/material';
+import { LoadingSpinner } from 'components/ui/atom/LoadingSmall/LoadingSmall.style';
+import { CheckBoxOutlineBlankRounded, CheckBoxRounded } from '@mui/icons-material';
+import { LoadingSmall } from 'components/ui/atom/LoadingSmall';
+import { useTransactionStore } from 'store/store';
 import {
   Column,
   Description,
@@ -19,13 +28,16 @@ import { getIcon, getTxnToFromLabel, getTxnValues } from './types';
 
 interface Props {
   transaction: Transaction;
+  api: ApiPromise | undefined;
 }
 
-export const TransactionListItemView = ({ transaction }: Props) => {
+export const TransactionListItemView = ({ transaction, api }: Props) => {
   const networks = useAppSelector((state) => state.networks);
   const [currencySymbol, setCurrencySymbol] = useState('AVAIL');
   const [txnValue, setTxnValue] = useState('0');
   const [txnUsdValue, setTxnUsdValue] = useState('0.00');
+  const { setTransactions } = useTransactionStore();
+  const metamask = useAppSelector((state) => state.metamask);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,12 +48,75 @@ export const TransactionListItemView = ({ transaction }: Props) => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+
+  useEffect(() => {
+    (async () => {
+    
+      const checkTxnStatus = async () => {
+        if (api === undefined || transaction.block === 'finalised') {
+          return;
+        }
+        const unsubscribe = await api.rpc.chain.subscribeFinalizedHeads(async (lastHeader) => {
+          const blockHash = lastHeader.hash;
+          const signedBlock = await api.rpc.chain.getBlock(blockHash);
+          const { extrinsics } = signedBlock.block;
+
+          extrinsics.forEach(async ({ hash }) => {
+            if (hash.toHex() === transaction.hash) {
+              await metamask?.availSnap?.api?.updateTransaction({ ...transaction, block: 'finalised' });
+              setTransactions(
+                (await metamask?.availSnap?.api?.getAllTransactions()!).filter(
+                  (tx) => tx.network === networks.activeNetwork
+                ));
+              console.log('Transaction updated finally');
+            
+              unsubscribe();
+            }
+          });
+        });
+
+        const unsubNewHeads = await api.rpc.chain.subscribeNewHeads(async (lastHeader) => {
+          const blockHash = lastHeader.hash;
+          const signedBlock = await api.rpc.chain.getBlock(blockHash);
+          const { extrinsics } = signedBlock.block;
+
+          extrinsics.forEach(async( { hash }) => {
+            if (hash.toHex() === transaction.hash) {
+              await metamask?.availSnap?.api?.updateTransaction({ ...transaction, block: 'in block' });
+              setTransactions(
+                (await metamask?.availSnap?.api?.getAllTransactions()!).filter(
+                  (tx) => tx.network === networks.activeNetwork
+                ));
+              console.log('Transaction updated');
+            
+            }
+          });
+        });
+
+        return () => {
+          unsubscribe();
+          unsubNewHeads();
+        };
+      };
+
+      checkTxnStatus();
+      const intervalId = setInterval(() => {
+        checkTxnStatus();
+      }, 6000);
+
+      return () => clearInterval(intervalId);
+    })();
+  }, []);
+
+  //either use subscan api or just remove pending status and have inblock and finalised better to use subscan api
+
   const txnToFromLabel = getTxnToFromLabel(transaction);
   return (
     <Wrapper onClick={() => openExplorerTab(transaction.hash, 'extrinsic', networks.activeNetwork)}>
       <Left>
         <LeftIcon>
-          <IconStyled transactionname={'Send'} icon={getIcon('Send')} />
+          <IconStyled transactionname={'Send'} icon={transaction.block === 'finalised' ? getIcon('Send') : getIcon('Loading')} />
         </LeftIcon>
         <Column>
           <Label>{'Send'}</Label>
@@ -49,8 +124,15 @@ export const TransactionListItemView = ({ transaction }: Props) => {
             fee: {(Number(transaction.fee) / 10 ** 18).toString().slice(0, 5)}
           </Description>
         </Column>
+        {/* {txnStatus === '' ? <></> :  <Chip
+          icon={icon()}
+          style={{ display: 'flex', alignItems: 'center', marginLeft: '20px' }}
+          label={txnStatus === '' ? '' : `Status: ${txnStatus}`}
+          className=""
+        ></Chip>} */}
+       {transaction.block}
       </Left>
-      <Middle>{txnToFromLabel} </Middle>
+      <Middle>{txnToFromLabel}</Middle>
       <Right>
         <AssetQuantity currency={currencySymbol} currencyValue={txnValue} />
       </Right>

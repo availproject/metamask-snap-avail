@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import type { OnRpcRequestHandler } from '@metamask/snaps-types';
 import { assert } from 'superstruct';
 import type { ApiPromise } from 'avail-js-sdk';
@@ -22,6 +23,7 @@ import {
   validSignPayloadJSONSchema,
   validSignPayloadRawSchema
 } from './util/validation';
+import { saveTxToState, updateTxInState } from './avail/tx';
 
 const apiDependentMethods = [
   'getBlock',
@@ -67,6 +69,14 @@ export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
       return await exportSeed();
     case 'getAllTransactions':
       return await getTransactions();
+    case 'addTransaction':
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      return await saveTxToState(request.params.transaction);
+    case 'updateTransaction':
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      return await updateTxInState(request.params.transaction);
     case 'getBlock':
       assert(request.params, validGetBlockSchema);
       return await getBlock(request.params.blockTag, api);

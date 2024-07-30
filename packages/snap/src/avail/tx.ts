@@ -15,12 +15,13 @@ export async function saveTxToState(tx: Transaction): Promise<void> {
 
 export async function updateTxInState(transaction: Transaction): Promise<void> {
   const state = await getMetamaskState();
-
-  // const index = transactionsArray.findIndex((tx) => tx.hash === transaction.hash);
-  const index = 0;
+  const transactionsArray = state.transactions as unknown as Transaction[];
+  const index = transactionsArray.findIndex((tx) => tx.hash === transaction.hash);
 
   if (index >= 0) {
-    state.transactions[index] = JSON.stringify(transaction);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    state.transactions[index] = { ...transaction };
     await snap.request({
       method: 'snap_manageState',
       params: { newState: state, operation: 'update' }

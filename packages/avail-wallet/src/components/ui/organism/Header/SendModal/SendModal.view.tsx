@@ -101,6 +101,13 @@ export const SendModalView = ({ closeModal }: Props) => {
         const tx = await metamask.availSnap.api.send(signedTx, txPayload, networks.activeNetwork);
         toastr.success('Transaction sent successfully');
 
+        await metamask.availSnap.api.updateTransaction({ ...tx, block: 'pending' });
+        console.log(
+          'Transactions',
+          (await metamask.availSnap.api.getAllTransactions()).filter(
+            (tx) => tx.network === networks.activeNetwork
+          )
+        );
         setTransactions(
           (await metamask.availSnap.api.getAllTransactions()).filter(
             (tx) => tx.network === networks.activeNetwork

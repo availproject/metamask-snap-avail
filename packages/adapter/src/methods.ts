@@ -90,6 +90,20 @@ export async function getLatestBlock(this: MetamaskAvailSnap): Promise<BlockInfo
   }
 }
 
+export async function addTransaction(
+  this: MetamaskAvailSnap,
+  transaction: Transaction
+): Promise<void> {
+  await sendSnapMethod({ method: 'addTransaction', params: { transaction } }, this.snapId);
+}
+
+export async function updateTransaction(
+  this: MetamaskAvailSnap,
+  transaction: Transaction
+): Promise<void> {
+  await sendSnapMethod({ method: 'updateTransaction', params: { transaction } }, this.snapId);
+}
+
 export async function getAllTransactions(this: MetamaskAvailSnap): Promise<Transaction[]> {
   return (await sendSnapMethod({ method: 'getAllTransactions' }, this.snapId)) as Transaction[];
 }

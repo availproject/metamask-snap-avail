@@ -26,7 +26,7 @@ export function hasMetaMask(): boolean {
   return window.ethereum.isMetaMask;
 }
 
-export const defaultSnapId = 'npm:@avail-project/avail-snap';
+export const defaultSnapId = 'local:http://localhost:8081';
 
 export async function installAvailSnap(): Promise<boolean> {
   const snapId = process.env.REACT_APP_SNAP_ID ? process.env.REACT_APP_SNAP_ID : defaultSnapId;
@@ -81,7 +81,7 @@ export const useAvailSnap = () => {
   const networkState = useAppSelector((state) => state.networks);
   const snapId = process.env.REACT_APP_SNAP_ID
     ? process.env.REACT_APP_SNAP_ID
-    : 'npm:@avail-project/avail-snap';
+    : 'local:http://localhost:8081';
   const snapVersion = process.env.REACT_APP_SNAP_VERSION ? process.env.REACT_APP_SNAP_VERSION : '*';
   const debugLevel =
     process.env.REACT_APP_DEBUG_LEVEL !== undefined ? process.env.REACT_APP_DEBUG_LEVEL : 'all';
@@ -93,22 +93,22 @@ export const useAvailSnap = () => {
   const connectToSnap = () => {
     dispatch(setWalletConnection(true));
     dispatch(setForceReconnect(false));
-    dispatch(enableLoadingWithMessage('Connecting...'));
-    provider
-      .request({
-        method: 'wallet_requestSnaps',
-        params: {
-          [snapId]: { version: snapVersion }
-        }
-      })
-      .then(() => {
-        dispatch(setWalletConnection(true));
-        dispatch(setForceReconnect(false));
-      })
-      .catch(() => {
-        dispatch(setWalletConnection(false));
-        dispatch(disableLoading());
-      });
+    // dispatch(enableLoadingWithMessage('Connecting...'));
+    // provider
+    //   .request({
+    //     method: 'wallet_requestSnaps',
+    //     params: {
+    //       [snapId]: { version: snapVersion }
+    //     }
+    //   })
+    //   .then(() => {
+    //     dispatch(setWalletConnection(true));
+    //     dispatch(setForceReconnect(false));
+    //   })
+    //   .catch(() => {
+    //     dispatch(setWalletConnection(false));
+    //     dispatch(disableLoading());
+    //   });
   };
 
   const getNetworks = async () => {
@@ -239,7 +239,7 @@ export const useAvailSnap = () => {
           toastr.error('Snap is unaccessible or unauthorized');
           dispatch(setWalletConnection(false));
         }
-        //eslint-disable-next-line no-console
+        //eslint-disable-n ext-line no-console
         console.error('Error while Initializing wallet', err);
       } finally {
         dispatch(disableLoading());

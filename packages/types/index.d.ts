@@ -1,4 +1,5 @@
 import { SignerPayloadRaw } from '@Avail/types/types';
+import { updateTransaction } from '../adapter/src/methods';
 
 export interface GetPublicKeyRequest {
   method: 'getPublicKey';
@@ -65,6 +66,20 @@ export interface GenerateTransactionPayload {
   };
 }
 
+export interface AddTransaction {
+  method: 'addTransaction';
+  params: {
+    transaction: Transaction;
+  };
+}
+
+export interface UpdateTransaction {
+  method: 'updateTransaction';
+  params: {
+    transaction: Transaction;
+  };
+}
+
 export interface SendUnitRequest {
   method: 'send';
   params: {
@@ -87,7 +102,9 @@ export type MetamaskAvailRpcRequest =
   | SignPayloadJSONRequest
   | SignPayloadRawRequest
   | SendUnitRequest
-  | GenerateTransactionPayload;
+  | GenerateTransactionPayload
+  | AddTransaction
+  | UpdateTransaction;
 
 type Method = MetamaskAvailRpcRequest['method'];
 
