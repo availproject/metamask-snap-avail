@@ -1,6 +1,7 @@
-import { openExplorerTab } from 'utils/utils';
+import { openExplorerTab, shortenAddress } from 'utils/utils';
 import { useAppSelector } from 'hooks/redux';
 import { useAvailSnap } from 'services/metamask';
+import { PopperTooltip } from 'components/ui/molecule/PopperTooltip';
 import {
   AccountImageDiv,
   AccountImageStyled,
@@ -32,7 +33,18 @@ export const AccountDetailsModalView = ({ address }: Props) => {
           {/* <ModifyIcon /> */}
         </TitleDiv>
         <AddressQrCode value={address} />
-        {/* <AddressCopy address={address} /> */}
+        <PopperTooltip content="Copied!" closeTrigger="click">
+          <PopperTooltip content="Copy to clipboard" closeTrigger="hover">
+            <Wrapper
+              onClick={() => {
+                navigator.clipboard.writeText(address);
+              }}
+              style={{ cursor: 'pointer', color: '#000000', fontWeight: 800 }}
+            >
+              Address: {shortenAddress(address)}
+            </Wrapper>
+          </PopperTooltip>
+        </PopperTooltip>
       </Wrapper>
       <ButtonDiv>
         <ButtonStyled onClick={() => openExplorerTab(address, 'contract', chainId)}>
