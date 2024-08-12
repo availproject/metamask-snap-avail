@@ -45,7 +45,7 @@ export const SendModalView = ({ closeModal }: Props) => {
     positionClass: 'toast-top-center'
   });
 
-  const handleChange = (fieldName: string, fieldValue: string) => {
+  const handleChange = async (fieldName: string, fieldValue: string) => {
     //Check if input amount does not exceed user balance
     setErrors((prevErrors) => ({
       ...prevErrors,
@@ -53,9 +53,10 @@ export const SendModalView = ({ closeModal }: Props) => {
     }));
     switch (fieldName) {
       case 'amount':
-        if (fieldValue !== '' && fieldValue !== '.') {
+        if (fieldValue !== '' && fieldValue !== '.' && metamask.availSnap.api) {
           const inputAmount = ethers.utils.parseUnits(fieldValue, wallet.tokenBalance.decimals);
-          const userBalance = wallet.tokenBalance.amount;
+          //change here the balance to be based on active network
+          const userBalance = await metamask?.availSnap?.api?.getBalance();
           if (inputAmount.gt(userBalance)) {
             setErrors((prevErrors) => ({
               ...prevErrors,

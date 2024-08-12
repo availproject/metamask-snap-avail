@@ -77,7 +77,7 @@ export const HeaderView = ({ address }: Props) => {
           );
           setBalance(newBalance);
         }
-      }, TOKEN_BALANCE_REFRESH_FREQUENCY); // every 60 seconds
+      }, TOKEN_BALANCE_REFRESH_FREQUENCY);
       return () => clearInterval(interval);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
