@@ -82,7 +82,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <body className={`${thicccBoi.variable} relative antialiased bg-main text-white min-h-screen p-16 flex flex-col`}>
+        <body className={`${thicccBoi.variable} relative antialiased bg-main text-white min-h-screen !p-16 flex flex-col`}>
         <div className="flex-grow m-4 p-6 sm:p-8 rounded-[32px] bg-sec overflow-auto border-[5px] border-[#FFFFFF1A]">
           <Header />
           <main className="flex-grow">{children}</main>

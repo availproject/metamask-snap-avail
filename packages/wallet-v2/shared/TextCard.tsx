@@ -7,12 +7,12 @@ interface Props {
 }
 export const TextCard = ({title, content, link}: Props) => {
   return (
-    <Card className="bg-[#FFFFFF0A] border border-[#FFFFFF12]">
+    <Card className="!bg-[#FFFFFF0A] border-2 border-[#FFFFFF12] p-6 rounded-[16px]">
           <CardHeader className="pb-2">
             <h3 className="text-2xl font-bold text-white">{title}</h3>
           </CardHeader>
           <CardContent className="space-y-2">
-            <p className=" text-sm text-white">
+            <p className=" text-sm text-[#FFFFFFC2]">
               {content}
             </p>
             <CardFooter className="pl-0 m-0">
