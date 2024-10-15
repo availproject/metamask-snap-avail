@@ -1,22 +1,27 @@
-// import { FaDiscord, FaTwitter, FaLinkedin } from "react-icons/fa";
-
 import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
 import Green from '@/assets/images/green.svg';
+import Discord from '@/assets/images/discord.svg';
+import Twitter from '@/assets/images/twitter.svg';
+import Linkedin from '@/assets/images/linkedin.svg';
+import Github from '@/assets/images/github.svg';
 
 const Footer = () => {
   return (
-    <footer className=' border-s border-[#cf535312]'>
-      <Separator className='bg-[#FFFFFF1F]' />
-      <div className="flex justify-between items-center p-2">
-        <div className="flex">
+    <footer className="absolute bottom-0 left-0 right-0 border-t border-[#FFFFFF12]">
+      <div className="flex justify-between items-center px-6 py-3 ">
+        <div className="flex justify-center items-center gap-1">
           <Image src={Green} alt="green" width={16} height={16} />
-          <p><strong className='font-bold'>Latest Data:</strong> Block number: 650000 | Block Hash: 0000...3d07</p>
+          <p>
+            <strong className="font-bold mr-3">Latest Data:</strong> Block number: 650000 | Block
+            Hash: 0000...3d07
+          </p>
         </div>
         <div className="flex justify-center space-x-4 mt-2">
-          {/* <FaDiscord className="text-white" />
-        <FaTwitter className="text-white" /> */}
-          {/* <FaLinkedin className="text-white" /> */}
+          <Image src={Discord} width={16} height={16} alt="discord logo" />
+          <Image src={Github} width={16} height={16} alt="github logo" />
+          <Image src={Twitter} width={16} height={16} alt="twitter logo" />
+          <Image src={Linkedin} width={16} height={16} alt="linkedin logo" />
         </div>
       </div>
     </footer>

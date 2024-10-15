@@ -11,11 +11,11 @@ import TransactionLayout from './Transactions/TransactionLayout';
 import MenuBar from './MenuBar';
 
 export const Header = () => {
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [isWalletConnected, setIsWalletConnected] = useState(true);
   return (
     <header className="flex flex-wrap items-center justify-between p-4 w-full">
       <div className="flex items-center gap-5">
-        <Image src={Logo} width={112} height={33} alt="Logo" className="h-8" />
+        <Image src={Logo} width={112} height={33} alt="Logo" className="h-auto" />
         <WalletCopy />
       </div>
       {isWalletConnected ? (
