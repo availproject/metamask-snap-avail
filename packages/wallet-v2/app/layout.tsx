@@ -8,6 +8,7 @@ import Logo from '@/assets/images/logo.png';
 import { Header } from '@/shared/Header';
 import { ConnectButton } from '@/shared/ConnectButton';
 import Footer from '@/shared/Footer';
+import useWalletStore from '@/slices/walletSlice';
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
   variable: '--font-geist-sans',
@@ -80,6 +81,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
         <body className={`${thicccBoi.variable} relative antialiased bg-main text-white min-h-screen !p-16 flex flex-col`}>

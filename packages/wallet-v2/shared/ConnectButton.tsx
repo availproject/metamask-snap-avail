@@ -2,24 +2,11 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useAvailSnap } from '@/services/metamask';
+import { useInitializeProvider } from '@/hooks/useInitializeProvider';
 
 export const ConnectButton = () => {
-  const { loading, connectToSnap, getWalletData } = useAvailSnap();
-
-  // useEffect(() => {
-  //   initSnap();
-  // }, []);
-
-  const handleConnect = async () => {
-    try {
-      await connectToSnap();
-      // Handle successful connection
-      console.log(getWalletData)
-    } catch (error) {
-      console.error('Failed to connect:', error);
-      // Handle error in UI (e.g., show an error message)
-    }
-  };
+  const { connectToSnap } = useAvailSnap();
+  // useInitializeProvider()
 
   return (
     <Button
@@ -27,10 +14,9 @@ export const ConnectButton = () => {
       style={{
         background: 'linear-gradient(270deg, #2778E9 0%, #439FE7 100.18%)', lineHeight: '20.8px'
       }}
-      onClick={handleConnect}
-      disabled={loading}
+      onClick={connectToSnap}
     >
-      {loading ? 'Connecting...' : 'Connect Wallet'}{' '}
+     Connect Wallet
     </Button>
   );
 };

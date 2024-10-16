@@ -1,9 +1,7 @@
 import { useUIStore } from '@/slices/UISlice';
-import { useWalletStore } from '@/slices/walletSlice';
+import useWalletStore from '@/slices/walletSlice';
 import detectEthereumProvider from '@metamask/detect-provider';
 import { useEffect, useState } from 'react';
-// import { useUIStore } from 'path/to/useUIStore';
-// import { useWalletStore } from 'path/to/useWalletStore';
 
 export const useHasMetamask = () => {
   const { enableLoadingWithMessage, disableLoading } = useUIStore();

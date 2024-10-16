@@ -86,7 +86,7 @@ const ExportKey: React.FC<{ onOpen: (open: boolean) => void }> = ({ onOpen }) =>
             </span>
           </div>
           <Textarea
-            className="inline-block w-full px-5 py-4 !bg-[#FFFFFF12] rounded-3xl min-h-[7rem] border border-[#FFFFFF33] !text-2xl text-white resize-none"
+            className="inline-block w-full px-5 py-4 !bg-[#FFFFFF12] !rounded-3xl min-h-[7rem] border border-[#FFFFFF33] !text-2xl text-white resize-none"
             disabled
             value="******************************************************************"
           />

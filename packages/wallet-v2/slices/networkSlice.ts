@@ -1,16 +1,27 @@
-import { create } from 'zustand';
 import { Network } from '@/types';
+import { create } from 'zustand';
 
 interface NetworkState {
-  networks: Network[];
+  items: Network[];
   activeNetwork: number;
   setNetworks: (networks: Network[]) => void;
   setActiveNetwork: (networkIndex: number) => void;
+  resetNetwork: () => void;
 }
 
-export const useNetworkStore = create<NetworkState>((set) => ({
-  networks: [],
+const useNetworkStore = create<NetworkState>((set) => ({
+  items: [],
   activeNetwork: 0,
-  setNetworks: (networks) => set({ networks }),
+
+  setNetworks: (networks) => set({ items: networks }),
+
   setActiveNetwork: (networkIndex) => set({ activeNetwork: networkIndex }),
+
+  resetNetwork: () =>
+    set({
+      items: [],
+      activeNetwork: 0
+    })
 }));
+
+export default useNetworkStore;

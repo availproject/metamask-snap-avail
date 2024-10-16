@@ -1,23 +1,23 @@
-'use client';
-
-import { ethers } from 'ethers';
-import { useState } from 'react';
-import { create } from 'zustand';
+// stores/walletStore.ts
 import { Account, Erc20TokenBalance, Transaction } from '@/types';
+import { create } from 'zustand';
 
-export interface WalletState {
+interface WalletState {
   connected: boolean;
   isLoading: boolean;
+  loadingMessage: string;  // Add this to keep track of loading messages
   forceReconnect: boolean;
-  accounts: Account[];
+  accounts: string[];
   tokenBalance: Erc20TokenBalance;
   transactions: Transaction[];
   transactionDeploy?: Transaction;
-  provider?: any; // TODO: Metamask SDK does not export types
-  metamaskState: any;
+  provider?: any;
+
   setProvider: (provider: any) => void;
+  setIsLoading: (isLoading: boolean) => void;
+  setLoadingMessage: (message: string) => void; // New method to set loading message
   setWalletConnection: (connected: boolean) => void;
-  setForceReconnect: (forceReconnect: boolean) => void;
+  setForceReconnect: (reconnect: boolean) => void;
   setAccounts: (accounts: Account[] | Account) => void;
   setErc20TokenBalances: (balance: Erc20TokenBalance) => void;
   setErc20TokenBalanceSelected: (balance: Erc20TokenBalance) => void;
@@ -27,40 +27,66 @@ export interface WalletState {
   resetWallet: () => void;
 }
 
-const initialState = {
+const initialState: Omit<
+  WalletState,
+  | 'setIsLoading'
+  | 'setLoadingMessage'
+  | 'setProvider'
+  | 'setWalletConnection'
+  | 'setForceReconnect'
+  | 'setAccounts'
+  | 'setErc20TokenBalances'
+  | 'setErc20TokenBalanceSelected'
+  | 'setTransactions'
+  | 'setTransactionDeploy'
+  | 'clearAccounts'
+  | 'resetWallet'
+> = {
   connected: false,
   isLoading: false,
+  loadingMessage: '',
   forceReconnect: false,
   accounts: [],
   tokenBalance: {} as Erc20TokenBalance,
   transactions: [],
   transactionDeploy: undefined,
   provider: undefined,
-  metamaskState: {}
 };
 
-export const useWalletStore = create<WalletState>((set) => ({
+const useWalletStore = create<WalletState>((set) => ({
   ...initialState,
-  setProvider: (provider: any) => set({ provider }),
-  setWalletConnection: (connected: boolean) => set({ connected }),
-  setForceReconnect: (forceReconnect: boolean) => set({ forceReconnect }),
-  setAccounts: (accounts: Account[] | Account) =>
-    set((state) => {
-      if (Array.isArray(accounts)) {
-        return { accounts: accounts.map((account) => account) };
-      }
-      return { accounts: [...state.accounts, accounts] };
-    }),
-  setErc20TokenBalances: (balance: Erc20TokenBalance) => set({ tokenBalance: balance }),
-  setErc20TokenBalanceSelected: (balance: Erc20TokenBalance) => set({ tokenBalance: balance }),
-  setTransactions: (transactions: Transaction[]) => set({ transactions }),
-  setTransactionDeploy: (transaction: Transaction) => set({ transactionDeploy: transaction }),
+
+  setProvider: (provider) => set({ provider }),
+  setIsLoading: (isLoading) => set({ isLoading }),
+  setLoadingMessage: (message) => set({ loadingMessage: message }), // New implementation
+
+  setWalletConnection: (connected) => set({ connected }),
+  setForceReconnect: (forceReconnect) => set({ forceReconnect }),
+
+  setAccounts: (accounts) => {
+    set((state) => ({
+      accounts: Array.isArray(accounts)
+        ? accounts.map((account) => account.address)
+        : [...state.accounts, accounts.address]
+    }));
+  },
+
+  setErc20TokenBalances: (tokenBalance) => set({ tokenBalance }),
+
+  setErc20TokenBalanceSelected: (tokenBalance) => set({ tokenBalance }),
+
+  setTransactions: (transactions) => set({ transactions }),
+
+  setTransactionDeploy: (transactionDeploy) => set({ transactionDeploy }),
+
   clearAccounts: () => set({ accounts: [] }),
+
   resetWallet: () =>
     set((state) => ({
       ...initialState,
       provider: state.provider,
-      forceReconnect: true,
+      forceReconnect: true
     })),
 }));
 
+export default useWalletStore;

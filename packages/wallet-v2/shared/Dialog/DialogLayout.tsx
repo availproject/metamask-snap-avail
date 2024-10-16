@@ -35,7 +35,7 @@ const DialogLayout: React.FC<DialogLayoutProps> = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="bg-[#252831] space-y-8 p-6 min-w-[530px] !rounded-3xl border-[3.2px] border-[#303441]">
+      <DialogContent className="bg-[#16171d] space-y-8 p-6 min-w-[530px] !rounded-3xl border-[3.2px] border-[#303441]">
         <DialogHeader>
           <div className="flex justify-between items-center">
             <DialogTitle className="mb-6 text-2xl font-semibold">{title}</DialogTitle>
