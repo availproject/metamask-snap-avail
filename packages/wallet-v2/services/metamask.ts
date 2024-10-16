@@ -73,8 +73,11 @@ export const useAvailSnap = () => {
     setAccounts,
     setTransactions,
     setErc20TokenBalances,
+    setErc20TokenBalanceSelected,
     resetWallet
   } = useWalletStore();
+  const { setNetworks } = useNetworkStore();
+  const { setAvailSnap } = useMetamaskStore();
   const provider = useWalletStore((state) => state.provider);
   const snapId = process.env.REACT_APP_SNAP_ID
     ? process.env.REACT_APP_SNAP_ID
@@ -106,7 +109,6 @@ export const useAvailSnap = () => {
       // On success, update connection state again
       setWalletConnection(true);
       setForceReconnect(false);
-      console.log('connecting');
     } catch (error) {
       console.error('Error connecting to snap:', error);
       setWalletConnection(false);
@@ -147,13 +149,13 @@ export const useAvailSnap = () => {
   ) => {
     const { setProvider } = useWalletStore.getState();
     const metamaskState = useMetamaskStore((state) => state.availSnap);
-    const setAvailSnap = useMetamaskStore((state) => state.setAvailSnap);
-    const setNetworks = useNetworkStore((state) => state.setNetworks);
-    const setAccounts = useWalletStore((state) => state.setAccounts);
-    const setTransactions = useWalletStore((state) => state.setTransactions);
-    const setErc20TokenBalanceSelected = useWalletStore(
-      (state) => state.setErc20TokenBalanceSelected
-    );
+    // const setAvailSnap = useMetamaskStore((state) => state.setAvailSnap);
+    // const setNetworks = useNetworkStore((state) => state.setNetworks);
+    // const setAccounts = useWalletStore((state) => state.setAccounts);
+    // const setTransactions = useWalletStore((state) => state.setTransactions);
+    // const setErc20TokenBalanceSelected = useWalletStore(
+    //   (state) => state.setErc20TokenBalanceSelected
+    // );
     // const enableLoadingWithMessage = useLoaderStore((state) => state.enableLoadingWithMessage);
     // const disableLoading = useLoaderStore((state) => state.disableLoading);
     // const setInfoModalVisible = useModalStore((state) => state.setInfoModalVisible);  // Assumes you have a modal store
@@ -240,12 +242,15 @@ export const useAvailSnap = () => {
       const publicKey = await snapApi.getPublicKey();
       const balance = await snapApi.getBalance();
       const transactions = await snapApi.getAllTransactions();
+      const latestBlock = await snapApi.getLatestBlock();
 
       setProvider(installResult.snap);
       setAccounts([{ address }]);
       setErc20TokenBalances(balance);
       setTransactions(transactions);
       setWalletConnection(true);
+
+      setAvailSnap({latestBlock})
     } catch {
       console.error('Error initializing wallet:', err);
       resetWallet();
