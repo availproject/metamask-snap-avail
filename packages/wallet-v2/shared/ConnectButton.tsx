@@ -14,6 +14,7 @@ export const ConnectButton = () => {
     try {
       await connectToSnap();
       // Handle successful connection
+      console.log(getWalletData)
     } catch (error) {
       console.error('Failed to connect:', error);
       // Handle error in UI (e.g., show an error message)
@@ -22,7 +23,7 @@ export const ConnectButton = () => {
 
   return (
     <Button
-      className="px-7 py-6 text-white rounded-[56px] text-base font-semibold"
+      className="px-7 py-6 text-white !rounded-full text-base font-semibold"
       style={{
         background: 'linear-gradient(270deg, #2778E9 0%, #439FE7 100.18%)', lineHeight: '20.8px'
       }}

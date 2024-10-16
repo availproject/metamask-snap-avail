@@ -11,7 +11,7 @@ import TransactionLayout from './Transactions/TransactionLayout';
 import MenuBar from './MenuBar';
 
 export const Header = () => {
-  const [isWalletConnected, setIsWalletConnected] = useState(true);
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
   return (
     <header className="flex flex-wrap items-center justify-between p-4 w-full">
       <div className="flex items-center gap-5">

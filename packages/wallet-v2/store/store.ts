@@ -8,15 +8,14 @@ interface WalletState {
   setForceReconnect: (value: boolean) => void;
 }
 
-export const useWalletStore = create<WalletState>()(
-  persist(
-    (set) => ({
-      forceReconnect: false,
-      setForceReconnect: (value) => set({ forceReconnect: value }),
-    }),
-    { name: 'wallet-storage' } // Specify the storage key for wallet state
-  )
-);
+export const useWalletStore = create((set) => ({
+  balance: 90,
+  transactions: [],
+  network: 'turing',
+  setBalance: (balance: any) => set({ balance }),
+  addTransaction: (tx: any) => set((state: { transactions: any; }) => ({ transactions: [...state.transactions, tx] })),
+  setNetwork: (network: any) => set({ network }),
+}));
 
 // Network State
 interface NetworkState {
