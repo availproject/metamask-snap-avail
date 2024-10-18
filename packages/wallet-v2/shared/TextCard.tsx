@@ -1,26 +1,37 @@
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { ArrowRight } from 'atomize_icons'
-interface Props {
-    title: string,
-    content: string,
-    link: string
+import { motion } from 'framer-motion'
+
+interface TextCardProps {
+  title: string
+  content: string
+  link: string
 }
-export const TextCard = ({title, content, link}: Props) => {
+
+export const TextCard: React.FC<TextCardProps> = ({ title, content, link }) => {
   return (
-    <Card className="!bg-[#FFFFFF0A] border-2 border-[#FFFFFF12] p-6 rounded-[16px]">
-          <CardHeader className="pb-2">
-            <h3 className="text-2xl font-bold text-white">{title}</h3>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <p className=" text-sm text-[#FFFFFFC2]">
-              {content}
-            </p>
-            <CardFooter className="pl-0 m-0">
-              <a href={link} className="text-white flex items-start underline ml-0">
-                Read more <ArrowRight className="ml-2" />
-              </a>
-            </CardFooter>
-          </CardContent>
-        </Card>
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      <Card className="bg-white/5 border-2 border-white/10 rounded-2xl h-full flex flex-col">
+        <CardHeader className="pb-2">
+          <h3 className="text-2xl font-bold text-white">{title}</h3>
+        </CardHeader>
+        <CardContent className="flex-grow">
+          <p className="text-sm text-white/75">
+            {content}
+          </p>
+        </CardContent>
+        <CardFooter className="pt-4">
+          <a 
+            href={link} 
+            className="text-white flex items-center hover:underline transition-all duration-300"
+          >
+            Read more <ArrowRight className="ml-2" />
+          </a>
+        </CardFooter>
+      </Card>
+    </motion.div>
   )
 }
