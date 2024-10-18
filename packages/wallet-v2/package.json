@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@avail-project/avail-snap": "^1.0.6",
+    "@avail-project/metamask-avail-adapter": "^1.0.6",
     "@polkadot/api": "^13.0.1",
     "@polkadot/extension-dapp": "^0.52.3",
     "@polkadot/rpc-core": "^13.0.1",

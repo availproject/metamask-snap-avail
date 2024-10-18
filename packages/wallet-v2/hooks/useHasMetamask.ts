@@ -1,5 +1,5 @@
 import { useUIStore } from '@/slices/UISlice';
-import useWalletStore from '@/slices/walletSlice';
+import {useWalletStore} from '@/slices/walletSlice';
 import detectEthereumProvider from '@metamask/detect-provider';
 import { useEffect, useState } from 'react';
 

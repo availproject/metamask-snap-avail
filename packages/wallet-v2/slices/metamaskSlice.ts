@@ -1,56 +1,43 @@
 import { create } from 'zustand';
-import type { MetamaskAvailSnap } from '@avail-project/metamask-avail-adapter/build/snap';
-import type {
-  BlockInfo,
-  SnapRpcMethodRequest,
-  Transaction,
-  TxPayload,
-  SnapNetworks,
-} from '@avail-project/metamask-avail-types';
-import type { MetamaskSnapApi } from '@avail-project/metamask-avail-adapter/build/types';
-import { hasMetaMask as checkMetaMask } from '../services/metamask';
+import { MetamaskAvailSnap } from '@avail-project/metamask-avail-adapter/build/snap';
+import { SnapNetworks, Transaction } from '@avail-project/metamask-avail-types';
 
-interface IAvailSnap {
+export interface IAvailSnap {
   isInstalled: boolean;
   message: string;
   snap?: MetamaskAvailSnap;
   balance: string;
   address: string;
   publicKey: string;
-  latestBlock: BlockInfo;
+  latestBlock: { hash: string; number: string };
   transactions: Transaction[];
   network: SnapNetworks;
-  api: MetamaskSnapApi | null;
+  api: any | null;
 }
 
 interface MetamaskState {
   availSnap: IAvailSnap;
   hasMetaMask: boolean;
-  setAvailSnap: (data: IAvailSnap) => void;
+  setData: (data: Partial<IAvailSnap>) => void;
 }
 
-const initialAvailSnap: IAvailSnap = {
-  isInstalled: false,
-  message: '',
-  balance: '0',
-  address: '',
-  publicKey: '',
-  latestBlock: {
-    hash: '',
-    number: ''
+const hasMetaMask = (): boolean => window.ethereum?.isMetaMask ?? false;
+
+export const useMetamaskStore = create<MetamaskState>((set) => ({
+  hasMetaMask: hasMetaMask(),
+  availSnap: {
+    isInstalled: false,
+    message: '',
+    balance: '0',
+    address: '',
+    publicKey: '',
+    latestBlock: { hash: '', number: '' },
+    transactions: [],
+    network: 'turing',
+    api: null
   },
-  transactions: [],
-  network: 'turing',
-  api: null
-};
-
-const useMetamaskStore = create<MetamaskState>((set) => ({
-  availSnap: initialAvailSnap,
-  hasMetaMask: checkMetaMask(),
-
-  setAvailSnap: (data: IAvailSnap) => set((state) => ({
-    availSnap: { ...state.availSnap, ...data }
-  })),
+  setData: (data: Partial<IAvailSnap>) =>
+    set((state) => ({
+      availSnap: { ...state.availSnap, ...data }
+    }))
 }));
-
-export default useMetamaskStore;
