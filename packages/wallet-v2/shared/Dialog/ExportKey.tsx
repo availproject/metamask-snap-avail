@@ -26,7 +26,7 @@ const ExportKey: React.FC<{ onOpen: (open: boolean) => void }> = ({ onOpen }) =>
   return (
     <>
       <DropdownMenuItem
-        className="flex items-center px-4 py-3 text-sm text-gray-300 rounded-full transition-colors hover:bg-gray-700 hover:text-white"
+        className="flex items-center px-4 py-3 text-sm text-gray-300 !rounded-full transition-colors focus:bg-white/10 focus:text-white/75"
         onClick={openDialog}
       >
         <Image src={Key} width={16} height={16} className="mr-3" alt="Export" />

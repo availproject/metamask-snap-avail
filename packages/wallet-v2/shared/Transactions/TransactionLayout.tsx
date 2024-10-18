@@ -32,7 +32,7 @@ const TransactionLayout: React.FC = () => {
         {isOpen && (
           <PopoverContent forceMount asChild>
             <motion.div
-              className="p-6 w-[480px] max-w-[90vw] bg-[#252831] border-[3.2px] border-gray-700 rounded-[20px]"
+              className="absolute top-4 -right-5 p-6 w-[480px] max-w-[90vw] bg-[#252831] border-[3.2px] border-gray-700 rounded-[20px]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
