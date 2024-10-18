@@ -1,26 +1,24 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-const MainnetTestnetSwitch = () => {
+const MainnetTestnetSwitch: React.FC = () => {
   return (
-    <div>
-      <Tabs defaultValue="account" className="bg-transparent border-4 py-1 border-[#FFFFFF12] rounded-full">
-        <TabsList className="bg-transparent w-full justify-between">
-          <TabsTrigger 
-            value="account" 
-            className="px-3 py-2 !rounded-full transition-all duration-300 font-semibold data-[state=active]:bg-[#FFFFFF1F] data-[state=active]:!text-[#FFFFFF]"
-            style={{ boxShadow: '0px 3p x 4px -2px rgba(17, 12, 34, 0.1)' }}>
-            Avail Mainnet
-          </TabsTrigger>
-          <TabsTrigger 
-            value="password" 
-            className="px-3 py-2 !rounded-full transition-all duration-300 font-semibold data-[state=active]:bg-[#FFFFFF1F] data-[state=active]:!text-[#FFFFFF]"
-            style={{ boxShadow: '0px 3px 4px -2px rgba(17, 12, 34, 0.1)' }}>
-            Goldberg Testnet
-          </TabsTrigger>
-        </TabsList>
-      </Tabs>
-    </div>
-  );
-};
+    <Tabs defaultValue="mainnet" className="border-4 py-1 border-white/10 rounded-full">
+      <TabsList className="bg-transparent w-full justify-between">
+        <TabsTrigger 
+          value="mainnet" 
+          className="px-3 py-2 rounded-full transition-all duration-300 font-semibold data-[state=active]:bg-white/12 data-[state=active]:text-white"
+        >
+          Avail Mainnet
+        </TabsTrigger>
+        <TabsTrigger 
+          value="testnet" 
+          className="px-3 py-2 rounded-full transition-all duration-300 font-semibold data-[state=active]:bg-white/12 data-[state=active]:text-white"
+        >
+          Goldberg Testnet
+        </TabsTrigger>
+      </TabsList>
+    </Tabs>
+  )
+}
 
-export default MainnetTestnetSwitch;
+export default MainnetTestnetSwitch

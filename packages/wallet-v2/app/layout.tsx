@@ -1,45 +1,26 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import Image from 'next/image';
-import Logo from '@/assets/images/logo.png';
 import { Header } from '@/shared/Header';
-import { ConnectButton } from '@/shared/ConnectButton';
 import Footer from '@/shared/Footer';
-import useWalletStore from '@/slices/walletSlice';
+
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
   variable: '--font-geist-sans',
-  weight: '100 900'
+  display: 'swap'
 });
+
 const geistMono = localFont({
   src: './fonts/GeistMonoVF.woff',
   variable: '--font-geist-mono',
-  weight: '100 900'
+  display: 'swap'
 });
 
 const thicccBoi = localFont({
   src: [
     {
-      path: './fonts/THICCCBOI/THICCCBOI-Black.ttf',
-      weight: '900',
-      style: 'normal'
-    },
-    {
-      path: './fonts/THICCCBOI/THICCCBOI-Bold.ttf',
-      weight: '700',
-      style: 'normal'
-    },
-    {
-      path: './fonts/THICCCBOI/THICCCBOI-ExtraBold.ttf',
-      weight: '800',
-      style: 'normal'
-    },
-    {
-      path: './fonts/THICCCBOI/THICCCBOI-Light.ttf',
-      weight: '300',
+      path: './fonts/THICCCBOI/THICCCBOI-Regular.ttf',
+      weight: '400',
       style: 'normal'
     },
     {
@@ -48,27 +29,13 @@ const thicccBoi = localFont({
       style: 'normal'
     },
     {
-      path: './fonts/THICCCBOI/THICCCBOI-Regular.ttf',
-      weight: '400',
-      style: 'normal'
-    },
-    {
-      path: './fonts/THICCCBOI/THICCCBOI-SemiBold.ttf',
-      weight: '600',
-      style: 'normal'
-    },
-    {
-      path: './fonts/THICCCBOI/THICCCBOI-ThicccAF.ttf',
-      weight: '900',
-      style: 'normal'
-    },
-    {
-      path: './fonts/THICCCBOI/THICCCBOI-Thin.ttf',
-      weight: '100',
+      path: './fonts/THICCCBOI/THICCCBOI-Bold.ttf',
+      weight: '700',
       style: 'normal'
     }
   ],
-  variable: '--font-thicccboi'
+  variable: '--font-thicccboi',
+  display: 'swap'
 });
 
 export const metadata: Metadata = {
@@ -81,14 +48,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
   return (
-    <html lang="en">
-        <body className={`${thicccBoi.variable} relative antialiased bg-main text-white min-h-screen !p-16 flex flex-col`}>
-        <div className="flex-grow m-4 p-6 sm:p-8 rounded-[32px] bg-sec overflow-auto border-[5px] border-[#FFFFFF1A]">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${thicccBoi.variable}`}>
+      <body className="relative antialiased bg-main text-white min-h-screen flex flex-col">
+        <div className="flex-grow m-2 sm:m-4 md:m-8 lg:m-16 p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-[32px] bg-sec overflow-auto border-2 sm:border-[5px] border-[#FFFFFF1A]">
           <Header />
-          <main className="flex-grow">{children}</main>
+          <main className="flex-grow my-4 sm:my-6 md:my-8">{children}</main>
         </div>
         <Footer />
       </body>
