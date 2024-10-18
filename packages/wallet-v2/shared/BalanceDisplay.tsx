@@ -6,7 +6,7 @@ export const BalanceDisplay = () => {
     <div className='m-8'>
         <SeperatorDot />
         <div className='flex items-center justify-center'>
-            <h2 className="text-8xl">-- AVL</h2>
+            <h2 className="text-8xl">35875 AVL</h2>
         </div>
         <SeperatorDot />
     </div>

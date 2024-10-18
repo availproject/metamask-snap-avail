@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
   const isLoading = availSnap.latestBlock.number === '';
 
   return (
-    <footer className="absolute bottom-0 left-0 right-0 border-t border-white/7 bg-black/20 backdrop-blur-sm">
+    <footer className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-black/20 backdrop-blur-sm">
       <div className="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center gap-4">
         <motion.div
           className="flex items-center gap-2 text-sm text-white/80"
@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
           )}
         </motion.div>
         <motion.div
-          className="flex justify-center space-x-4"
+          className="flex justify-center items-center space-x-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}

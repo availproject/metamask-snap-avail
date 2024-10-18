@@ -9,8 +9,8 @@ import SendDialog from '@/shared/Dialog/SendDialog'
 import LoadingModal from '@/shared/LoadingModal'
 import { useAvailSnap } from '@/services/metamask'
 import { useHasMetamask } from '@/hooks/useHasMetamask'
-import useWalletStore from '@/slices/walletSlice'
-import useNetworkStore from '@/slices/networkSlice'
+import {useWalletStore} from '@/slices/walletSlice'
+import {useNetworkStore} from '@/slices/networkSlice'
 import { useUIStore } from '@/slices/UISlice'
 import Line from '@/assets/images/line.svg'
 import Sign from '@/assets/images/signature.svg'
@@ -70,8 +70,8 @@ export default function Home() {
       <motion.div {...fadeInUp} className="space-y-12">
         <Image src={Line} alt="Decorative line" width={100} height={10} className="w-full" />
         <div className="flex flex-col items-center justify-center text-center">
-          <h2 className="text-4xl sm:text-5xl font-extrabold">-- AVL</h2>
-          <p className="mt-3 font-semibold text-lg sm:text-xl text-white/48">50,000.00 USD</p>
+          <h2 className="text-4xl sm:text-5xl font-extrabold">{connected ? balance.amount : '--'} AVL</h2>
+          <p className="mt-3 font-semibold text-lg sm:text-xl text-white/48">4748.45 USD</p>
         </div>
         <Image src={Line} alt="Decorative line" width={100} height={10} className="w-full" />
       </motion.div>
@@ -91,7 +91,7 @@ export default function Home() {
             <motion.div variants={fadeInUp}>
               <Button
                 size="lg"
-                className="w-full px-6 py-10 border shadow-none border-white/7 bg-white/4 gap-2 rounded-2xl hover:bg-white/8 transition-colors duration-300"
+                className="w-full px-6 py-10 border shadow-none border-white/10 bg-white/5 gap-2 rounded-2xl hover:bg-white/10 transition-colors duration-300"
               >
                 <Image src={Qr} width={20} height={20} alt="Receive icon" /> Receive
               </Button>
@@ -99,7 +99,7 @@ export default function Home() {
             <motion.div variants={fadeInUp}>
               <Button
                 size="lg"
-                className="w-full px-6 py-10 border shadow-none border-white/7 bg-white/4 gap-2 rounded-2xl hover:bg-white/8 transition-colors duration-300"
+                className="w-full px-6 py-10 border shadow-none border-white/10 bg-white/5 gap-2 rounded-2xl hover:bg-white/10 transition-colors duration-300"
               >
                 <Image src={Sign} width={20} height={20} alt="Sign icon" /> Sign Message
               </Button>
