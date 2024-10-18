@@ -19,7 +19,7 @@ const TransactionList: React.FC<TransactionListProps> = ({ transactions }) => {
         transition={{ duration: 0.5 }}
       >
         <Image src={EmptyBox} width={120} height={120} alt="No transactions" className="mb-4" />
-        <p className="text-white/32 font-semibold">No transactions found!</p>
+        <p className="text-white/30 font-semibold">No transactions found!</p>
       </motion.div>
     )
   }
