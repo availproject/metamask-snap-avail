@@ -1,27 +1,29 @@
 // components/ExportKey.tsx
 
-import React, { useState } from 'react';
-import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import Key from '@/assets/images/key.svg';
-import Image from 'next/image';
-import { Textarea } from '@/components/ui/textarea';
-import { Copy, Info } from 'atomize_icons';
-import { CheckCircledIcon } from '@radix-ui/react-icons';
-import { Button } from '@/components/ui/button';
-import DialogLayout from './DialogLayout';
+import React, { useState } from 'react'
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
+import Key from '@/assets/images/key.svg'
+import Image from 'next/image'
+import { Textarea } from '@/components/ui/textarea'
+import { Copy, Info } from 'atomize_icons'
+import { CheckCircledIcon } from '@radix-ui/react-icons'
+import { Button } from '@/components/ui/button'
+import DialogLayout from './DialogLayout'
 
-const ExportKey: React.FC<{ onOpen: (open: boolean) => void }> = ({ onOpen }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const ExportKey: React.FC<{ onOpen: (open: boolean) => void }> = ({
+  onOpen,
+}) => {
+  const [isOpen, setIsOpen] = useState(false)
 
   const openDialog = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsOpen(true);
-  };
+    e.stopPropagation()
+    setIsOpen(true)
+  }
 
   const closeDialog = () => {
-    setIsOpen(false);
-    onOpen(false);
-  };
+    setIsOpen(false)
+    onOpen(false)
+  }
 
   return (
     <>
@@ -61,14 +63,24 @@ const ExportKey: React.FC<{ onOpen: (open: boolean) => void }> = ({ onOpen }) =>
           </>
         }
         closeButton={
-          <button onClick={closeDialog} className="text-white cursor-pointer" aria-label="Close">
+          <button
+            onClick={closeDialog}
+            className="text-white cursor-pointer"
+            aria-label="Close"
+          >
             <span className="text-xl">&times;</span>
           </button>
         }
       >
         <div className="space-y-5">
-          <p>The Secret Recovery Phrase (SRP) provides full access to your wallet and funds.</p>
-          <p>MetaMask snap is a non-custodial wallet. That means you're the owner of your SRP.</p>
+          <p>
+            The Secret Recovery Phrase (SRP) provides full access to your wallet
+            and funds.
+          </p>
+          <p>
+            MetaMask snap is a non-custodial wallet. That means you're the owner
+            of your SRP.
+          </p>
         </div>
         <div>
           <div className="flex justify-between items-center mb-2">
@@ -93,13 +105,14 @@ const ExportKey: React.FC<{ onOpen: (open: boolean) => void }> = ({ onOpen }) =>
           <div className="flex items-center text-[#FF7373]">
             <Info className="mr-2" aria-hidden="true" />
             <p className="text-sm">
-              Make sure no one is looking at your screen. MetaMask Support will never request this.
+              Make sure no one is looking at your screen. MetaMask Support will
+              never request this.
             </p>
           </div>
         </div>
       </DialogLayout>
     </>
-  );
-};
+  )
+}
 
-export default ExportKey;
+export default ExportKey

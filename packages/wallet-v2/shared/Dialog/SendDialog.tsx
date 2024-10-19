@@ -1,21 +1,21 @@
-'use client';
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { DialogTrigger } from '@/components/ui/dialog';
-import { Info, Send } from 'atomize_icons';
-import DialogLayout from './DialogLayout';
-import { Input } from '@/components/ui/input';
+'use client'
+import React, { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { DialogTrigger } from '@/components/ui/dialog'
+import { Info, Send } from 'atomize_icons'
+import DialogLayout from './DialogLayout'
+import { Input } from '@/components/ui/input'
 
 const SendDialog = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   const openDialog = () => {
-    setIsOpen(true);
-  };
+    setIsOpen(true)
+  }
 
   const closeDialog = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
   return (
     <>
@@ -36,7 +36,7 @@ const SendDialog = () => {
         }
         footerContent={
           <>
-          <Button
+            <Button
               size="lg"
               className="py-4 w-full bg-[#F4FBFF66] border border-[#F4FBFF66] !rounded-full font-semibold border-none"
               onClick={closeDialog}
@@ -48,18 +48,17 @@ const SendDialog = () => {
               className="py-4 w-full bg-gradient-to-tr to-[#2778E9] from-[#439FE7] text-white !rounded-full"
               onClick={() => {
                 // Perform the delete action here
-                console.log('Account deleted');
-                closeDialog();
+                console.log('Account deleted')
+                closeDialog()
               }}
             >
               Confirm
             </Button>
-            
           </>
         }
       >
         <div className="space-y-5">
-          <div className='space-y-2'>
+          <div className="space-y-2">
             <h4 className="font-semibold ml-4">To</h4>
             <Input
               className="sblock w-full px-5 py-7 !bg-[#FFFFFF12] !rounded-full border border-[#FFFFFF33] text-white"
@@ -68,12 +67,12 @@ const SendDialog = () => {
             <div className="flex items-center text-[#FFFFFFC2] space-y-2">
               <Info className="mr-2" aria-hidden="true" />
               <p className="text-sm">
-                Please only enter a valid Avail address. Sending funds to a different network might
-                result in permanent loss.
+                Please only enter a valid Avail address. Sending funds to a
+                different network might result in permanent loss.
               </p>
             </div>
           </div>
-          <div className='space-y-2'>
+          <div className="space-y-2">
             <h4 className="font-semibold ml-4">Amount</h4>
             <Input
               className="sblock w-full px-5 py-7 !bg-[#FFFFFF12] !rounded-full border border-[#FFFFFF33] text-white"
@@ -111,7 +110,7 @@ const SendDialog = () => {
         </div> */}
       </DialogLayout>
     </>
-  );
-};
+  )
+}
 
-export default SendDialog;
+export default SendDialog

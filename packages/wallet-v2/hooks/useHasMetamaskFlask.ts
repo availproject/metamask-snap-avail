@@ -1,41 +1,41 @@
 //TODO: remove when metamask is released with snap support
-import detectEthereumProvider from '@metamask/detect-provider';
-import { useEffect, useState } from 'react';
+import detectEthereumProvider from '@metamask/detect-provider'
+import { useEffect, useState } from 'react'
 
 export const useHasMetamaskFlask = () => {
-  const [hasMetamaskFlask, setHasMetamaskFlask] = useState<boolean | null>(null);
+  const [hasMetamaskFlask, setHasMetamaskFlask] = useState<boolean | null>(null)
 
   const detectMetamaskFlask = async () => {
     try {
       const provider = (await detectEthereumProvider({
         mustBeMetaMask: false,
-        silent: true
-      })) as any | undefined;
-      const isFlask = (await provider?.request({ method: 'web3_clientVersion' }))?.includes(
-        'flask'
-      );
+        silent: true,
+      })) as any | undefined
+      const isFlask = (
+        await provider?.request({ method: 'web3_clientVersion' })
+      )?.includes('flask')
       if (provider && isFlask) {
-        return true;
+        return true
       }
-      return false;
+      return false
     } catch (e) {
-      console.log('Error', e);
-      return false;
+      console.log('Error', e)
+      return false
     }
-  };
+  }
 
   useEffect(() => {
     detectMetamaskFlask()
       .then((result) => {
-        setHasMetamaskFlask(result);
+        setHasMetamaskFlask(result)
       })
       .catch((err) => {
-        console.error(err);
-        setHasMetamaskFlask(false);
-      });
-  }, []);
+        console.error(err)
+        setHasMetamaskFlask(false)
+      })
+  }, [])
 
   return {
-    hasMetamaskFlask
-  };
-};
+    hasMetamaskFlask,
+  }
+}

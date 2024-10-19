@@ -1,5 +1,5 @@
-import { Send } from "atomize_icons"
-import { TransactionType } from "@/types"
+import { Send } from 'atomize_icons'
+import { TransactionType } from '@/types'
 
 interface TransactionProps {
   tx: TransactionType
@@ -11,11 +11,14 @@ const Transaction: React.FC<TransactionProps> = ({ tx }) => {
       <div className="flex items-center mb-2">
         <Send className="mr-1 text-white" />
         <span className="font-semibold text-white">{tx.type}</span>
-        {tx.amount && <span className="ml-auto font-semibold text-white">{tx.amount}</span>}
+        {tx.amount && (
+          <span className="ml-auto font-semibold text-white">{tx.amount}</span>
+        )}
       </div>
       {tx.from && (
         <p className="text-sm text-white/75">
-          From <span className="font-semibold text-white">{tx.from}</span> to <span className="font-semibold text-white">{tx.to}</span>
+          From <span className="font-semibold text-white">{tx.from}</span> to{' '}
+          <span className="font-semibold text-white">{tx.to}</span>
         </p>
       )}
       {tx.txHash && (

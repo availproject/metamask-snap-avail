@@ -1,27 +1,27 @@
-import { create } from 'zustand';
-import { MetamaskAvailSnap } from '@avail-project/metamask-avail-adapter/build/snap';
-import { SnapNetworks, Transaction } from '@avail-project/metamask-avail-types';
+import { create } from 'zustand'
+import { MetamaskAvailSnap } from '@avail-project/metamask-avail-adapter/build/snap'
+import { SnapNetworks, Transaction } from '@avail-project/metamask-avail-types'
 
 export interface IAvailSnap {
-  isInstalled: boolean;
-  message: string;
-  snap?: MetamaskAvailSnap;
-  balance: string;
-  address: string;
-  publicKey: string;
-  latestBlock: { hash: string; number: string };
-  transactions: Transaction[];
-  network: SnapNetworks;
-  api: any | null;
+  isInstalled: boolean
+  message: string
+  snap?: MetamaskAvailSnap
+  balance: string
+  address: string
+  publicKey: string
+  latestBlock: { hash: string; number: string }
+  transactions: Transaction[]
+  network: SnapNetworks
+  api: any | null
 }
 
 interface MetamaskState {
-  availSnap: IAvailSnap;
-  hasMetaMask: boolean;
-  setData: (data: Partial<IAvailSnap>) => void;
+  availSnap: IAvailSnap
+  hasMetaMask: boolean
+  setData: (data: Partial<IAvailSnap>) => void
 }
 
-const hasMetaMask = (): boolean => window.ethereum?.isMetaMask ?? false;
+const hasMetaMask = (): boolean => window.ethereum?.isMetaMask ?? false
 
 export const useMetamaskStore = create<MetamaskState>((set) => ({
   hasMetaMask: hasMetaMask(),
@@ -34,10 +34,10 @@ export const useMetamaskStore = create<MetamaskState>((set) => ({
     latestBlock: { hash: '', number: '' },
     transactions: [],
     network: 'turing',
-    api: null
+    api: null,
   },
   setData: (data: Partial<IAvailSnap>) =>
     set((state) => ({
-      availSnap: { ...state.availSnap, ...data }
-    }))
-}));
+      availSnap: { ...state.availSnap, ...data },
+    })),
+}))

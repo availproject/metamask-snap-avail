@@ -11,7 +11,8 @@
 }
 
 body {
-  font-family: var(--font-thicccboi);}
+  font-family: var(--font-thicccboi);
+}
 
 @layer utilities {
   .text-balance {

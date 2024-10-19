@@ -1,34 +1,34 @@
-'use client';
+'use client'
 
-import React, { useEffect, useState } from 'react';
-import { useMetamaskStore } from '@/slices/metamaskSlice';
-import { shortenAddress } from '@/lib/utils';
-import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import Green from '@/assets/images/green.svg';
-import Discord from '@/assets/images/discord.svg';
-import Twitter from '@/assets/images/twitter.svg';
-import Linkedin from '@/assets/images/linkedin.svg';
-import Github from '@/assets/images/github.svg';
+import React, { useEffect, useState } from 'react'
+import { useMetamaskStore } from '@/slices/metamaskSlice'
+import { shortenAddress } from '@/lib/utils'
+import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
+import Green from '@/assets/images/green.svg'
+import Discord from '@/assets/images/discord.svg'
+import Twitter from '@/assets/images/twitter.svg'
+import Linkedin from '@/assets/images/linkedin.svg'
+import Github from '@/assets/images/github.svg'
 
 const Footer: React.FC = () => {
-  const availSnap = useMetamaskStore((state) => state.availSnap);
-  const [prevBlock, setPrevBlock] = useState(availSnap.latestBlock);
+  const availSnap = useMetamaskStore((state) => state.availSnap)
+  const [prevBlock, setPrevBlock] = useState(availSnap.latestBlock)
 
   useEffect(() => {
     if (availSnap.latestBlock.number !== prevBlock.number) {
-      setPrevBlock(availSnap.latestBlock);
+      setPrevBlock(availSnap.latestBlock)
     }
-  }, [availSnap.latestBlock, prevBlock]);
+  }, [availSnap.latestBlock, prevBlock])
 
   const socialLinks = [
     { icon: Discord, alt: 'Discord', href: '#' },
     { icon: Github, alt: 'GitHub', href: '#' },
     { icon: Twitter, alt: 'Twitter', href: '#' },
-    { icon: Linkedin, alt: 'LinkedIn', href: '#' }
-  ];
+    { icon: Linkedin, alt: 'LinkedIn', href: '#' },
+  ]
 
-  const isLoading = availSnap.latestBlock.number === '';
+  const isLoading = availSnap.latestBlock.number === ''
 
   return (
     <footer className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-black/20 backdrop-blur-sm">
@@ -76,13 +76,18 @@ const Footer: React.FC = () => {
               whileTap={{ scale: 0.9 }}
               aria-label={`Visit our ${link.alt} page`}
             >
-              <Image src={link.icon} width={20} height={20} alt={`${link.alt} logo`} />
+              <Image
+                src={link.icon}
+                width={20}
+                height={20}
+                alt={`${link.alt} logo`}
+              />
             </motion.a>
           ))}
         </motion.div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

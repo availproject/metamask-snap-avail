@@ -1,31 +1,31 @@
-import type { SnapConfig } from '@avail-project/metamask-avail-types';
+import type { SnapConfig } from '@avail-project/metamask-avail-types'
 
 declare module '@avail-project/metamask-avail-adapter' {
   export function injectMetamaskAvailSnapProvider(
     network: 'turing',
     config?: SnapConfig,
     pluginOrigin?: string
-  ): void;
+  ): void
 }
 
 export type Network = Pick<
   Types.Network,
   'name' | 'chainId' | 'baseUrl' | 'nodeUrl' | 'displayName'
->;
-export type Account = Pick<Types.AccContract, 'address' | 'publicKey'>;
+>
+export type Account = Pick<Types.AccContract, 'address' | 'publicKey'>
 
 export interface Erc20TokenBalance {
-  amount: BigNumber;
-  symbol: string;
-  decimals: number;
+  amount: BigNumber
+  symbol: string
+  decimals: number
 }
 
 export interface Erc20Token {
-  address: string; // in hex
-  name: string;
-  symbol: string;
-  decimals: number;
-  chainId: string; // in hex
+  address: string // in hex
+  name: string
+  symbol: string
+  decimals: number
+  chainId: string // in hex
 }
 
 export type TransactionStatusOptions =
@@ -34,12 +34,12 @@ export type TransactionStatusOptions =
   | 'Accepted on L2'
   | 'Accepted on L1'
   | 'Rejected'
-  | 'Not Received';
+  | 'Not Received'
 
 export enum ExplorerTransactionType { // for retrieving txns from Explorer
   DEPLOY = 'deploy',
   DEPLOY_ACCOUNT = 'deploy_account',
-  INVOKE = 'invoke'
+  INVOKE = 'invoke',
 }
 
 export enum TransactionStatus { // for retrieving txn from Avail feeder gateway
@@ -48,17 +48,17 @@ export enum TransactionStatus { // for retrieving txn from Avail feeder gateway
   ACCEPTED_ON_L2 = 'ACCEPTED_ON_L2',
   ACCEPTED_ON_L1 = 'ACCEPTED_ON_L1',
   NOT_RECEIVED = 'NOT_RECEIVED',
-  REJECTED = 'REJECTED'
+  REJECTED = 'REJECTED',
 }
 
-export type { Transaction } from '@avail-project/metamask-avail-types';
+export type { Transaction } from '@avail-project/metamask-avail-types'
 
 export type TransactionType = {
-  id: string;
-  date: string;
-  type: string;
-  amount?: string;
-  from?: string;
-  to?: string;
-  txHash?: string;
-};
+  id: string
+  date: string
+  type: string
+  amount?: string
+  from?: string
+  to?: string
+  txHash?: string
+}

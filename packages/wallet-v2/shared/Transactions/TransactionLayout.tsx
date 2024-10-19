@@ -1,16 +1,34 @@
-import { useState } from "react"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Separator } from "@/components/ui/separator"
-import { Cross, Notification } from "atomize_icons"
-import { TransactionType } from "@/types"
-import { motion, AnimatePresence } from "framer-motion"
-import TransactionList from "./TransactionLists"
+import { useState } from 'react'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { Separator } from '@/components/ui/separator'
+import { Cross, Notification } from 'atomize_icons'
+import { TransactionType } from '@/types'
+import { motion, AnimatePresence } from 'framer-motion'
+import TransactionList from './TransactionLists'
 
 const TransactionLayout: React.FC = () => {
   const [transactions] = useState<TransactionType[]>([
-    { id: '1', date: '2024-09-25', type: 'Send', amount: '0.32 AVL', from: '0xbc24...ds92', to: '0x234h...32ds' },
+    {
+      id: '1',
+      date: '2024-09-25',
+      type: 'Send',
+      amount: '0.32 AVL',
+      from: '0xbc24...ds92',
+      to: '0x234h...32ds',
+    },
     { id: '2', date: '2024-09-26', type: 'Sign', txHash: '0xbc24...ds92' },
-    { id: '3', date: '2024-09-27', type: 'Send', amount: '0.32 AVL', from: '0xbc24...ds92', to: '0x234h...32ds' },
+    {
+      id: '3',
+      date: '2024-09-27',
+      type: 'Send',
+      amount: '0.32 AVL',
+      from: '0xbc24...ds92',
+      to: '0x234h...32ds',
+    },
     // ... (other transactions)
   ])
 
@@ -39,7 +57,9 @@ const TransactionLayout: React.FC = () => {
               transition={{ duration: 0.2 }}
             >
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-semibold text-white">Transaction history</h2>
+                <h2 className="text-2xl font-semibold text-white">
+                  Transaction history
+                </h2>
                 <motion.button
                   className="text-white hover:text-white/80"
                   whileHover={{ scale: 1.1 }}

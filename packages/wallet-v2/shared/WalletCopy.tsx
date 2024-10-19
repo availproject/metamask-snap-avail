@@ -1,4 +1,4 @@
-import { Copy } from "atomize_icons"
+import { Copy } from 'atomize_icons'
 import { shortenAddress } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
@@ -11,7 +11,8 @@ const WalletCopy: React.FC<Props> = ({ address }) => {
   const [isCopied, setIsCopied] = useState(false)
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(address)
+    navigator.clipboard
+      .writeText(address)
       .then(() => {
         setIsCopied(true)
         setTimeout(() => setIsCopied(false), 2000)
@@ -29,7 +30,7 @@ const WalletCopy: React.FC<Props> = ({ address }) => {
       whileTap={{ scale: 0.95 }}
       aria-label="Copy wallet address"
     >
-      <span className='font-semibold'>{shortenAddress(address)}</span>
+      <span className="font-semibold">{shortenAddress(address)}</span>
       <motion.div
         animate={{ rotate: isCopied ? 360 : 0 }}
         transition={{ duration: 0.3 }}

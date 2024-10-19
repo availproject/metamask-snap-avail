@@ -1,17 +1,21 @@
-"use client"
+'use client'
 
-import { useEffect, useState } from "react"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
-import { motion, AnimatePresence } from "framer-motion"
-import { useUIStore } from "@/slices/UISlice"
+import { useEffect, useState } from 'react'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useUIStore } from '@/slices/UISlice'
 
 export default function LoadingModal() {
   const { loader } = useUIStore()
-  const [prevMessage, setPrevMessage] = useState(loader.loadingMessage || 'Please wait while we process your request.')
+  const [prevMessage, setPrevMessage] = useState(
+    loader.loadingMessage || 'Please wait while we process your request.'
+  )
 
   useEffect(() => {
     if (loader.loadingMessage !== prevMessage) {
-      setPrevMessage(loader.loadingMessage || 'Please wait while we process your request.')
+      setPrevMessage(
+        loader.loadingMessage || 'Please wait while we process your request.'
+      )
     }
   }, [loader.loadingMessage, prevMessage])
 
