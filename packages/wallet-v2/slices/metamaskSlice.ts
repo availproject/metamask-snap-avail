@@ -33,7 +33,7 @@ export const useMetamaskStore = create<MetamaskState>((set) => ({
     publicKey: '',
     latestBlock: { hash: '', number: '' },
     transactions: [],
-    network: 'turing',
+    network: 'mainnet',
     api: null,
   },
   setData: (data: Partial<IAvailSnap>) =>

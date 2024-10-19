@@ -25,7 +25,7 @@ export const defaultSnapId = 'npm:@avail-project/avail-snap';
 export async function installAvailSnap(): Promise<boolean> {
   const snapId = process.env.REACT_APP_SNAP_ID ? process.env.REACT_APP_SNAP_ID : defaultSnapId;
   try {
-    await enableAvailSnap({ networkName: 'turing' }, snapId);
+    await enableAvailSnap({ networkName: 'mainnet' }, snapId);
     return true;
   } catch (err) {
     return false;
@@ -81,6 +81,7 @@ export const useAvailSnap = () => {
     resetWallet
   } = useWalletStore();
   const { setNetworks, setActiveNetwork } = useNetworkStore();
+  const networkState = useNetworkStore((state) => state.items)
   const { setData, availSnap } = useMetamaskStore();
   const provider = useWalletStore((state) => state.provider);
   const snapId = process.env.REACT_APP_SNAP_ID
@@ -90,6 +91,7 @@ export const useAvailSnap = () => {
   const debugLevel =
     process.env.REACT_APP_DEBUG_LEVEL !== undefined ? process.env.REACT_APP_DEBUG_LEVEL : 'all';
   const metamaskState = useMetamaskStore((state) => state.availSnap)
+  const metamask = useMetamaskStore((state) => state.hasMetaMask)
   const defaultParam = {
     debugLevel
   };
@@ -142,7 +144,19 @@ export const useAvailSnap = () => {
     ] as Network[];
   };
 
-  const switchNetwork = async (network: number, chainId: string) => {};
+  const switchNetwork = async (network: number, chainId: string) => {
+    enableLoadingWithMessage('Switching Network...')
+    if (metamask && metamaskState.isInstalled) {
+      await metamaskState?.api?.setConfiguration({
+        networkName: networkState[network].name
+      });
+      disableLoading();
+      return true;
+    } else {
+    disableLoading();
+      return false;
+    }
+  };
 
   const getCurrentNetwork = async () => {};
 

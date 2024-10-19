@@ -1,6 +1,33 @@
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useAvailSnap } from '@/services/metamask';
+import { useNetworkStore } from '@/slices/networkSlice';
+import useWalletStore from '@/slices/walletSlice';
 
-const MainnetTestnetSwitch: React.FC = () => {
+const MainnetTuringSwitch: React.FC = () => {
+  const { switchNetwork } = useAvailSnap();
+  const { clearAccounts } = useWalletStore();
+  const { setActiveNetwork } = useNetworkStore();
+
+  const networks = useNetworkStore((state) => state.items);
+  const activeNetwork = useNetworkStore((state) => state.activeNetwork);
+
+  const changeNetwork = async (networkIndex: number) => {
+    const selectedNetwork = networks[networkIndex];
+    const { chainId } = selectedNetwork;
+
+    console.log('Switching to network:', selectedNetwork.name, 'with chain ID:', chainId);
+
+    let result = false;
+    if (activeNetwork !== networkIndex) {
+      result = await switchNetwork(networkIndex, chainId);
+    }
+
+    if (result) {
+      clearAccounts();
+      setActiveNetwork(networkIndex);
+    }
+  };
+
   return (
     <Tabs
       defaultValue="mainnet"
@@ -9,19 +36,21 @@ const MainnetTestnetSwitch: React.FC = () => {
       <TabsList className="bg-transparent w-full justify-between">
         <TabsTrigger
           value="mainnet"
-          className="px-3 py-2 rounded-full transition-all duration-300 font-semibold data-[state=active]:bg-white/12 data-[state=active]:text-white"
+          onClick={() => changeNetwork(2)} // Assuming mainnet is at index 2
+          className={`px-3 py-2 rounded-full transition-all duration-300 font-semibold ${activeNetwork === 2 ? 'bg-white/12 text-white' : ''}`}
         >
           Avail Mainnet
         </TabsTrigger>
         <TabsTrigger
-          value="testnet"
-          className="px-3 py-2 rounded-full transition-all duration-300 font-semibold data-[state=active]:bg-white/12 data-[state=active]:text-white"
+          value="turing"
+          onClick={() => changeNetwork(0)} // Turing at index 0
+          className={`px-3 py-2 rounded-full transition-all duration-300 font-semibold ${activeNetwork === 0 ? 'bg-white/12 text-white' : ''}`}
         >
-          Goldberg Testnet
+          Turing Testnet
         </TabsTrigger>
       </TabsList>
     </Tabs>
-  )
-}
+  );
+};
 
-export default MainnetTestnetSwitch
+export default MainnetTuringSwitch;
