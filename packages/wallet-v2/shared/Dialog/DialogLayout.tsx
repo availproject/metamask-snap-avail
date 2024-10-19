@@ -61,7 +61,7 @@ const DialogLayout: React.FC<DialogLayoutProps> = ({
                   </DialogTitle>
                   {closeButton && <DialogClose>{closeButton}</DialogClose>}
                 </div>
-                <Separator className="bg-[#FFFFFF1F]" />
+                <Separator className="bg-[#ffffff14]" />
               </DialogHeader>
               <div className="mt-6 space-y-8">{children}</div>
               <DialogFooter>{footerContent}</DialogFooter>

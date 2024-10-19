@@ -27,7 +27,7 @@ const MenuBar: React.FC = () => {
           </button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="absolute top-4 -right-5 w-[80vw] max-w-[280px] bg-[#252831]  rounded-xl p-4 border-[3.2px] border-[#303441] shadow-lg">
+        <DropdownMenuContent className="absolute top-4 -right-5 w-[80vw] max-w-[280px] !bg-[#252831]  rounded-xl p-4 border-[3.2px] border-[#303441] shadow-lg">
           <DropdownMenuItem className="flex items-center px-4 py-3 text-sm text-white whitespace-nowrap !rounded-full transition-colors focus:bg-white/10 focus:text-white/75">
             <Stepper className="mr-3 text-green-500 scale-75" />
             Connected to Avail Snap

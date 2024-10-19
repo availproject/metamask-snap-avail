@@ -104,7 +104,6 @@ export const useAvailSnap = () => {
     enableLoadingWithMessage('Connecting to the wallet...')
 
     try {
-      // Directly access window.ethereum for request method
       provider.request({
         method: 'wallet_requestSnaps',
         params: {
@@ -326,8 +325,42 @@ export const useAvailSnap = () => {
       setWalletConnection(false);
     }
   };
-
-  const getPrivateKeyFromAddress = async () => {};
+  const getPrivateKeyFromAddress = async () => {
+    if (!availSnap.snap) {
+      console.error('Snap is not initialized.');
+      return;
+    }
+  
+    const api = availSnap.snap.getMetamaskSnapApi();
+  
+    if (!api) {
+      console.error('Failed to get Metamask Snap API.');
+      return;
+    }
+  
+    try {
+      // Requesting permissions (this may vary based on your Snap setup)
+      await window.ethereum.request({
+        method: 'wallet_requestPermissions',
+        params: [{
+          eth_accounts: {},
+        }],
+      });
+  
+      // Now try to export the seed
+      const privateKey = await api.exportSeed();
+  
+      if (privateKey) {
+        console.log({ privateKey });
+      } else {
+        console.warn('exportSeed returned null. Please check permissions and Snap configuration.');
+      }
+    } catch (error) {
+      console.error('Error requesting permissions or exporting seed:', error);
+    }
+  };
+  
+  
 
   return {
     connectToSnap,

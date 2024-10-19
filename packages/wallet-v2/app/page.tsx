@@ -17,6 +17,8 @@ import Sign from '@/assets/images/signature.svg'
 import Qr from '@/assets/images/qr.svg'
 import { GET_FAUCENT_URL, SNAPS_DOC_URL } from '@/utils/constants'
 import { BalanceDisplay } from '@/shared/BalanceDisplay'
+import ReceiveDialog from '@/shared/Dialog/RecieveDialog'
+import SignMessageDialog from '@/shared/Dialog/SignMessageDialog'
 
 export default function Home(): JSX.Element {
   const { initSnap, checkConnection, getWalletData } = useAvailSnap()
@@ -97,28 +99,16 @@ export default function Home(): JSX.Element {
         initial="initial"
         animate="animate"
       >
-        {connected ? (
+        {true ? (
           <>
             <motion.div variants={fadeInUp}>
               <SendDialog />
             </motion.div>
             <motion.div variants={fadeInUp}>
-              <Button
-                size="lg"
-                className="w-full px-6 py-10 border shadow-none border-white/10 bg-white/5 gap-2 rounded-2xl hover:bg-white/10 transition-colors duration-300"
-              >
-                <Image src={Qr} width={20} height={20} alt="Receive icon" />{' '}
-                Receive
-              </Button>
+              <ReceiveDialog />
             </motion.div>
             <motion.div variants={fadeInUp}>
-              <Button
-                size="lg"
-                className="w-full px-6 py-10 border shadow-none border-white/10 bg-white/5 gap-2 rounded-2xl hover:bg-white/10 transition-colors duration-300"
-              >
-                <Image src={Sign} width={20} height={20} alt="Sign icon" /> Sign
-                Message
-              </Button>
+             <SignMessageDialog />
             </motion.div>
           </>
         ) : (

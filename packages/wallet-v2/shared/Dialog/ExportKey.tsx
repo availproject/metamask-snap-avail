@@ -8,6 +8,8 @@ import { CheckCircledIcon } from '@radix-ui/react-icons'
 import Image from 'next/image'
 import DialogLayout from './DialogLayout'
 import Key from '@/assets/images/key.svg'
+import { useAvailSnap } from '@/services/metamask'
+
 
 interface ExportKeyProps {
   onOpen: (open: boolean) => void
@@ -16,6 +18,8 @@ interface ExportKeyProps {
 const ExportKey: React.FC<ExportKeyProps> = ({ onOpen }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
+
+  const {getPrivateKeyFromAddress} = useAvailSnap()
 
   const openDialog = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -28,6 +32,7 @@ const ExportKey: React.FC<ExportKeyProps> = ({ onOpen }) => {
   }
 
   const copyToClipboard = () => {
+    getPrivateKeyFromAddress()
     navigator.clipboard.writeText("Your secret recovery phrase here")
       .then(() => {
         setIsCopied(true)
@@ -46,7 +51,7 @@ const ExportKey: React.FC<ExportKeyProps> = ({ onOpen }) => {
         Export private key
       </DropdownMenuItem>
       <DialogLayout
-        open={isOpen}
+        open={true}
         onOpenChange={closeDialog}
         title="Export key"
         trigger={null}
