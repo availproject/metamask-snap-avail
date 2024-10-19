@@ -8,6 +8,7 @@ import {
   DialogTitle,
   DialogClose,
   DialogTrigger,
+  DialogDescription,
 } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
 
@@ -42,6 +43,9 @@ const DialogLayout: React.FC<DialogLayoutProps> = ({
       <AnimatePresence>
         {open && (
           <DialogContent className='!bg-none !border-none '>
+            <DialogTitle></DialogTitle>
+            <DialogDescription></DialogDescription>
+
             <motion.div
               className="bg-[#0f1014] space-y-8 p-6 min-w-[530px] max-w-[90vw] !rounded-3xl border-[3.2px] border-[#303441]"
               initial="hidden"

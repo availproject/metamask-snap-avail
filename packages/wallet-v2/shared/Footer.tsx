@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { useMetamaskStore } from '@/slices/metamaskSlice'
+import  {useMetamaskStore}  from '@/slices/metamaskSlice'
 import { shortenAddress } from '@/lib/utils'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <Image src={Green} alt="Status indicator" width={16} height={16} />
+          <Image src={Green} alt="Status indicator" width={16} height={16} className='h-4 w-4' />
           <p className="hidden sm:block">
             <strong className="font-bold mr-2">Latest Data:</strong>
           </p>
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
               >
-                Block: {availSnap.latestBlock.number} | Hash:{' '}
+                Block Number: {availSnap.latestBlock.number} | Block Hash:{' '}
                 {shortenAddress(availSnap.latestBlock.hash)}
               </motion.p>
             </AnimatePresence>
@@ -80,6 +80,7 @@ const Footer: React.FC = () => {
                 src={link.icon}
                 width={20}
                 height={20}
+                className='w-5 h-5'
                 alt={`${link.alt} logo`}
               />
             </motion.a>

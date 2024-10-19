@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUIStore } from '@/slices/UISlice'
+import { DialogDescription, DialogTitle } from '@radix-ui/react-dialog'
 
 export default function LoadingModal() {
   const { loader } = useUIStore()
@@ -22,6 +23,8 @@ export default function LoadingModal() {
   return (
     <Dialog open={loader.isLoading} onOpenChange={() => {}}>
       <DialogContent className="bg-white border-none rounded-2xl shadow-lg p-6">
+        <DialogTitle></DialogTitle>
+        <DialogDescription></DialogDescription>
         <div className="flex flex-col items-center justify-center space-y-4">
           <div className="w-12 h-12 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
           <div className="overflow-hidden h-12">

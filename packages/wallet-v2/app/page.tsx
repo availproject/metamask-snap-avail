@@ -9,13 +9,14 @@ import SendDialog from '@/shared/Dialog/SendDialog'
 import LoadingModal from '@/shared/LoadingModal'
 import { useAvailSnap } from '@/services/metamask'
 import { useHasMetamask } from '@/hooks/useHasMetamask'
-import { useWalletStore } from '@/slices/walletSlice'
-import { useNetworkStore } from '@/slices/networkSlice'
+import  useWalletStore from '@/slices/walletSlice'
+import  {useNetworkStore}  from '@/slices/networkSlice'
 import { useUIStore } from '@/slices/UISlice'
 import Line from '@/assets/images/line.svg'
 import Sign from '@/assets/images/signature.svg'
 import Qr from '@/assets/images/qr.svg'
 import { GET_FAUCENT_URL, SNAPS_DOC_URL } from '@/utils/constants'
+import { BalanceDisplay } from '@/shared/BalanceDisplay'
 
 export default function Home(): JSX.Element {
   const { initSnap, checkConnection, getWalletData } = useAvailSnap()
@@ -37,27 +38,21 @@ export default function Home(): JSX.Element {
     if (!provider) return
 
     if (connected) {
-      void initSnap() // Marking as void to handle floating promise
+      initSnap()
     }
 
     if (hasMetamask && !connected && !forceReconnect) {
-      void checkConnection() // Marking as void to handle floating promise
+      checkConnection()
     }
-  }, [
-    connected,
-    provider,
-    forceReconnect,
-    hasMetamask,
-    initSnap,
-    checkConnection,
-  ]) // Adding missing dependencies
+  }, [connected, forceReconnect, hasMetamask, provider]);
+
 
   useEffect(() => {
     if (provider && networks.length > 0) {
       const chainId = networks[activeNetwork].chainId
-      void getWalletData(chainId, true) // Marking as void to handle floating promise
+      getWalletData(chainId, true)
     }
-  }, [activeNetwork, provider, networks, getWalletData])
+  }, [activeNetwork, provider, networks])
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -68,7 +63,7 @@ export default function Home(): JSX.Element {
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-12">
       {loader.isLoading && <LoadingModal />}
-      <motion.div {...fadeInUp} className="space-y-12">
+      {/* <motion.div {...fadeInUp} className="space-y-12">
         <Image
           src={Line}
           alt="Decorative line"
@@ -91,8 +86,8 @@ export default function Home(): JSX.Element {
           height={10}
           className="w-full"
         />
-      </motion.div>
-
+      </motion.div> */}
+<BalanceDisplay />
       <motion.div
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12"
         variants={{
