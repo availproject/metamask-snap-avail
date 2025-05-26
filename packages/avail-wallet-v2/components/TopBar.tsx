@@ -34,7 +34,7 @@ export default function TopBar() {
   } = useWalletStore();
 
   const [isNetworkMenuOpen, setIsNetworkMenuOpen] = useState(false);
-  const { isConnected, activeNetwork, connectWallet, disconnectWallet, switchNetwork } =
+  const { isConnected, activeNetwork, switchNetwork } =
     useWalletStore();
 
   const handleDisconnect = () => setConnected(false);
