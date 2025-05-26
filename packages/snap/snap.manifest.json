@@ -7,7 +7,7 @@
     "url": "git+https://github.com/availproject/metamask-snap-avail.git"
   },
   "source": {
-    "shasum": "KZV4C5Gao8Ij61Thb/Q2zp34iPvugBNoYK7US5oLju8=",
+    "shasum": "tZ2ZKXAp1tmKNaBfV9JTk+nH/GWa//D9Gy/mUXL3hMY=",
     "location": {
       "npm": {
         "filePath": "dist/bundle.js",
@@ -30,7 +30,19 @@
         "coinType": 709
       }
     ],
-    "snap_manageState": {}
+    "snap_manageState": {},
+    "snap_getBip32Entropy": [
+      {
+        "path": [
+          "m",
+          "44'",
+          "709'",
+          "0'",
+          "0'"
+        ],
+        "curve": "ed25519"
+      }
+    ]
   },
   "manifestVersion": "0.1"
 }

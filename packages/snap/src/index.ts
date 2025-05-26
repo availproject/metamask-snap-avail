@@ -36,92 +36,146 @@ const apiDependentMethods = [
 ];
 
 export const onRpcRequest: OnRpcRequestHandler = async ({ request }) => {
-  const state = await snap.request({
-    method: 'snap_manageState',
-    params: { operation: 'get' }
-  });
+  console.log('=== SNAP REQUEST HANDLER START ===');
+  console.log('Received request:', request);
 
-  if (!state) {
-    // initialize state if empty and set default config
-    await snap.request({
+  try {
+    // Log snap state
+    const state = await snap.request({
       method: 'snap_manageState',
-      params: { newState: EmptyMetamaskState(), operation: 'update' }
+      params: { operation: 'get' }
     });
-  }
-  // fetch api promise
-  let api: ApiPromise = null;
-  if (apiDependentMethods.includes(request.method)) {
-    api = await getApi();
-  }
 
-  switch (request.method) {
-    case 'signPayloadJSON':
-      assert(request.params, validSignPayloadJSONSchema);
-      return await signPayloadJSON(api, request.params.payload);
-    case 'signPayloadRaw':
-      assert(request.params, validSignPayloadRawSchema);
-      return await signPayloadRaw(api, request.params.payload);
-    case 'getPublicKey':
-      return await getPublicKey();
-    case 'getAddress':
-      return await getAddress();
-    case 'exportSeed':
-      return await exportSeed();
-    case 'getAllTransactions':
-      return await getTransactions();
-    case 'updateTransaction':
-      assert(request.params, validTransactionSchema);
-      return await updateTxInState(request.params.transaction);
-    case 'getBlock':
-      assert(request.params, validGetBlockSchema);
-      return await getBlock(request.params.blockTag, api);
-    case 'getBalance': {
-      return await getBalance(api);
-    }
-    case 'configure': {
-      const state = (await snap.request({
+    console.log('Current snap state:', state);
+
+    if (!state) {
+      console.log('Initializing empty state...');
+      await snap.request({
         method: 'snap_manageState',
-        params: { operation: 'get' }
-      })) as MetamaskState;
-
-      const isInitialConfiguration = state.config === null;
-      // reset api and remove asset only if already configured
-      if (!isInitialConfiguration) {
-        await resetApi();
-      }
-      // set new configuration
-      assert(
-        request.params,
-        validConfigureSchema,
-        'Invalid configuration schema - Network name should be provided'
-      );
-      console.info('Configuring snap with', request.params.configuration);
-      return await configure(
-        request.params.configuration.networkName,
-        request.params.configuration
-      );
+        params: { newState: EmptyMetamaskState(), operation: 'update' }
+      });
     }
-    case 'generateTransactionPayload':
-      assert(request.params, validGenerateTransactionPayloadSchema);
-      return await generateTransactionPayload(
-        api,
-        request.params.module,
-        request.params.method,
-        request.params.args
-      );
 
-    case 'send':
-      assert(request.params, validSendSchema);
-      return await send(
-        api,
-        request.params.signature as Uint8Array | `0x${string}`,
-        request.params.txPayload,
-        request.params.network
-      );
-    case 'getChainHead':
-      return api && (await api.rpc.chain.getFinalizedHead()).hash;
+    // Log available permissions
+    try {
+      const permissions = await snap.request({
+        method: 'wallet_getPermissions'
+      });
+      console.log('Available permissions:', permissions);
+    } catch (error) {
+      console.error('Failed to get permissions:', error);
+    }
 
-    default:
-      throw new Error('Method not found.');
+    // fetch api promise
+    let api: ApiPromise = null;
+    if (apiDependentMethods.includes(request.method)) {
+      console.log('Method requires API, fetching...');
+      api = await getApi();
+    }
+
+    console.log('Processing request method:', request.method);
+
+    let result;
+    switch (request.method) {
+      case 'exportSeed':
+        console.log('=== EXPORT SEED HANDLER START ===');
+        console.log('Handling exportSeed request');
+        try {
+          result = await exportSeed();
+          console.log('Export seed result:', {
+            success: !!result,
+            length: result?.length
+          });
+          console.log('=== EXPORT SEED HANDLER END ===');
+          return result;
+        } catch (error) {
+          console.error('Error in exportSeed handler:', error);
+          if (error instanceof Error) {
+            if (error.message.includes('User rejected')) {
+              return null;
+            }
+            throw error;
+          }
+          throw new Error('Failed to export seed');
+        }
+      case 'signPayloadJSON':
+        assert(request.params, validSignPayloadJSONSchema);
+        result = await signPayloadJSON(api, request.params.payload);
+        return result;
+      case 'signPayloadRaw':
+        assert(request.params, validSignPayloadRawSchema);
+        result = await signPayloadRaw(api, request.params.payload);
+        return result;
+      case 'getPublicKey':
+        result = await getPublicKey();
+        return result;
+      case 'getAddress':
+        result = await getAddress();
+        return result;
+      case 'getAllTransactions':
+        result = await getTransactions();
+        return result;
+      case 'updateTransaction':
+        assert(request.params, validTransactionSchema);
+        result = await updateTxInState(request.params.transaction);
+        return result;
+      case 'getBlock':
+        assert(request.params, validGetBlockSchema);
+        result = await getBlock(request.params.blockTag, api);
+        return result;
+      case 'getBalance':
+        result = await getBalance(api);
+        return result;
+      case 'configure': {
+        const state = (await snap.request({
+          method: 'snap_manageState',
+          params: { operation: 'get' }
+        })) as MetamaskState;
+
+        const isInitialConfiguration = state.config === null;
+        if (!isInitialConfiguration) {
+          await resetApi();
+        }
+        assert(
+          request.params,
+          validConfigureSchema,
+          'Invalid configuration schema - Network name should be provided'
+        );
+        console.info('Configuring snap with', request.params.configuration);
+        result = await configure(
+          request.params.configuration.networkName,
+          request.params.configuration
+        );
+        return result;
+      }
+      case 'generateTransactionPayload':
+        assert(request.params, validGenerateTransactionPayloadSchema);
+        result = await generateTransactionPayload(
+          api,
+          request.params.module,
+          request.params.method,
+          request.params.args
+        );
+        return result;
+      case 'send':
+        assert(request.params, validSendSchema);
+        result = await send(
+          api,
+          request.params.signature as Uint8Array | `0x${string}`,
+          request.params.txPayload,
+          request.params.network
+        );
+        return result;
+      case 'getChainHead':
+        result = api && (await api.rpc.chain.getFinalizedHead()).hash;
+        return result;
+      default:
+        throw new Error('Method not found.');
+    }
+  } catch (error) {
+    console.error('Error processing request:', error);
+    throw error;
+  } finally {
+    console.log('=== SNAP REQUEST HANDLER END ===');
   }
 };

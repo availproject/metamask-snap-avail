@@ -6,24 +6,64 @@ import type {
   SnapConfig,
   Transaction,
   TxPayload
-} from '@availproject/metamask-avail-types';
+} from '@avail-project/metamask-avail-types';
 import type { SignerPayloadJSON, SignerPayloadRaw } from '@polkadot/types/types';
 import type { MetamaskAvailSnap } from './snap';
 
-async function sendSnapMethod(request: MetamaskAvailRpcRequest, snapId: string): Promise<unknown> {
+async function sendSnapMethod(request: MetamaskAvailRpcRequest & { params?: unknown }, snapId: string): Promise<unknown> {
   try {
-    console.info('sendSnapMethod', request, snapId);
+    console.log('=== SNAP METHOD CALL START ===');
+    console.log('Snap ID:', snapId);
+    console.log('Request:', {
+      method: request.method,
+      params: request.params
+    });
+
+    // Verify snap connection
+    try {
+      console.log('Verifying snap connection...');
+      const snaps = await window.ethereum.request({
+        method: 'wallet_getSnaps'
+      }) as Record<string, { enabled: boolean }>;
+      
+      console.log('Available snaps:', snaps);
+      
+      if (!snaps[snapId]?.enabled) {
+        console.log('Snap not enabled, requesting connection...');
+        await window.ethereum.request({
+          method: 'wallet_requestSnaps',
+          params: {
+            [snapId]: {}
+          }
+        });
+        console.log('Snap connection requested');
+      }
+    } catch (error) {
+      console.error('Snap connection verification failed:', error);
+      throw error;
+    }
+
+    console.log('Sending request to snap...');
     const result = await window.ethereum.request({
       method: 'wallet_invokeSnap',
       params: {
-        request,
-        snapId
+        snapId,
+        request: {
+          method: request.method,
+          params: request.params
+        }
       }
     });
-    console.info('result', request, result);
+
+    console.log('Snap response:', result);
+    console.log('=== SNAP METHOD CALL END ===');
+
     return result;
   } catch (error) {
-    console.error('Error sending snap method:', error);
+    console.error('Error in sendSnapMethod:', {
+      method: request.method,
+      error: error instanceof Error ? error.message : error
+    });
     throw error;
   }
 }
