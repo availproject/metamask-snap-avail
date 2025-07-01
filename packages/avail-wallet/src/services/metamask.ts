@@ -102,12 +102,14 @@ export const useAvailSnap = () => {
         }
       })
       .then(() => {
+        console.log('what', loader);
         dispatch(setWalletConnection(true));
         dispatch(setForceReconnect(false));
+        dispatch(disableLoading());
+        console.log('what 2', loader);
       })
       .catch(() => {
         dispatch(setWalletConnection(false));
-        dispatch(disableLoading());
       });
   };
 
