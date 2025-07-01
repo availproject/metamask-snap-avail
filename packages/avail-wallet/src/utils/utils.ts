@@ -31,7 +31,7 @@ export async function initializeApi(endpoint: string) {
 export const getRpcEndpoint = (chainId: number) => {
   switch (chainId) {
     case 0: // turing
-      return 'wss://turing-rpc.avail.so/ws';
+      return 'wss://avail.public.curie.radiumblock.co/ws';
     case 1: // goldberg
       return 'wss://goldberg-rpc.slowops.xyz/ws';
     case 2: // mainnet
