@@ -1,6 +1,7 @@
-import React, { ReactNode } from 'react';
-import { Backdrop } from 'components/ui/atom/Backdrop';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Backdrop } from 'components/ui/atom/Backdrop';
+import React, { ReactNode } from 'react';
+
 import { Wrapper } from './LoadingBackdrop.style';
 
 interface Props {

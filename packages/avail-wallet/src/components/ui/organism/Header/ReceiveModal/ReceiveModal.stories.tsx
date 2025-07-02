@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
-import { useState } from 'react';
 import { PopIn } from 'components/ui/molecule/PopIn';
+import { useState } from 'react';
+
 import { ReceiveModalView } from './ReceiveModal.view';
 
 export default {

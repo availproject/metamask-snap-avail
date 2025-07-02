@@ -1,7 +1,8 @@
-import React, { HTMLAttributes, MutableRefObject, ReactNode } from 'react';
-import { Dialog } from '@headlessui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Dialog } from '@headlessui/react';
 import { Backdrop } from 'components/ui/atom/Backdrop';
+import React, { HTMLAttributes, MutableRefObject, ReactNode } from 'react';
+
 import { Wrapper, CloseButton, Panel } from './PopIn.style';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {

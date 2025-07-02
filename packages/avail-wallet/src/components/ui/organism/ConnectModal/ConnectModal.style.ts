@@ -1,7 +1,7 @@
-import styled from 'styled-components';
 import availSrc from 'assets/images/avail-logo.png';
 import foxIconSrc from 'assets/images/metamask-fox-icon.svg';
 import { Button } from 'components/ui/atom/Button';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;

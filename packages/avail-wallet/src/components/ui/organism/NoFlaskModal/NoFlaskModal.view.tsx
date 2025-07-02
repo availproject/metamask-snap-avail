@@ -1,3 +1,5 @@
+import { AlertView } from '../../atom/Alert/Alert.view';
+
 import {
   ConnectButton,
   DescriptionCentered,
@@ -5,7 +7,6 @@ import {
   Title,
   Wrapper
 } from './NoFlaskModal.style';
-import { AlertView } from '../../atom/Alert/Alert.view';
 
 export const NoFlaskModalView = () => {
   return (

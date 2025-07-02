@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import QRCode from 'react-qr-code';
-import styled from 'styled-components';
 import { AccountImage } from 'components/ui/atom/AccountImage';
 import { Button } from 'components/ui/atom/Button';
 import { AccountAddress } from 'components/ui/molecule/AccountAddress';
+import QRCode from 'react-qr-code';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;

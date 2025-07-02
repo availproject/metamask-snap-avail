@@ -2,6 +2,7 @@ import { Alert } from 'components/ui/atom/Alert';
 import { Button } from 'components/ui/atom/Button';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { setInfoModalVisible } from 'slices/modalSlice';
+
 import { Bold, ButtonDiv, Normal, Wrapper } from './ConnectInfoModal.style';
 
 interface Props {

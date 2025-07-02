@@ -1,6 +1,5 @@
 /* eslint-disable import/order */
 // import { Keyring } from '@polkadot/keyring';
-import type { JsonBIP44CoinTypeNode } from '@metamask/key-tree';
 import type { SnapNetworks } from '@avail-project/metamask-avail-types';
 import { getConfiguration } from '../configuration';
 import type { KeyringPair } from '@polkadot/keyring/types';
@@ -13,12 +12,12 @@ export async function getKeyPair(): Promise<KeyringPair> {
   try {
     const config = await getConfiguration();
 
-    const bip44Node = (await snap.request({
+    const bip44Node = await snap.request({
       method: 'snap_getBip44Entropy',
       params: {
         coinType: getCoinTypeByNetwork(config.networkName)
       }
-    })) as JsonBIP44CoinTypeNode;
+    });
     // generate keys
     const seed = bip44Node.privateKey;
     const keyring = getKeyringFromSeed(seed);

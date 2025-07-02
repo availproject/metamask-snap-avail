@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react';
 import { BigNumber } from 'ethers';
+
 import { AmountInputView } from './AmountInput.view';
 
 export default {

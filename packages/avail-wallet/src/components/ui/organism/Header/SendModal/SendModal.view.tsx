@@ -1,15 +1,17 @@
-import { useCallback, useState } from 'react';
-import { AmountInput } from 'components/ui/molecule/AmountInput';
-import { useAppSelector } from 'hooks/redux';
-import { ethers } from 'ethers';
-import Toastr from 'toastr2';
-import { AddressInput } from 'components/ui/molecule/AddressInput';
-import { isValidAddress } from 'utils/utils';
 import BigNumber from 'bignumber.js';
+import { AddressInput } from 'components/ui/molecule/AddressInput';
+import { AmountInput } from 'components/ui/molecule/AmountInput';
+import { ethers } from 'ethers';
+import { useAppSelector } from 'hooks/redux';
+import { useCallback, useState } from 'react';
 import { useAvailSnap } from 'services/metamask';
 import { useTransactionStore } from 'store/store';
-import { SendSummaryModal } from '../SendSummaryModal';
+import Toastr from 'toastr2';
+import { isValidAddress } from 'utils/utils';
+
 import { Bold, Normal } from '../../ConnectInfoModal/ConnectInfoModal.style';
+import { SendSummaryModal } from '../SendSummaryModal';
+
 import {
   Buttons,
   ButtonStyled,

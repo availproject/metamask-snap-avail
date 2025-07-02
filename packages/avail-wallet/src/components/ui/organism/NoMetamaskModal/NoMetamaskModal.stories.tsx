@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
-import { useState } from 'react';
 import { PopIn } from 'components/ui/molecule/PopIn';
+import { useState } from 'react';
+
 import { NoMetamaskModalView } from './NoMetamaskModal.view';
 
 export default {
@@ -11,7 +12,7 @@ export default {
 export const ContentOnly = () => <NoMetamaskModalView />;
 
 export const WithModal = () => {
-  let [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <button onClick={() => setIsOpen(!isOpen)}>Open Modal</button>

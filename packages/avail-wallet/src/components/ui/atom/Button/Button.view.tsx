@@ -1,7 +1,8 @@
-import { MouseEvent, ButtonHTMLAttributes, ReactNode } from 'react';
-import { Variant } from 'theme/types';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
+import { MouseEvent, ButtonHTMLAttributes, ReactNode } from 'react';
 import { CSSProperties } from 'styled-components';
+import { Variant } from 'theme/types';
+
 import { LeftIcon, RightIcon, TextWrapper, Wrapper } from './Button.style';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {

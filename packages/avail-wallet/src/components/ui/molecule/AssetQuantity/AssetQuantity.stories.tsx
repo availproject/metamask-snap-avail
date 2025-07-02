@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { AssetQuantityView } from './AssetQuantity.view';
 
 export default {

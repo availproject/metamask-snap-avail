@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ethers } from 'ethers';
+
 import { Account, Erc20TokenBalance, Transaction } from '../@types/index';
 
 export interface WalletState {

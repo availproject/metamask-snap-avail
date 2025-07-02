@@ -22,14 +22,14 @@ export const Currency = styled.span<ISize>`
     props.size === 'normal'
       ? props.theme.typography.p1.fontSize
       : props.size === 'medium'
-      ? props.theme.typography.h2.fontSize
-      : props.theme.typography.h1.fontSize};
+        ? props.theme.typography.h2.fontSize
+        : props.theme.typography.h1.fontSize};
   line-height: ${(props) =>
     props.size === 'normal'
       ? props.theme.typography.p1.lineHeight
       : props.size === 'medium'
-      ? props.theme.typography.h2.lineHeight
-      : props.theme.typography.h1.lineHeight};
+        ? props.theme.typography.h2.lineHeight
+        : props.theme.typography.h1.lineHeight};
   font-weight: ${(props) => props.theme.typography.h1.fontWeight};
   font-family: ${(props) => props.theme.typography.h1.fontFamily};
   color: ${(props) =>
@@ -41,13 +41,13 @@ export const Dollars = styled.span<ISize>`
     props.size === 'normal'
       ? props.theme.typography.p2.fontSize
       : props.size === 'medium'
-      ? props.theme.typography.p1.fontSize
-      : props.theme.typography.h4.fontSize};
+        ? props.theme.typography.p1.fontSize
+        : props.theme.typography.h4.fontSize};
   line-height: ${(props) =>
     props.size === 'normal'
       ? props.theme.typography.p2.lineHeight
       : props.size === 'medium'
-      ? props.theme.typography.p1.lineHeight
-      : props.theme.typography.h4.lineHeight};
+        ? props.theme.typography.p1.lineHeight
+        : props.theme.typography.h4.lineHeight};
   color: ${(props) => props.theme.palette.grey.grey1};
 `;

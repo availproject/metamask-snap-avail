@@ -1,7 +1,9 @@
 import { useRef, useEffect, useState } from 'react';
-import { Variant, VariantOptions } from 'theme/types';
 import { theme } from 'theme/default';
+import { Variant, VariantOptions } from 'theme/types';
+
 import { LeftIcon } from '../Button/Button.style';
+
 import { Parag, Wrapper } from './Alert.style';
 
 interface Props {

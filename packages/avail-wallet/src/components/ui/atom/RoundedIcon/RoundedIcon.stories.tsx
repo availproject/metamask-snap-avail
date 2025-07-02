@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Meta } from '@storybook/react';
+
 import { RoundedIconView } from './RoundedIcon.view';
 
 export default {
