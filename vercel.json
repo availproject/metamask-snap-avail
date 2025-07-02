@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "yarn vercel-build",
+  "buildCommand": "yarn workspace @avail-project/avail-snap build && yarn workspace @avail-project/metamask-avail-adapter build && yarn workspace avail-wallet build",
   "outputDirectory": "packages/avail-wallet/build",
   "installCommand": "yarn install --frozen-lockfile",
   "framework": null,
