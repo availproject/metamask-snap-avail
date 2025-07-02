@@ -13,6 +13,7 @@
     "start:avail-wallet": "yarn workspace avail-wallet start",
     "predemo": "yarn run build:snap && yarn run build:adapter",
     "build": "yarn workspaces foreach -vpt run build",
+    "vercel-build": "yarn workspace @avail-project/avail-snap build && yarn workspace @avail-project/metamask-avail-adapter build && yarn workspace avail-wallet build",
     "test": "yarn workspaces foreach -vpt run test",
     "lint": "yarn workspaces foreach -vpt run lint",
     "lint:style:fix": "yarn workspaces foreach -vp run lint:style:fix",
