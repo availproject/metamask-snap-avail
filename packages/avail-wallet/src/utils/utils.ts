@@ -1,5 +1,6 @@
 import { Erc20Token, Erc20TokenBalance, Network } from '@types';
 import { ApiPromise, initialize, isValidAddress as isValidAvailAddress } from 'avail-js-sdk';
+import { BigNumber } from 'bignumber.js';
 import { ethers } from 'ethers';
 import { KeyboardEvent } from 'react';
 
@@ -73,7 +74,7 @@ export const addMissingPropertiesToToken = (
 ): Erc20TokenBalance => {
   return {
     ...token,
-    amount: ethers.BigNumber.from(balance ? balance : '0x0')
+    amount: new BigNumber(balance ? balance : '0')
   };
 };
 
@@ -81,8 +82,8 @@ export const getHumanReadableAmount = (asset: Erc20TokenBalance) => {
   // const amountStr = assetAmount
   //   ? assetAmount
   //   : ethers.utils.formatUnits(asset.amount, asset.decimals);
-  if (asset.amount > 0) {
-    const amountStr = ethers.utils.formatUnits(asset.amount, asset.decimals);
+  if (asset.amount.gt(0)) {
+    const amountStr = ethers.utils.formatUnits(asset.amount.toString(), asset.decimals);
     const indexDecimal = amountStr.indexOf('.');
     const integerPart = amountStr.substring(0, indexDecimal);
     let decimalPart = amountStr.substring(indexDecimal + 1, indexDecimal + 5 - integerPart.length);
@@ -104,7 +105,7 @@ export const getHumanReadableAmount = (asset: Erc20TokenBalance) => {
 export const getMaxDecimalsReadable = (asset: Erc20TokenBalance, assetAmount?: string) => {
   const amountStr = assetAmount
     ? assetAmount
-    : ethers.utils.formatUnits(asset.amount, asset.decimals);
+    : ethers.utils.formatUnits(asset.amount.toString(), asset.decimals);
   const indexDecimal = amountStr.indexOf('.');
   const decimalPart = amountStr.substring(indexDecimal + 1).split('');
   const firstNonZeroIndexReverse = decimalPart.reverse().findIndex((char) => char !== '0');

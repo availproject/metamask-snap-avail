@@ -8,6 +8,7 @@ import type {
   TxPayload
 } from '@avail-project/metamask-avail-types';
 import type { SignerPayloadJSON, SignerPayloadRaw } from '@polkadot/types/types';
+
 import type { MetamaskAvailSnap } from './snap';
 
 async function sendSnapMethod(request: MetamaskAvailRpcRequest, snapId: string): Promise<unknown> {

@@ -5,6 +5,7 @@ import type { SnapNetworks } from '@avail-project/metamask-avail-types';
 import { web3EnablePromise } from '@polkadot/extension-dapp';
 import type { InjectedExtension } from '@polkadot/extension-inject/types';
 import { Network, Erc20TokenBalance, Account } from '@types';
+import { BigNumber } from 'bignumber.js';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
 import { disableLoading, enableLoadingWithMessage } from 'slices/UISlice';
 import { setData } from 'slices/metamaskSlice';
@@ -188,7 +189,7 @@ export const useAvailSnap = () => {
     if (acc.length > 0) {
       dispatch(
         setErc20TokenBalanceSelected({
-          amount: metamaskState.availSnap.balance,
+          amount: new BigNumber(metamaskState.availSnap.balance),
           symbol: 'AVAIL',
           decimals: 18
         } as Erc20TokenBalance)

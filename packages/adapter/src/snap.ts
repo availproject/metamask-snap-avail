@@ -1,4 +1,5 @@
 import type { SnapConfig } from '@avail-project/metamask-avail-types';
+
 import {
   exportSeed,
   generateTransactionPayload,

@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Menu } from '@headlessui/react';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import { Erc20TokenBalance } from '@types';
+import { BigNumber } from 'bignumber.js';
 import { Button } from 'components/ui/atom/Button';
 import { AccountAddress } from 'components/ui/molecule/AccountAddress';
 import { AssetQuantity } from 'components/ui/molecule/AssetQuantity';
@@ -74,7 +75,7 @@ export const HeaderView = ({ address }: Props) => {
           dispatch(
             setErc20TokenBalanceSelected({
               ...wallet.tokenBalance,
-              amount: newBalance
+              amount: new BigNumber(newBalance)
             })
           );
           setBalance(newBalance);

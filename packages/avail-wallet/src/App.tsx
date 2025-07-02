@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/free-regular-svg-icons';
@@ -13,6 +12,7 @@ import 'toastr2/dist/toastr.min.css';
 import { NoMetamaskModal } from 'components/ui/organism/NoMetamaskModal';
 import { useAppSelector } from 'hooks/redux';
 import { useHasMetamask } from 'hooks/useHasMetamask';
+import { useEffect } from 'react';
 import { useAvailSnap } from 'services/metamask';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'theme/GlobalStyles';

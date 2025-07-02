@@ -1,5 +1,6 @@
 import '@polkadot/types-augment';
 import type { SnapConfig } from '@avail-project/metamask-avail-types';
+
 import { MetamaskAvailSnap } from './snap';
 import { hasMetaMask, isMetamaskSnapsSupported, isAvailSnapInstalled } from './utils';
 

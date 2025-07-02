@@ -1,4 +1,5 @@
 import type { SnapConfig } from '@avail-project/metamask-avail-types';
+import { BigNumber } from 'bignumber.js';
 
 declare module '@avail-project/metamask-avail-adapter' {
   export function injectMetamaskAvailSnapProvider(

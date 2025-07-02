@@ -1,10 +1,10 @@
+import { VariantOptions } from 'theme/types';
 import Toastr from 'toastr2';
 
 import { Wrapper } from './Snackbar.style';
 
 import 'toastr2/dist/toastr.min.css';
 import './snackbar.css';
-import { VariantOptions } from 'theme/types';
 
 interface Props {
   text?: string;

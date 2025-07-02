@@ -1,6 +1,13 @@
 import { Erc20TokenBalance } from '@types';
 import { ethers } from 'ethers';
-import { KeyboardEvent, useEffect, InputHTMLAttributes, useRef, useState } from 'react';
+import {
+  KeyboardEvent,
+  useEffect,
+  InputHTMLAttributes,
+  useRef,
+  useState,
+  ChangeEvent
+} from 'react';
 import { getAmountPrice, isSpecialInputKey } from 'utils/utils';
 
 import { HelperText } from '../../atom/HelperText';
@@ -89,7 +96,9 @@ export const AmountInputView = ({
 
   const handleMaxClick = () => {
     if (inputRef.current) {
-      const amountStr = ethers.utils.formatUnits(asset.amount, asset.decimals).toString();
+      const amountStr = ethers.utils
+        .formatUnits(asset.amount.toString(), asset.decimals)
+        .toString();
       inputRef.current.value = (Number(amountStr) - 1).toString();
       resizeInput();
       triggerOnChange();
@@ -119,7 +128,7 @@ export const AmountInputView = ({
             ref={inputRef}
             onKeyUp={() => handleOnKeyUp()}
             onKeyDown={(event: any) => handleOnKeyDown(event)}
-            onChange={(event) => triggerOnChange()}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => triggerOnChange()}
             {...otherProps}
           />
           {asset.symbol}
