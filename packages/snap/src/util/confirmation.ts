@@ -11,21 +11,42 @@ type ConfirmationDialogContent = {
 };
 
 export async function showConfirmationDialog(message: ConfirmationDialogContent): Promise<boolean> {
-  return (await snap.request({
+  console.log('=== CONFIRMATION DIALOG START ===');
+  console.log('Dialog content:', message);
+  
+  const content = [];
+
+  // Add the main prompt
+  content.push(heading(message.prompt || 'Are you sure?'));
+  
+  // Add description if provided
+  if (message.description) {
+    content.push(text(message.description));
+  }
+
+  // Add transaction-specific content only if method is provided
+  if (message.method) {
+    content.push(divider());
+    if (message.sender) {
+      content.push(text('Your address:'));
+      content.push(copyable(message.sender));
+    }
+    content.push(divider());
+    content.push(text(`Method: **${JSON.stringify(message.method.method, null, 2)}** `));
+    content.push(text(JSON.stringify(message.method, null, 2)));
+  }
+
+  console.log('Requesting dialog from snap...');
+  const result = await snap.request({
     method: 'snap_dialog',
     params: {
-      content: panel([
-        heading(message.prompt || 'Are you sure?'),
-        text(message.description || ''),
-        divider(),
-        text('Your address:'),
-        copyable(message.sender),
-
-        divider(),
-        text(`Method: **${JSON.stringify(message.method.method, null, 2)}** `),
-        text(JSON.stringify(message.method, null, 2))
-      ]),
+      content: panel(content),
       type: 'confirmation'
     }
-  })) as boolean;
+  }) as boolean;
+  
+  console.log('Dialog result:', result);
+  console.log('=== CONFIRMATION DIALOG END ===');
+  
+  return result;
 }

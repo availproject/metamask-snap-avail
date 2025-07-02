@@ -1,4 +1,4 @@
-import type { SnapConfig } from '@availproject/metamask-avail-types';
+import type { SnapConfig } from '@avail-project/metamask-avail-types';
 import {
   exportSeed,
   generateTransactionPayload,
@@ -25,7 +25,7 @@ export class MetamaskAvailSnap {
 
   public constructor(pluginOrigin: string, config: SnapConfig) {
     this.pluginOrigin = pluginOrigin;
-    this.snapId = `${this.pluginOrigin}`;
+    this.snapId = 'npm:@avail-project/avail-snap';
     this.config = config || { networkName: 'turing' };
   }
 
