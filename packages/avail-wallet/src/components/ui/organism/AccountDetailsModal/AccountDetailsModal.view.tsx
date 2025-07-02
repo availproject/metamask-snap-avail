@@ -1,7 +1,8 @@
-import { openExplorerTab, shortenAddress } from 'utils/utils';
+import { PopperTooltip } from 'components/ui/molecule/PopperTooltip';
 import { useAppSelector } from 'hooks/redux';
 import { useAvailSnap } from 'services/metamask';
-import { PopperTooltip } from 'components/ui/molecule/PopperTooltip';
+import { openExplorerTab, shortenAddress } from 'utils/utils';
+
 import {
   AccountImageDiv,
   AccountImageStyled,

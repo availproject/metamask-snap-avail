@@ -3,6 +3,7 @@ import { ReactNode, useState } from 'react';
 import { usePopperTooltip } from 'react-popper-tooltip';
 import { CSSProperties } from 'styled-components';
 import { POPOVER_DURATION } from 'utils/constants';
+
 import { PopperContainer, ToolTipContent, Wrapper } from './PopperTooltip.style';
 
 type CloseTriggers = 'timeout' | 'click' | 'hover';

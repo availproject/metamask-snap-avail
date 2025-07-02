@@ -64,6 +64,8 @@
     "@avail-project/metamask-avail-types": "0.6.0",
     "@metamask/snaps-cli": "^1.0.2",
     "@types/chai": "^4.2.10",
+    "@types/glob": "^9.0.0",
+    "@types/minimatch": "^6.0.0",
     "@types/mocha": "^10.0.1",
     "@types/sinon": "^7.5.2",
     "@types/sinon-chai": "^3.2.3",

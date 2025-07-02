@@ -1,16 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { AssetQuantity } from 'components/ui/molecule/AssetQuantity';
+import { PopperTooltip } from 'components/ui/molecule/PopperTooltip';
+import { ethers } from 'ethers';
+import { useAppSelector } from 'hooks/redux';
+import { useEffect, useState } from 'react';
+import Toastr from 'toastr2';
 import {
   getAmountPrice,
   getHumanReadableAmount,
   getMaxDecimalsReadable,
   shortenAddress
 } from 'utils/utils';
-import { AssetQuantity } from 'components/ui/molecule/AssetQuantity';
-import { PopperTooltip } from 'components/ui/molecule/PopperTooltip';
-import { useAppSelector } from 'hooks/redux';
-import { useEffect, useState } from 'react';
-import { ethers } from 'ethers';
-import Toastr from 'toastr2';
+
 import {
   AddressDiv,
   Buttons,

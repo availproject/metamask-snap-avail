@@ -1,6 +1,7 @@
-import { createGlobalStyle } from 'styled-components';
 import CheckIcon from 'assets/images/check.png';
 import ErrorIcon from 'assets/images/error.png';
+import { createGlobalStyle } from 'styled-components';
+
 import { theme } from './default';
 
 const GlobalStyle = createGlobalStyle`

@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import { Alert } from 'components/ui/atom/Alert';
 import { Button } from 'components/ui/atom/Button';
 import { LoadingSmall } from 'components/ui/atom/LoadingSmall';
-import { Alert } from 'components/ui/atom/Alert';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;

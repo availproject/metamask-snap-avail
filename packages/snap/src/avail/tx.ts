@@ -1,5 +1,6 @@
 // import type { Transaction } from "@avail-project/metamask-avail-types";
 import type { Transaction } from '@avail-project/metamask-avail-types';
+
 import { getMetamaskState } from '../rpc/getMetamaskState';
 
 export async function saveTxToState(tx: Transaction): Promise<void> {

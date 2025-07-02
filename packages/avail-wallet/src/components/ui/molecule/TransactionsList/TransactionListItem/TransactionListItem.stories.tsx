@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
 import { Transaction } from '@types';
 import { ApiPromise } from 'avail-js-sdk';
+
 import { TransactionListItemView } from './TransactionListItem.view';
 
 export default {

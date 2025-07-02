@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import { Menu } from '@headlessui/react';
 import { AccountImage } from 'components/ui/atom/AccountImage';
 import { Button } from 'components/ui/atom/Button';
 import { RoundedIcon } from 'components/ui/atom/RoundedIcon';
 import { PopIn } from 'components/ui/molecule/PopIn';
 import { PopperTooltip } from 'components/ui/molecule/PopperTooltip';
-import { Menu } from '@headlessui/react';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;

@@ -1,6 +1,7 @@
 // import type { ApiPromise } from '@polkadot/api';
-import type { ApiPromise } from 'avail-js-sdk';
 import type { AccountData } from '@polkadot/types/interfaces';
+import type { ApiPromise } from 'avail-js-sdk';
+
 import { getKeyPair } from '../../avail/account';
 
 /**

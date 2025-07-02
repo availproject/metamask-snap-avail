@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
 import Jazzicon from '@metamask/jazzicon';
+import { useEffect, useRef } from 'react';
+
 import { Wrapper } from './AccountImage.style';
 
 interface Props {

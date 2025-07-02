@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { AccountImageView } from './AccountImage.view';
 
 export default {

@@ -1,6 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { Network } from '@types';
 import type { MetamaskAvailSnap } from '@avail-project/metamask-avail-adapter/build/snap';
+import type { MetamaskSnapApi } from '@avail-project/metamask-avail-adapter/build/types';
 import type {
   BlockInfo,
   SnapConfig,
@@ -9,7 +8,9 @@ import type {
   TxPayload,
   SnapNetworks
 } from '@avail-project/metamask-avail-types';
-import type { MetamaskSnapApi } from '@avail-project/metamask-avail-adapter/build/types';
+import { createSlice } from '@reduxjs/toolkit';
+import { Network } from '@types';
+
 import { hasMetaMask } from '../services/metamask';
 
 interface IAvailSnap {

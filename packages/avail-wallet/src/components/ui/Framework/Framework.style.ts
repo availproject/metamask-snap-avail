@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { Menu } from 'components/ui/organism/Menu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Menu } from 'components/ui/organism/Menu';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   background-color: ${(props) => props.theme.palette.grey.grey5};

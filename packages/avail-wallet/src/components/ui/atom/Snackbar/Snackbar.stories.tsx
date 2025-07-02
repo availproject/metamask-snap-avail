@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { SnackbarView } from './Snackbar.view';
 
 export default {

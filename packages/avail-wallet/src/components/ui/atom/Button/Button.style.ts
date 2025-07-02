@@ -1,6 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import { Variant, VariantOptions } from 'theme/types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface IButtonProps {
   variant?: Variant;

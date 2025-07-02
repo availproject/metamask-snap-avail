@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { AddressInputView } from './AddressInput.view';
 
 export default {

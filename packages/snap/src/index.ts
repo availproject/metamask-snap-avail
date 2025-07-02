@@ -1,19 +1,21 @@
 import type { OnRpcRequestHandler } from '@metamask/snaps-types';
-import { assert } from 'superstruct';
 import type { ApiPromise } from 'avail-js-sdk';
+import { assert } from 'superstruct';
+
+import { getApi, resetApi } from './avail/api';
+import { updateTxInState } from './avail/tx';
 import type { MetamaskState } from './interfaces';
 import { EmptyMetamaskState } from './interfaces';
-import { getPublicKey } from './rpc/getPublicKey';
-import { exportSeed } from './rpc/exportSeed';
-import { getBalance } from './rpc/substrate/getBalance';
-import { getAddress } from './rpc/getAddress';
-import { getTransactions } from './rpc/substrate/getTransactions';
-import { getBlock } from './rpc/substrate/getBlock';
-import { getApi, resetApi } from './avail/api';
 import { configure } from './rpc/configure';
-import { signPayloadJSON, signPayloadRaw } from './rpc/substrate/sign';
+import { exportSeed } from './rpc/exportSeed';
 import { generateTransactionPayload } from './rpc/generateTransactionPayload';
+import { getAddress } from './rpc/getAddress';
+import { getPublicKey } from './rpc/getPublicKey';
 import { send } from './rpc/send';
+import { getBalance } from './rpc/substrate/getBalance';
+import { getBlock } from './rpc/substrate/getBlock';
+import { getTransactions } from './rpc/substrate/getTransactions';
+import { signPayloadJSON, signPayloadRaw } from './rpc/substrate/sign';
 import {
   validConfigureSchema,
   validGenerateTransactionPayloadSchema,
@@ -23,7 +25,6 @@ import {
   validSignPayloadRawSchema,
   validTransactionSchema
 } from './util/validation';
-import { updateTxInState } from './avail/tx';
 
 const apiDependentMethods = [
   'getBlock',

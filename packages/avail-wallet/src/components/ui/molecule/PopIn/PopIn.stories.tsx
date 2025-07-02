@@ -1,6 +1,7 @@
 import { Meta } from '@storybook/react';
-import { PopIn } from './index';
 import React, { useRef, useState } from 'react';
+
+import { PopIn } from './index';
 
 export default {
   title: 'Molecule/PopIn',
@@ -8,7 +9,7 @@ export default {
 } as Meta;
 
 export const Default = () => {
-  let [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <>
       <button onClick={() => setIsOpen(!isOpen)}>Open Modal</button>
@@ -17,8 +18,8 @@ export const Default = () => {
           <h3>What is a snap?</h3>
           <p>
             A snap is a program that runs in an isolated environment that can extend the
-            functionality of MetaMask. In this case, Avail uses Snaps to add support for—and
-            create an account on Avail using MetaMask.
+            functionality of MetaMask. In this case, Avail uses Snaps to add support for—and create
+            an account on Avail using MetaMask.
           </p>
           <button onClick={() => setIsOpen(false)}>Close</button>
         </div>
@@ -28,7 +29,7 @@ export const Default = () => {
 };
 
 export const WithoutCloseButton = () => {
-  let [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <>
       <button onClick={() => setIsOpen(!isOpen)}>Open Modal</button>
@@ -37,8 +38,8 @@ export const WithoutCloseButton = () => {
           <h3>What is a snap?</h3>
           <p>
             A snap is a program that runs in an isolated environment that can extend the
-            functionality of MetaMask. In this case, Avail uses Snaps to add support for—and
-            create an account on Avail using MetaMask.
+            functionality of MetaMask. In this case, Avail uses Snaps to add support for—and create
+            an account on Avail using MetaMask.
           </p>
           <button onClick={() => setIsOpen(false)}>Close</button>
         </div>
@@ -48,8 +49,8 @@ export const WithoutCloseButton = () => {
 };
 
 export const InitialFocus = () => {
-  let [isOpen, setIsOpen] = useState(true);
-  let textareaRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(true);
+  const textareaRef = useRef(null);
   return (
     <>
       <button onClick={() => setIsOpen(!isOpen)}>Open Modal</button>
@@ -58,8 +59,8 @@ export const InitialFocus = () => {
           <h3>What is a snap?</h3>
           <p>
             A snap is a program that runs in an isolated environment that can extend the
-            functionality of MetaMask. In this case, Avail uses Snaps to add support for—and
-            create an account on Avail using MetaMask.
+            functionality of MetaMask. In this case, Avail uses Snaps to add support for—and create
+            an account on Avail using MetaMask.
           </p>
           <button onClick={() => setIsOpen(false)}>Close</button>
           <p>

@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react';
 import { Transaction } from '@types';
+
 import { TransactionsListView } from './TransactionsList.view';
 
 export default {

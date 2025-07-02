@@ -1,18 +1,19 @@
-import logo from 'assets/images/avail-logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { HTMLAttributes } from 'react';
 import { Menu } from '@headlessui/react';
-import { theme } from 'theme/default';
 import { Radio, Skeleton } from '@mui/material';
+import logo from 'assets/images/avail-logo.png';
 import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { HTMLAttributes } from 'react';
+import { useAvailSnap } from 'services/metamask';
+import { resetNetwork, setActiveNetwork } from 'slices/networkSlice';
 import {
   setWalletConnection,
   setForceReconnect,
   resetWallet,
   clearAccounts
 } from 'slices/walletSlice';
-import { resetNetwork, setActiveNetwork } from 'slices/networkSlice';
-import { useAvailSnap } from 'services/metamask';
+import { theme } from 'theme/default';
+
 import {
   Left,
   Right,

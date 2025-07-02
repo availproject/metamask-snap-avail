@@ -1,9 +1,11 @@
-import { KeyboardEvent, useEffect, InputHTMLAttributes, useRef, useState } from 'react';
 import { Erc20TokenBalance } from '@types';
 import { ethers } from 'ethers';
+import { KeyboardEvent, useEffect, InputHTMLAttributes, useRef, useState } from 'react';
 import { getAmountPrice, isSpecialInputKey } from 'utils/utils';
+
 import { HelperText } from '../../atom/HelperText';
 import { Label } from '../../atom/Label';
+
 import {
   IconRight,
   Input,

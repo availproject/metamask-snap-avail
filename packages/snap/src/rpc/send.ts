@@ -1,7 +1,9 @@
 import type { Extrinsic, Transaction, TxPayload } from '@avail-project/metamask-avail-types';
-import type { ApiPromise } from 'avail-js-sdk';
 import type { AnyJson } from '@polkadot/types/types';
+import type { ApiPromise } from 'avail-js-sdk';
+
 import { saveTxToState } from '../avail/tx';
+
 import { getAddress } from './getAddress';
 
 export async function send(

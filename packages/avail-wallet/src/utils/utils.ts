@@ -1,7 +1,8 @@
-import { KeyboardEvent } from 'react';
-import { ethers } from 'ethers';
-import { ApiPromise, initialize, isValidAddress as isValidAvailAddress } from 'avail-js-sdk';
 import { Erc20Token, Erc20TokenBalance, Network } from '@types';
+import { ApiPromise, initialize, isValidAddress as isValidAvailAddress } from 'avail-js-sdk';
+import { ethers } from 'ethers';
+import { KeyboardEvent } from 'react';
+
 import {
   DECIMALS_DISPLAYED_MAX_LENGTH,
   TURING_TESTNET_EXPLORER,
