@@ -1,5 +1,6 @@
 # Don't ignore the build output
 !packages/avail-wallet/build/
+!build/
 
 # Ignore node_modules except for the build output
 node_modules/
