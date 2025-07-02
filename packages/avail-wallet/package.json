@@ -63,6 +63,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "prebuild": "cd ../adapter && yarn build",
     "build": "react-scripts build",
     "test": "exit 0",
     "eject": "react-scripts eject",

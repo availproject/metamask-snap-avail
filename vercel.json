@@ -1,0 +1,6 @@
+{
+  "buildCommand": "yarn workspace @avail-project/metamask-avail-adapter build && yarn workspace avail-wallet build",
+  "outputDirectory": "packages/avail-wallet/build",
+  "installCommand": "yarn install",
+  "framework": null
+}
