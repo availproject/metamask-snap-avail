@@ -1,15 +1,17 @@
-import { useCallback, useState } from 'react';
-import { AmountInput } from 'components/ui/molecule/AmountInput';
-import { useAppSelector } from 'hooks/redux';
-import { ethers } from 'ethers';
-import Toastr from 'toastr2';
-import { AddressInput } from 'components/ui/molecule/AddressInput';
-import { isValidAddress } from 'utils/utils';
 import BigNumber from 'bignumber.js';
+import { AddressInput } from 'components/ui/molecule/AddressInput';
+import { AmountInput } from 'components/ui/molecule/AmountInput';
+import { ethers } from 'ethers';
+import { useAppSelector } from 'hooks/redux';
+import { useCallback, useState } from 'react';
 import { useAvailSnap } from 'services/metamask';
 import { useTransactionStore } from 'store/store';
-import { SendSummaryModal } from '../SendSummaryModal';
+import Toastr from 'toastr2';
+import { isValidAddress } from 'utils/utils';
+
 import { Bold, Normal } from '../../ConnectInfoModal/ConnectInfoModal.style';
+import { SendSummaryModal } from '../SendSummaryModal';
+
 import {
   Buttons,
   ButtonStyled,
@@ -96,7 +98,7 @@ export const SendModalView = ({ closeModal }: Props) => {
         const txPayload = await metamask.availSnap.api.generateTransactionPayload(
           'balances',
           'transferKeepAlive',
-          [fields.address, new BigNumber(amountBN.toString()).toString()]
+          [fields.address, amountBN.toString()]
         );
         const signedTx = await metamask.availSnap.api.signPayloadJSON(txPayload.payload);
         const tx = await metamask.availSnap.api.send(signedTx, txPayload, networks.activeNetwork);

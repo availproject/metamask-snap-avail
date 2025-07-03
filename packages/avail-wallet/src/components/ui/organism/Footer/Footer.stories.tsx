@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { FooterView } from './Footer.view';
 
 export default {

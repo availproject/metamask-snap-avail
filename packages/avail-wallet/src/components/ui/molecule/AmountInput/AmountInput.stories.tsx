@@ -1,5 +1,6 @@
 import { Meta } from '@storybook/react';
-import { BigNumber } from 'ethers';
+import { BigNumber } from 'bignumber.js';
+
 import { AmountInputView } from './AmountInput.view';
 
 export default {
@@ -9,7 +10,7 @@ export default {
 
 const asset = {
   address: '0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7',
-  amount: BigNumber.from('1000000000000000000'),
+  amount: new BigNumber('1000000000000000000'),
   chainId: '1',
   decimals: 18,
   name: 'Ether',

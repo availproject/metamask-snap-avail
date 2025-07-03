@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { HelperTextView } from './HelperText.view';
 
 export default {

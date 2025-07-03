@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { MenuView } from './Menu.view';
 
 export default {

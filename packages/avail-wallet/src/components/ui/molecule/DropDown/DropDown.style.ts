@@ -1,7 +1,7 @@
+import selectArrow from 'assets/images/select-arrow.svg';
+import Dropdown from 'react-dropdown';
 import styled from 'styled-components';
 import { theme } from 'theme/default';
-import Dropdown from 'react-dropdown';
-import selectArrow from 'assets/images/select-arrow.svg';
 
 interface IDropDown {
   error?: boolean;

@@ -1,6 +1,8 @@
 import { PopperPlacementType } from '@mui/material';
 import { shortenAddress } from 'utils/utils';
+
 import { PopperTooltip } from '../PopperTooltip';
+
 import { Wrapper } from './AccountAddress.style';
 
 interface Props {

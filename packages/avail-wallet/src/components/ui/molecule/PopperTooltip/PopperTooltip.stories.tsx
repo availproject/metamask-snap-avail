@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { PopperTooltipView } from './PopperTooltip.view';
 
 export default {

@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { ListView } from './List.view';
 
 export default {

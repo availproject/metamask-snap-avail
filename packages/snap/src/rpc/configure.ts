@@ -1,6 +1,8 @@
-import deepmerge from 'deepmerge';
 import type { SnapConfig } from '@avail-project/metamask-avail-types';
+import deepmerge from 'deepmerge';
+
 import { getDefaultConfiguration } from '../configuration';
+
 import { getMetamaskState } from './getMetamaskState';
 
 export async function configure(networkName: string, overrides: unknown): Promise<SnapConfig> {

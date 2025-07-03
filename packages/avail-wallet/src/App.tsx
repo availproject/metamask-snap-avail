@@ -1,22 +1,22 @@
-import { useEffect } from 'react';
 import './App.css';
-import GlobalStyle from 'theme/GlobalStyles';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { Home } from 'components/pages/Home';
 import { FrameworkView } from 'components/ui/Framework/Framework.view';
-import { useAppSelector } from 'hooks/redux';
-import { ThemeProvider } from 'styled-components';
-import { theme } from 'theme/default';
-import { ConnectModal } from 'components/ui/organism/ConnectModal';
-import { PopIn } from 'components/ui/molecule/PopIn';
 import { LoadingBackdrop } from 'components/ui/molecule/LoadingBackdrop';
+import { PopIn } from 'components/ui/molecule/PopIn';
 import { ConnectInfoModal } from 'components/ui/organism/ConnectInfoModal';
+import { ConnectModal } from 'components/ui/organism/ConnectModal';
 import 'toastr2/dist/toastr.min.css';
 import { NoMetamaskModal } from 'components/ui/organism/NoMetamaskModal';
+import { useAppSelector } from 'hooks/redux';
 import { useHasMetamask } from 'hooks/useHasMetamask';
+import { useEffect } from 'react';
 import { useAvailSnap } from 'services/metamask';
+import { ThemeProvider } from 'styled-components';
+import GlobalStyle from 'theme/GlobalStyles';
+import { theme } from 'theme/default';
 
 library.add(fas, far);
 

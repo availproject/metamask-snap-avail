@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import QRCode from 'react-qr-code';
 import { AccountAddress } from 'components/ui/molecule/AccountAddress';
+import QRCode from 'react-qr-code';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;

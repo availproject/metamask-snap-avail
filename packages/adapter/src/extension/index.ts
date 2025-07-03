@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import type { SnapConfig } from '@avail-project/metamask-avail-types';
 import type { Injected, InjectedAccount, InjectedWindow } from '@polkadot/extension-inject/types';
-import type { SnapConfig } from '@availproject/metamask-avail-types';
 import type { SignerPayloadJSON, SignerPayloadRaw, SignerResult } from '@polkadot/types/types';
 import type { HexString } from '@polkadot/util/types';
+
 import { enableAvailSnap } from '../index';
 import { hasMetaMask, isMetamaskSnapsSupported } from '../utils';
 

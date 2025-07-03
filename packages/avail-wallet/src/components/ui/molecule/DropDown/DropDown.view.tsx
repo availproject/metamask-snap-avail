@@ -1,8 +1,10 @@
-import { DropdownStyled, Wrapper } from './DropDown.style';
-import 'react-dropdown/style.css';
-import { Group, Option, ReactDropdownProps } from 'react-dropdown';
-import { Label } from 'components/ui/atom/Label';
 import { HelperText } from 'components/ui/atom/HelperText';
+import { Label } from 'components/ui/atom/Label';
+import { Group, Option, ReactDropdownProps } from 'react-dropdown';
+
+import { DropdownStyled, Wrapper } from './DropDown.style';
+
+import 'react-dropdown/style.css';
 
 interface Props extends ReactDropdownProps {
   error?: boolean;

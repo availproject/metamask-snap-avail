@@ -1,4 +1,5 @@
 import { HTMLAttributes, ReactNode } from 'react';
+
 import { Wrapper } from './RoundedIcon.style';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {

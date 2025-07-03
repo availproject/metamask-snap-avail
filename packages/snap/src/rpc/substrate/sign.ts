@@ -1,8 +1,9 @@
 // import type { ApiPromise } from '@polkadot/api/';
+import type { SignerPayloadJSON } from '@avail-project/metamask-avail-types';
 import type { SignerPayloadRaw } from '@polkadot/types/types';
 import { hexToU8a, u8aToHex } from '@polkadot/util';
 import { signedExtensions, type ApiPromise } from 'avail-js-sdk';
-import type { SignerPayloadJSON } from '@avail-project/metamask-avail-types';
+
 import { getKeyPair } from '../../avail/account';
 import { showConfirmationDialog } from '../../util/confirmation';
 

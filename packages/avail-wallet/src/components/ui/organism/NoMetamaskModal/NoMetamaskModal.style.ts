@@ -1,6 +1,6 @@
-import styled from 'styled-components';
 import foxIconSrc from 'assets/images/metamask-fox-icon.svg';
 import { Button } from 'components/ui/atom/Button';
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;

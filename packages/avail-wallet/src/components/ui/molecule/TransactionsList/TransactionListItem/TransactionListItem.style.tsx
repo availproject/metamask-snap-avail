@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styled from 'styled-components';
 import { TransactionStatusOptions } from '@types';
-import { theme } from 'theme/default';
 import { RoundedIcon } from 'components/ui/atom/RoundedIcon';
+import styled from 'styled-components';
+import { theme } from 'theme/default';
 
 interface ISpan {
   status?: TransactionStatusOptions | string;

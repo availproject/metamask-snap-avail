@@ -1,11 +1,12 @@
 import './style/index.scss';
 import { createRoot } from 'react-dom/client';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistStore } from 'redux-persist';
 import { Provider } from 'react-redux';
-import { store } from './store/store';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { store } from './store/store';
 
 const container = document.getElementById('root');
 const persistor = persistStore(store);

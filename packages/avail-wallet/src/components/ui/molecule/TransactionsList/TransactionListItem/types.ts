@@ -1,11 +1,11 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { shortenAddress } from 'utils/utils';
-import { ethers } from 'ethers';
 import { Extrinsic } from '@avail-project/metamask-avail-types';
-import { LoadingSmall } from 'components/ui/atom/LoadingSmall';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import BigNumber from 'bignumber.js';
+import { LoadingSmall } from 'components/ui/atom/LoadingSmall';
+import { ethers } from 'ethers';
+import { shortenAddress } from 'utils/utils';
 
 export interface Transaction {
   hash: string;

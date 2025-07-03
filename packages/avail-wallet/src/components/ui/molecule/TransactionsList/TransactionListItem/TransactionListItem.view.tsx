@@ -1,18 +1,19 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable prettier/prettier */
-import { Transaction } from '@types';
-import { ethers } from 'ethers';
-import { useEffect, useState } from 'react';
-import { useAppSelector } from 'hooks/redux';
-import { AssetQuantity } from 'components/ui/molecule/AssetQuantity';
-import { getHumanReadableAmount, getRpcEndpoint, openExplorerTab } from 'utils/utils';
-import { ApiPromise, initialize } from 'avail-js-sdk';
-import { Chip } from '@mui/material';
-import { LoadingSpinner } from 'components/ui/atom/LoadingSmall/LoadingSmall.style';
 import { CheckBoxOutlineBlankRounded, CheckBoxRounded } from '@mui/icons-material';
+import { Chip } from '@mui/material';
+import { Transaction } from '@types';
+import { ApiPromise, initialize } from 'avail-js-sdk';
 import { LoadingSmall } from 'components/ui/atom/LoadingSmall';
+import { LoadingSpinner } from 'components/ui/atom/LoadingSmall/LoadingSmall.style';
+import { AssetQuantity } from 'components/ui/molecule/AssetQuantity';
+import { ethers } from 'ethers';
+import { useAppSelector } from 'hooks/redux';
+import { useEffect, useState } from 'react';
 import { useTransactionStore } from 'store/store';
+import { getHumanReadableAmount, getRpcEndpoint, openExplorerTab } from 'utils/utils';
+
 import {
   Column,
   Description,

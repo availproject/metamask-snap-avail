@@ -1,5 +1,6 @@
 import { HTMLAttributes, ReactNode } from 'react';
 import { CSSProperties } from 'styled-components';
+
 import { List, ListItem, Wrapper } from './List.style';
 
 export interface IListProps<T> extends HTMLAttributes<HTMLElement> {

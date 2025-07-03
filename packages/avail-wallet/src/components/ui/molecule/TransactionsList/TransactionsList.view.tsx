@@ -1,11 +1,13 @@
+import { Transaction } from '@types';
+import { ApiPromise } from 'avail-js-sdk';
 import { useAppSelector } from 'hooks/redux';
 import { FC, useEffect, useRef, useState } from 'react';
-import { Transaction } from '@types';
-import { TRANSACTIONS_REFRESH_FREQUENCY } from 'utils/constants';
 import { useTransactionStore } from 'store/store';
-import { ApiPromise } from 'avail-js-sdk';
+import { TRANSACTIONS_REFRESH_FREQUENCY } from 'utils/constants';
 import { getRpcEndpoint, initializeApi } from 'utils/utils';
+
 import { IListProps } from '../List/List.view';
+
 import { TransactionListItem } from './TransactionListItem';
 import { Wrapper } from './TransactionsList.style';
 

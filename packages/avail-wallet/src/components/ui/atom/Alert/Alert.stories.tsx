@@ -1,5 +1,6 @@
-import { AlertView } from './Alert.view';
 import { Meta } from '@storybook/react';
+
+import { AlertView } from './Alert.view';
 
 export default {
   title: 'Atom/Alert',

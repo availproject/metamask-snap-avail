@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { HeaderView } from './Header.view';
 
 export default {

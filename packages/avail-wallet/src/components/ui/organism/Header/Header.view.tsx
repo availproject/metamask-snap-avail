@@ -1,15 +1,16 @@
-import { ethers } from 'ethers';
-import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAppDispatch, useAppSelector } from 'hooks/redux';
-import { theme } from 'theme/default';
+import { Menu } from '@headlessui/react';
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import { Erc20TokenBalance } from '@types';
+import { BigNumber } from 'bignumber.js';
 import { Button } from 'components/ui/atom/Button';
+import { AccountAddress } from 'components/ui/molecule/AccountAddress';
 import { AssetQuantity } from 'components/ui/molecule/AssetQuantity';
 import { PopIn } from 'components/ui/molecule/PopIn';
-import { Menu } from '@headlessui/react';
-import { AccountAddress } from 'components/ui/molecule/AccountAddress';
-import { getAmountPrice, getHumanReadableAmount, openExplorerTab } from 'utils/utils';
-import { TOKEN_BALANCE_REFRESH_FREQUENCY } from 'utils/constants';
+import { ethers } from 'ethers';
+import { useAppDispatch, useAppSelector } from 'hooks/redux';
+import { useEffect, useRef, useState } from 'react';
+import { resetNetwork, setActiveNetwork } from 'slices/networkSlice';
 import {
   setWalletConnection,
   setForceReconnect,
@@ -17,11 +18,13 @@ import {
   resetWallet,
   clearAccounts
 } from 'slices/walletSlice';
-import { resetNetwork, setActiveNetwork } from 'slices/networkSlice';
-import { Erc20TokenBalance } from '@types';
-import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import { ConnectInfoModal } from '../ConnectInfoModal';
+import { theme } from 'theme/default';
+import { TOKEN_BALANCE_REFRESH_FREQUENCY } from 'utils/constants';
+import { getAmountPrice, getHumanReadableAmount, openExplorerTab } from 'utils/utils';
+
 import { AccountDetailsModal } from '../AccountDetailsModal';
+import { ConnectInfoModal } from '../ConnectInfoModal';
+
 import {
   AccountDetailButton,
   AccountDetails,
@@ -72,7 +75,7 @@ export const HeaderView = ({ address }: Props) => {
           dispatch(
             setErc20TokenBalanceSelected({
               ...wallet.tokenBalance,
-              amount: newBalance
+              amount: new BigNumber(newBalance)
             })
           );
           setBalance(newBalance);

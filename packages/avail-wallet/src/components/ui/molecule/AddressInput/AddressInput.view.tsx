@@ -1,3 +1,5 @@
+import { HelperText } from 'components/ui/atom/HelperText';
+import { Label } from 'components/ui/atom/Label';
 import {
   KeyboardEvent,
   ChangeEvent,
@@ -8,8 +10,7 @@ import {
   SetStateAction
 } from 'react';
 import { isSpecialInputKey, isValidAddress } from 'utils/utils';
-import { HelperText } from 'components/ui/atom/HelperText';
-import { Label } from 'components/ui/atom/Label';
+
 import { Icon, Input, InputContainer, Left, RowWrapper, Wrapper } from './AddressInput.style';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {

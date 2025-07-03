@@ -1,8 +1,8 @@
 /* eslint-disable no-useless-catch */
 
-import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { TxPayload } from '@avail-project/metamask-avail-types';
 import type { ApiPromise } from 'avail-js-sdk';
+
 import { getAddress } from './getAddress';
 
 export async function generateTransactionPayload(
@@ -21,14 +21,14 @@ export async function generateTransactionPayload(
       blockHash: signedBlock.block.header.hash,
       appId: 0,
       era: api.createType('ExtrinsicEra', {
-      current: signedBlock.block.header.number,
+        current: signedBlock.block.header.number,
         period: 50
       }),
       nonce
     };
 
     // define transaction method
-    const data: SubmittableExtrinsic<'promise'> = api.tx[module][method](...args);
+    const data = api.tx[module][method](...args);
 
     const signerPayload = api.createType('SignerPayload', {
       genesisHash: api.genesisHash,

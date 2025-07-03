@@ -1,14 +1,15 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { Transaction } from '@types';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import metamaskSlice from 'slices/metamaskSlice';
-import { Transaction } from '@types';
 import { create } from 'zustand';
-import walletReducer from '../slices/walletSlice';
-import networkReducer from '../slices/networkSlice';
-import modalSlice from '../slices/modalSlice';
+
 import UIReducer from '../slices/UISlice';
+import modalSlice from '../slices/modalSlice';
+import networkReducer from '../slices/networkSlice';
+import walletReducer from '../slices/walletSlice';
 
 const persistConfig = {
   key: 'root',

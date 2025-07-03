@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { LabelView } from './Label.view';
 
 export default {

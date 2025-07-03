@@ -1,4 +1,5 @@
 import type { SnapConfig } from '@avail-project/metamask-avail-types';
+import { BigNumber } from 'bignumber.js';
 
 declare module '@avail-project/metamask-avail-adapter' {
   export function injectMetamaskAvailSnapProvider(
@@ -36,13 +37,15 @@ export type TransactionStatusOptions =
   | 'Rejected'
   | 'Not Received';
 
-export enum ExplorerTransactionType { // for retrieving txns from Explorer
+export enum ExplorerTransactionType {
+  // for retrieving txns from Explorer
   DEPLOY = 'deploy',
   DEPLOY_ACCOUNT = 'deploy_account',
   INVOKE = 'invoke'
 }
 
-export enum TransactionStatus { // for retrieving txn from Avail feeder gateway
+export enum TransactionStatus {
+  // for retrieving txn from Avail feeder gateway
   RECEIVED = 'RECEIVED',
   PENDING = 'PENDING',
   ACCEPTED_ON_L2 = 'ACCEPTED_ON_L2',

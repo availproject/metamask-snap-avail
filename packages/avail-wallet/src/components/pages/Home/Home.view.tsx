@@ -1,6 +1,7 @@
 import { TransactionsList } from 'components/ui/molecule/TransactionsList';
 import { Header } from 'components/ui/organism/Header';
 import { useAppSelector } from 'hooks/redux';
+
 import { RightPart, Wrapper, NoTransactions } from './Home.style';
 
 interface Props {

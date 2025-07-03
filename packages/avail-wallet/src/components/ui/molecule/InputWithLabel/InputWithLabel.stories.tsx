@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { InputWithLabelView } from './InputWithLabel.view';
 
 export default {

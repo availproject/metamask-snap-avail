@@ -1,4 +1,5 @@
 import { Meta } from '@storybook/react';
+
 import { LoadingSmallView } from './LoadingSmall.view';
 
 export default {
