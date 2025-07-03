@@ -8,18 +8,7 @@ export const turingConfiguration: SnapConfig = {
     image: 'https://svgshare.com/i/L2d.svg',
     symbol: 'AVAIL'
   },
-  wsRpcUrl: 'https://turing-rpc.avail.so/ws'
-};
-
-export const goldbergConfiguration: SnapConfig = {
-  addressPrefix: 43,
-  networkName: 'goldberg',
-  unit: {
-    decimals: 18,
-    image: 'https://svgshare.com/i/L2d.svg',
-    symbol: 'AVAIL'
-  },
-  wsRpcUrl: 'https://goldberg-rpc.slowops.xyz/ws'
+  wsRpcUrl: 'https://rpc.ankr.com/avail_turing_testnet/'
 };
 
 export const mainnetConfiguration: SnapConfig = {
@@ -30,7 +19,7 @@ export const mainnetConfiguration: SnapConfig = {
     image: 'https://svgshare.com/i/L2d.svg',
     symbol: 'AVAIL'
   },
-  wsRpcUrl: 'https://mainnet-rpc.avail.so/ws'
+  wsRpcUrl: 'https://mainnet.avail-rpc.com/'
 };
 
-export const defaultConfiguration: SnapConfig = turingConfiguration;
+export const defaultConfiguration: SnapConfig = mainnetConfiguration;

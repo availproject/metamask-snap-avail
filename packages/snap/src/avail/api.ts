@@ -9,8 +9,6 @@ let api: ApiPromise;
 let provider: HttpProvider;
 let isConnecting: boolean;
 
-/**Commented this code in favour of using avail js initialize, rather than this */
-
 /**
  * Initialize substrate api and awaits for it to be ready
  */

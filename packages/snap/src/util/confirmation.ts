@@ -20,10 +20,11 @@ export async function showConfirmationDialog(message: ConfirmationDialogContent)
         divider(),
         text('Your address:'),
         copyable(message.sender),
-
         divider(),
-        text(`Method: **${JSON.stringify(message.method.method, null, 2)}** `),
-        text(JSON.stringify(message.method, null, 2))
+        text(
+          message.method ? `Method: **${JSON.stringify(message.method.method, null, 2)}** ` : ''
+        ),
+        text(message.method ? JSON.stringify(message.method, null, 2) : '')
       ]),
       type: 'confirmation'
     }

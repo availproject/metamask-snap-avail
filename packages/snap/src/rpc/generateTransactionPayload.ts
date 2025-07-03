@@ -14,7 +14,6 @@ export async function generateTransactionPayload(
   try {
     // fetch last signed block and account address
     const [signedBlock, address] = await Promise.all([api.rpc.chain.getBlock(), getAddress()]);
-
     // create signer options
     const nonce = (await api.derive.balances.account(address)).accountNonce;
     const signerOptions = {

@@ -31,6 +31,8 @@
         <button class="configure">Set configuration</button>
         <button class="create-asset">Create dot asset</button>
         <button class="remove-asset">Remove dot asset</button>
+        <button class="test-sign">Test Sign Payload</button>
+        <button class="debug-api">Debug API Modules</button>
       </div>
 
       <!-- Public Key -->
@@ -149,6 +151,12 @@
     sendTransferButton.addEventListener('click', sendTransfer);
     const removeAssetButton = document.querySelector('button.remove-asset');
     removeAssetButton.addEventListener('click', removeAsset);
+    // test sign button
+    const testSignButton = document.querySelector('button.test-sign');
+    testSignButton.addEventListener('click', testSignPayload);
+    // debug api button
+    const debugApiButton = document.querySelector('button.debug-api');
+    debugApiButton.addEventListener('click', debugApiModules);
     // export seed
     const exportButton = document.querySelector('button.export-seed');
     const seedLabel = document.querySelector('div.seed');
@@ -211,19 +219,19 @@
 
     async function sendTransfer() {
       try {
-        console.log("clicked")
+        console.log('clicked');
         await invokeSnap({
           method: 'generateTransactionPayload',
           params: {
-            amount: '10',
-            to: '5D7GadfhbbkSqCugapLwP1nj6xkTZTEG1UbG11ndzCwEPBJh'
+            module: 'dataAvailability',
+            method: 'submitData',
+            args: ['Test data submission']
           }
         });
       } catch (e) {
         console.log('problem creating transfer', e);
       }
     }
-
 
     async function findBlock() {
       let block = null;
@@ -256,19 +264,32 @@
       .catch((err) => console.error(err));
 
     async function exportSeed() {
-      let response = null;
       try {
-        response = await invokeSnap({
-          method: 'exportSeed'
-        });
-      } catch (e) {
-        console.error('Keys not generated', error);
-      }
-      if (response != null) {
-        seedLabel.innerHTML = response;
+        const res = await invokeSnap({ method: 'exportSeed' });
+        console.log('response', res);
+        if (!res) return false;
+
+        /* 1. Show the raw seed */
+        seedLabel.textContent = res.keyPair.rawSeedHex;
+
+        /* 2. Download the Polkadot‑JSON */
+        const jsonString = JSON.stringify(res.keyPair.json, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${res.keyPair.address}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
         return true;
+      } catch (error) {
+        console.error('exportSeed failed', error);
+        return false;
       }
-      return false;
     }
 
     // snap functions
@@ -317,62 +338,168 @@
         });
       } catch (e) {
         console.error('Connect Snap error', e);
+        return;
       }
       snapConnectedLabel.innerHTML = TRUE;
       publicKeyLabel.innerHTML = 'In progress...';
       addressLabel.innerHTML = 'In progress...';
 
-      let payload = null;
+      let txPayload = null;
       try {
-        payload = await invokeSnap({
+        txPayload = await invokeSnap({
           method: 'generateTransactionPayload',
           params: {
-            amount: '10',
-            to: 'HYxTWKxPTQwcENdt41QhsDrAKoy8Vn7i1NPfYjSnBT1Z62c'
+            module: 'dataAvailability',
+            method: 'submitData',
+            args: ['Hello Avail from MetaMask Snap!']
           }
         });
 
-        console.log('GENERATE PAYLOAD RESULT');
-        console.log(payload);
+        console.log('GENERATE PAYLOAD RESULT:');
+        console.log(txPayload);
+
+        if (!txPayload || !txPayload.payload) {
+          console.error('Invalid txPayload structure:', txPayload);
+          return;
+        }
       } catch (e) {
-        console.log('Unable to generate payload', e);
+        console.error('Unable to generate payload:', e);
+        return;
       }
 
       let signature = null;
       try {
+        console.log('Signing payload:', txPayload.payload);
         signature = await invokeSnap({
           method: 'signPayloadJSON',
           params: {
-            payload: payload
+            payload: txPayload.payload
           }
         });
 
-        console.log('SIGN RESULT');
+        console.log('SIGN RESULT:');
         console.log(signature);
+
+        if (!signature || !signature.signature) {
+          console.error('Invalid signature structure:', signature);
+          return;
+        }
       } catch (e) {
-        console.log('Unable to sign payload', e);
+        console.error('Unable to sign payload:', e);
+        return;
       }
 
       let tx = null;
       try {
+        console.log('Sending transaction with params:', {
+          signature: signature.signature,
+          txPayload: txPayload,
+          network: 1
+        });
+
         tx = await invokeSnap({
           method: 'send',
           params: {
-            params: {
-              signature: signature,
-              txPayload: payload
-            }
+            signature: signature.signature,
+            txPayload: txPayload,
+            network: 1
           }
         });
 
-        console.log('SEND RESULT');
+        console.log('SEND RESULT:');
         console.log(tx);
       } catch (e) {
-        console.log('Unable to sign payload', e);
+        console.error('Unable to send transaction:', e);
       }
-      // await test();
-      // await fetchPublicKey();
-      // await fetchAddress();
+
+      // Fetch and display public key and address
+      await fetchPublicKey();
+      await fetchAddress();
+    }
+
+    async function testSignPayload() {
+      console.log('Testing signPayloadJSON with proper payload structure...');
+
+      try {
+        // First generate a proper transaction payload
+        const txPayload = await invokeSnap({
+          method: 'generateTransactionPayload',
+          params: {
+            module: 'dataAvailability',
+            method: 'submitData',
+            args: ['Test data from MetaMask Snap']
+          }
+        });
+
+        console.log('Generated txPayload:', txPayload);
+
+        if (!txPayload || !txPayload.payload) {
+          console.error('Invalid txPayload structure');
+          return;
+        }
+
+        // Now test signing with the proper payload
+        const signature = await invokeSnap({
+          method: 'signPayloadJSON',
+          params: {
+            payload: txPayload.payload
+          }
+        });
+
+        console.log('Signature result:', signature);
+        alert('Sign test successful! Check console for details.');
+      } catch (e) {
+        console.error('Test sign failed:', e);
+        alert('Sign test failed: ' + e.message);
+      }
+    }
+
+    async function debugApiModules() {
+      console.log('Debugging API modules...');
+
+      try {
+        // First, let's check what's available after configuration
+        await loadConfiguration();
+
+        // Now let's try to inspect the API structure
+        const result = await invokeSnap({
+          method: 'getChainHead'
+        });
+
+        console.log('Chain head result:', result);
+
+        // Try different module combinations
+        const testModules = [
+          { module: 'dataAvailability', method: 'submitData', args: ['Hello Avail'] },
+          { module: 'system', method: 'remark', args: ['0x48656c6c6f20417661696c'] },
+          { module: 'system', method: 'remarkWithEvent', args: ['0x48656c6c6f20417661696c'] },
+          {
+            module: 'balances',
+            method: 'transferKeepAlive',
+            args: ['5D7GadfhbbkSqCugapLwP1nj6xkTZTEG1UbG11ndzCwEPBJh', '1000000000000000000']
+          },
+          {
+            module: 'balances',
+            method: 'transfer',
+            args: ['5D7GadfhbbkSqCugapLwP1nj6xkTZTEG1UbG11ndzCwEPBJh', '1000000000000000000']
+          }
+        ];
+
+        for (const test of testModules) {
+          try {
+            console.log(`Testing ${test.module}.${test.method}...`);
+            const txPayload = await invokeSnap({
+              method: 'generateTransactionPayload',
+              params: test
+            });
+            console.log(`✅ ${test.module}.${test.method} works!`, txPayload);
+          } catch (e) {
+            console.log(`❌ ${test.module}.${test.method} failed:`, e.message);
+          }
+        }
+      } catch (e) {
+        console.error('Debug failed:', e);
+      }
     }
 
     // polkadot/substrate functions

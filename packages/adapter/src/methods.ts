@@ -8,6 +8,7 @@ import type {
   TxPayload
 } from '@avail-project/metamask-avail-types';
 import type { SignerPayloadJSON, SignerPayloadRaw } from '@polkadot/types/types';
+import type { KeyringPair$Json } from '@polkadot/keyring/types';
 import type { MetamaskAvailSnap } from './snap';
 
 async function sendSnapMethod(request: MetamaskAvailRpcRequest, snapId: string): Promise<unknown> {
@@ -70,8 +71,22 @@ export async function getPublicKey(this: MetamaskAvailSnap): Promise<string> {
   return (await sendSnapMethod({ method: 'getPublicKey' }, this.snapId)) as string;
 }
 
-export async function exportSeed(this: MetamaskAvailSnap): Promise<string> {
-  return (await sendSnapMethod({ method: 'exportSeed' }, this.snapId)) as string;
+export async function exportSeed(this: MetamaskAvailSnap): Promise<{
+  keyPair: {
+    address: string;
+    publicKey: Uint8Array;
+    json: KeyringPair$Json;
+    rawSeedHex: string;
+  };
+} | null> {
+  return (await sendSnapMethod({ method: 'exportSeed' }, this.snapId)) as {
+    keyPair: {
+      address: string;
+      publicKey: Uint8Array;
+      json: KeyringPair$Json;
+      rawSeedHex: string;
+    };
+  } | null;
 }
 
 export async function setConfiguration(this: MetamaskAvailSnap, config: SnapConfig): Promise<void> {

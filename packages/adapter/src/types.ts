@@ -8,6 +8,7 @@ import type {
   SignerPayloadJSON
 } from '@avail-project/metamask-avail-types';
 import type { InjectedExtension } from '@polkadot/extension-inject/types';
+import type { KeyringPair$Json } from '@polkadot/keyring/types';
 import type { SignerPayloadRaw } from '@polkadot/types/types/extrinsic';
 
 export interface MetamaskSnapApi {
@@ -17,7 +18,14 @@ export interface MetamaskSnapApi {
 
   getBalance(): Promise<string>;
 
-  exportSeed(): Promise<string>;
+  exportSeed(): Promise<{
+    keyPair: {
+      address: string;
+      publicKey: Uint8Array;
+      json: KeyringPair$Json;
+      rawSeedHex: string;
+    };
+  } | null>;
 
   getLatestBlock(): Promise<BlockInfo>;
 
