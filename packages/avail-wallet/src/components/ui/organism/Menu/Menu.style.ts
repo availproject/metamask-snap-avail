@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   padding-top: 36px;
   padding-bottom: 26px;
+  position: relative;
   a {
     all: unset;
   }
@@ -32,6 +33,13 @@ export const Right = styled.div`
   align-items: center;
   justify-content: flex-end;
   gap: 16px;
+`;
+
+export const Banner = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 `;
 
 export const NetworkPill = styled(Button).attrs((props) => ({

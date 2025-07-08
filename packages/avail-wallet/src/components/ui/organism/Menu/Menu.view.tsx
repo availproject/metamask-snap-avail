@@ -14,6 +14,8 @@ import {
 } from 'slices/walletSlice';
 import { theme } from 'theme/default';
 
+import { DeprecateBanner } from '../Header/DeprecateBanner';
+
 import {
   Left,
   Right,
@@ -26,7 +28,8 @@ import {
   MenuSection,
   Bold,
   MenuItemText,
-  NetworkMenuItem
+  NetworkMenuItem,
+  Banner
 } from './Menu.style';
 
 interface IProps extends HTMLAttributes<HTMLElement> {
@@ -51,59 +54,67 @@ export const MenuView = ({ connected, ...otherProps }: IProps) => {
   };
 
   return (
-    <Wrapper {...otherProps}>
-      <Left>
-        <img height="40px" src={logo} alt="logo" />
-      </Left>
-      <Right>
-        <Menu as="div" style={{ display: 'inline-block', position: 'relative', textAlign: 'left' }}>
-          <Menu.Button
+    <>
+      <Banner>
+        <DeprecateBanner />
+      </Banner>
+      <Wrapper {...otherProps} style={{ marginTop: '36px' }}>
+        <Left>
+          <img height="40px" src={logo} alt="logo" />
+        </Left>
+        <Right>
+          <Menu
             as="div"
-            style={{
-              cursor: 'pointer',
-              border: 'none',
-              background: 'transparent'
-            }}
+            style={{ display: 'inline-block', position: 'relative', textAlign: 'left' }}
           >
-            <NetworkPill iconRight="angle-down" backgroundTransparent>
-              {networks.items[networks.activeNetwork] ? (
-                networks.items[networks.activeNetwork].displayName
-              ) : (
-                <Skeleton variant="text" width={100} height={16} />
-              )}
-            </NetworkPill>
-          </Menu.Button>
-          <MenuItems>
-            <MenuSection>
-              <Menu.Item disabled>
-                <div style={{ padding: '8px 0px 0px 8px' }}>
-                  <Bold>Network</Bold>
-                </div>
-              </Menu.Item>
-            </MenuSection>
-            <MenuSection>
-              {networks.items.map((network: any, index: any) => (
-                <Menu.Item key={network.chainId + '_' + index}>
-                  <NetworkMenuItem onClick={() => changeNetwork(index, network.chainId)}>
-                    <Radio
-                      checked={Number(networks.activeNetwork) === index}
-                      name="radio-buttons"
-                      inputProps={{ 'aria-label': network.displayName }}
-                      sx={{
-                        color: theme.palette.grey.grey1,
-                        '&.Mui-checked': {
-                          color: theme.palette.secondary.main
-                        }
-                      }}
-                    />
-                    <MenuItemText>{network.displayName}</MenuItemText>
-                  </NetworkMenuItem>
+            <Menu.Button
+              as="div"
+              style={{
+                cursor: 'pointer',
+                border: 'none',
+                background: 'transparent'
+              }}
+            >
+              <NetworkPill iconRight="angle-down" backgroundTransparent>
+                {networks.items[networks.activeNetwork] ? (
+                  networks.items[networks.activeNetwork].displayName
+                ) : (
+                  <Skeleton variant="text" width={100} height={16} />
+                )}
+              </NetworkPill>
+            </Menu.Button>
+            <MenuItems>
+              <MenuSection>
+                <Menu.Item disabled>
+                  <div style={{ padding: '8px 0px 0px 8px' }}>
+                    <Bold>Network</Bold>
+                  </div>
                 </Menu.Item>
-              ))}
-            </MenuSection>
-          </MenuItems>
-        </Menu>
-      </Right>
-    </Wrapper>
+              </MenuSection>
+              <MenuSection>
+                {networks.items.map((network: any, index: any) => (
+                  <Menu.Item key={network.chainId + '_' + index}>
+                    <NetworkMenuItem onClick={() => changeNetwork(index, network.chainId)}>
+                      <Radio
+                        checked={Number(networks.activeNetwork) === index}
+                        name="radio-buttons"
+                        inputProps={{ 'aria-label': network.displayName }}
+                        sx={{
+                          color: theme.palette.grey.grey1,
+                          '&.Mui-checked': {
+                            color: theme.palette.secondary.main
+                          }
+                        }}
+                      />
+                      <MenuItemText>{network.displayName}</MenuItemText>
+                    </NetworkMenuItem>
+                  </Menu.Item>
+                ))}
+              </MenuSection>
+            </MenuItems>
+          </Menu>
+        </Right>
+      </Wrapper>
+    </>
   );
 };
